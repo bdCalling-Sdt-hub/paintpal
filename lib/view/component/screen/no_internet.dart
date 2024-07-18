@@ -1,13 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_string.dart';
-import '../button/custom_button.dart';
-import '../text/custom_text.dart';
+import '../button/common_button.dart';
+import '../text/common_text.dart';
 
 class NoInternet extends StatelessWidget {
   const NoInternet({super.key});
@@ -19,7 +16,7 @@ class NoInternet extends StatelessWidget {
         title: const Text(AppString.noInternet),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,22 +26,22 @@ class NoInternet extends StatelessWidget {
               Icons.wifi_off,
               size: 100,
             )),
-            CustomText(
+            const CommonText(
               text: AppString.noInternet,
-              fontSize: 18.sp,
-              top: 16.h,
+              fontSize: 18,
+              top: 16,
             ),
-            CustomText(
+            const CommonText(
               text: AppString.checkInternet,
-              top: 8.h,
-              bottom: 20.h,
+              top: 8,
+              bottom: 20,
             ),
-            CustomButton(
-              onPressed: () => Get.back(),
+            CommonButton(
+              onTap: () => Get.back(),
               titleText: AppString.back,
-              buttonWidth: 80.w,
-              buttonHeight: 40.h,
-              buttonColor: AppColors.primaryColor,
+              buttonWidth: 80,
+              buttonHeight: 40,
+              buttonColor: AppColors.black,
             )
           ],
         ),

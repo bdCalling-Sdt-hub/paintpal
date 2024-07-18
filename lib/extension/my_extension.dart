@@ -14,6 +14,11 @@ extension View2 on Widget {
         child: this,
       );
 
+  Widget get center => Align(
+        alignment: Alignment.center,
+        child: this,
+      );
+
   Widget get end => Align(
         alignment: Alignment.centerRight,
         child: this,

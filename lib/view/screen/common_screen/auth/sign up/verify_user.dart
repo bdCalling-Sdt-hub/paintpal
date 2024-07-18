@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/extension/my_extension.dart';
 import '../../../../../controllers/common_controller/auth/sign_up_controller.dart';
 import '../../../../../utils/app_colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../../common_widgets/button/common_button.dart';
-import '../../../../common_widgets/text/common_text.dart';
+import '../../../../../utils/app_images.dart';
+import '../../../../../utils/app_string.dart';
+import '../../../../component/button/common_button.dart';
+import '../../../../component/image/common_image.dart';
+import '../../../../component/text/common_text.dart';
 
 class VerifyUser extends StatefulWidget {
   const VerifyUser({super.key});
@@ -28,8 +32,8 @@ class _VerifyUserState extends State<VerifyUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CommonText(
-          text: "OTP Verify".tr,
+        title: const CommonText(
+          text: AppString.otpVerify,
           fontWeight: FontWeight.w700,
           fontSize: 24,
         ),
@@ -42,74 +46,101 @@ class _VerifyUserState extends State<VerifyUser> {
               key: formKey,
               child: Column(
                 children: [
-                  Center(
-                    child: CommonText(
-                      text:
-                          "${"Code has been send to".tr} ${controller.emailController.text}",
-                      fontSize: 18,
-                      top: 100,
-                      bottom: 60,
-                      maxLines: 3,
-                    ),
-                  ),
+                  CommonImage(
+                    imageSrc: AppImages.otpImage,
+                    imageType: ImageType.png,
+                    height: 280,
+                    width: 350,
+                  ).center,
+                  const CommonText(
+                    text: AppString.codeHasBeenSendTo,
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.highlight,
+                    left: 16,
+                    top: 20,
+                    bottom: 32,
+                  ).start,
                   Flexible(
                     flex: 0,
                     child: PinCodeTextField(
                       controller: controller.otpController,
+                      validator: (value) {
+                        if (value != null && value.length == 6) {
+                          return null;
+                        } else {
+                          return AppString.otpIsInValid;
+                        }
+                      },
                       autoDisposeControllers: false,
-                      cursorColor: AppColors.black,
+                      cursorColor: AppColors.highlight,
+                      textStyle: const TextStyle(color: AppColors.white_500),
                       appContext: (context),
                       autoFocus: true,
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
-                        borderRadius: BorderRadius.circular(16.r),
+                        borderRadius: BorderRadius.circular(8),
                         fieldHeight: 60.h,
                         fieldWidth: 60.w,
                         activeFillColor: AppColors.transparent,
                         selectedFillColor: AppColors.transparent,
                         inactiveFillColor: AppColors.transparent,
                         borderWidth: 0.5.w,
-                        selectedColor: AppColors.primaryColor,
-                        activeColor: AppColors.primaryColor,
-                        inactiveColor: AppColors.black,
+                        selectedColor: AppColors.highlight,
+                        activeColor: AppColors.highlight,
+                        inactiveColor: AppColors.white_500,
                       ),
                       length: 6,
                       keyboardType: TextInputType.number,
                       autovalidateMode: AutovalidateMode.disabled,
                       enableActiveFill: true,
-                      validator: (value) {
-                        if (value != null && value.length == 6) {
-                          return null;
-                        } else {
-                          return "Otp is inValid".tr;
-                        }
-                      },
                     ),
                   ),
-                  GestureDetector(
-                    onTap: controller.time == '00:00'
-                        ? () {
-                            controller.startTimer();
-                            controller.signUpUser();
-                          }
-                        : () {},
-                    child: CommonText(
-                      text: controller.time == '00:00'
-                          ? "Resend Code"
-                          : "${"Resend code in".tr}  ${controller.time} minute",
-                      top: 60,
-                      bottom: 100,
-                      fontSize: 18,
-                    ),
+                  const CommonText(
+                    text: AppString.didNotReceiveOtp,
+                    top: 24,
+                    bottom: 24,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CommonText(
+                        text: "${controller.time} ${AppString.minute}",
+                      ),
+                      GestureDetector(
+                        onTap: controller.time == '00:00'
+                            ? () {
+                                controller.startTimer();
+                                controller.signUpUser();
+                              }
+                            : () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: controller.time == '00:00'
+                                      ? AppColors.white_900
+                                      : AppColors.white_200)),
+                          child: CommonText(
+                              text: AppString.resendCode,
+                              fontSize: 18,
+                              color: controller.time == '00:00'
+                                  ? AppColors.white_900
+                                  : AppColors.white_200),
+                        ),
+                      ),
+                    ],
+                  ),
+                  50.height,
                   CommonButton(
-                      titleText: "Verify".tr,
-                      isLoading: controller.isLoadingVerify,
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          controller.verifyOtpRepo();
-                        }
-                      })
+                    titleText: AppString.verify,
+                    isLoading: controller.isLoadingVerify,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        controller.verifyOtpRepo();
+                      }
+                    },
+                  )
                 ],
               ),
             ),

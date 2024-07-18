@@ -51,6 +51,7 @@ class ForgetPasswordController extends GetxController {
         final seconds = (start % 60).toString().padLeft(2, '0');
 
         time = "$minutes:$seconds";
+        print(time);
 
         update();
       } else {

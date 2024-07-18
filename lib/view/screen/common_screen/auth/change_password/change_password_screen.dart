@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import '../../../../../extension/my_extension.dart';
 import '../../../../../controllers/common_controller/auth/change_password_controller.dart';
 import '../../../../../core/app_routes.dart';
-import '../../../../../extension/my_extension.dart';
 import '../../../../../helpers/reg_exp_helper.dart';
 import '../../../../../utils/app_colors.dart';
-import '../../../../common_widgets/button/common_button.dart';
-import '../../../../common_widgets/text/common_text.dart';
-import '../../../../common_widgets/text_field/common_text_field.dart';
-
+import '../../../../../utils/app_string.dart';
+import '../../../../component/button/common_button.dart';
+import '../../../../component/text/common_text.dart';
+import '../../../../component/text_field/common_text_field.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
@@ -22,8 +21,8 @@ class ChangePasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: CommonText(
-          text: "Change Password".tr,
+        title: const CommonText(
+          text: AppString.changePassword,
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
@@ -39,7 +38,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   70.height,
                   CommonTextField(
                     controller: controller.currentPasswordController,
-                    hintText: "Current  Password".tr,
+                    hintText: AppString.currentPassword,
                     validator: OtherHelper.passwordValidator,
                     isPassword: true,
                     prefixIcon: Icon(
@@ -50,7 +49,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   16.height,
                   CommonTextField(
                     controller: controller.newPasswordController,
-                    hintText: "New Password".tr,
+                    hintText: AppString.newPassword,
                     validator: OtherHelper.passwordValidator,
                     isPassword: true,
                     prefixIcon: Icon(
@@ -61,7 +60,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   16.height,
                   CommonTextField(
                     controller: controller.confirmPasswordController,
-                    hintText: "Confirm Password".tr,
+                    hintText: AppString.confirmPassword,
                     validator: (value) => OtherHelper.confirmPasswordValidator(
                         value, controller.newPasswordController),
                     isPassword: true,
@@ -75,7 +74,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => Get.toNamed(AppRoutes.forgotPassword),
                       child: CommonText(
-                        text: "Forgot Password".tr,
+                        text: AppString.forgotPassword,
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
                         fontSize: 18.sp,
@@ -85,7 +84,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     ),
                   ),
                   CommonButton(
-                    titleText: "Confirm".tr,
+                    titleText: AppString.confirm,
                     isLoading: controller.isLoading,
                     onTap: () {
                       if (formKey.currentState!.validate()) {

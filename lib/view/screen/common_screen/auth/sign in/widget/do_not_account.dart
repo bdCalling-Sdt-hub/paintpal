@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../core/app_routes.dart';
 import '../../../../../../utils/app_colors.dart';
-import '../../../../../../extension/my_extension.dart';
+import '../../../../../../utils/app_string.dart';
 
-
-class DoNotHaveAccont extends StatelessWidget {
-  const DoNotHaveAccont({
+class DoNotHaveAccount extends StatelessWidget {
+  const DoNotHaveAccount({
     super.key,
   });
 
@@ -26,29 +26,29 @@ class DoNotHaveAccont extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: "Don’t have an account".tr,
+                  text: AppString.doNotHaveAccount,
                   style: GoogleFonts.plusJakartaSans(
-                    color: AppColors.secondary,
-                    fontSize: 16,
+                    color: AppColors.white_500,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 TextSpan(
                   text: "  ".tr,
                   style: GoogleFonts.plusJakartaSans(
-                    color: AppColors.primaryColor,
+                    color: AppColors.secondary,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 TextSpan(
-                  text: "Sign up".tr,
+                  text: AppString.signUp,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       Get.toNamed(AppRoutes.signUp);
                     },
                   style: GoogleFonts.plusJakartaSans(
-                    color: AppColors.secondary,
+                    color: AppColors.highlight,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),

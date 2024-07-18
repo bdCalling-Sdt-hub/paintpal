@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../utils/app_colors.dart';
 
 class CommonButton extends StatelessWidget {
@@ -25,11 +23,11 @@ class CommonButton extends StatelessWidget {
   const CommonButton(
       {this.onTap,
       required this.titleText,
-      this.titleColor = AppColors.white,
+      this.titleColor = AppColors.blue_500,
       this.buttonColor = AppColors.primaryColor,
-      this.titleSize = 16,
-      this.buttonRadius = 10,
-      this.titleWeight = FontWeight.w700,
+      this.titleSize = 20,
+      this.buttonRadius = 16,
+      this.titleWeight = FontWeight.w600,
       this.buttonHeight = 60,
       this.borderWidth = 1,
       this.isLoading = false,
@@ -64,7 +62,7 @@ class CommonButton extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.sourceSerif4(
                     color: titleColor,
                     fontSize: titleSize.sp,
                     fontWeight: titleWeight),

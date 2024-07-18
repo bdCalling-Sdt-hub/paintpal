@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../utils/app_colors.dart';
 import '../text/common_text.dart';
 
@@ -24,10 +23,10 @@ class CommonTextField extends StatelessWidget {
       this.paddingVertical = 14,
       this.borderRadius = 10,
       this.inputFormatters,
-      this.fillColor = AppColors.filledColor,
+      this.fillColor = AppColors.blue_400,
       this.hintTextColor = AppColors.textFiledColor,
       this.labelTextColor = AppColors.textFiledColor,
-      this.textColor = AppColors.black,
+      this.textColor = AppColors.white_500,
       this.borderColor = AppColors.transparent,
       this.onSubmitted,
       this.onTap,

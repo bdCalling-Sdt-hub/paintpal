@@ -4,9 +4,10 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/setting/terms_of_services_controller.dart';
 import '../../../../models/api_response_model.dart';
-import '../../../common_widgets/other_widgets/common_loader.dart';
-import '../../../common_widgets/screen/error_screen.dart';
-import '../../../common_widgets/text/common_text.dart';
+import '../../../../utils/app_string.dart';
+import '../../../component/other_widgets/common_loader.dart';
+import '../../../component/screen/error_screen.dart';
+import '../../../component/text/common_text.dart';
 
 class TermsOfServicesScreen extends StatelessWidget {
   const TermsOfServicesScreen({super.key});
@@ -16,8 +17,8 @@ class TermsOfServicesScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: CommonText(
-            text: "Terms of services".tr,
+          title: const CommonText(
+            text: AppString.termsOfServices,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),

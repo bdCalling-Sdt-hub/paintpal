@@ -1,5 +1,5 @@
-
 import 'package:get/get.dart';
+import 'package:paintpal/view/screen/screen/welcome_screen.dart';
 
 import '../view/screen/common_screen/auth/change_password/change_password_screen.dart';
 import '../view/screen/common_screen/auth/forgot password/create_password.dart';
@@ -39,28 +39,84 @@ class AppRoutes {
   static const String privacyPolicy = "/privacy_policy_screen.dart";
   static const String termsOfServices = "/terms_of_services_screen.dart";
   static const String setting = "/setting_screen.dart";
+  static const String welcome = "/welcome_screen.dart";
 
   static List<GetPage> routes = [
-    GetPage(name: test, page: () => TestScreen()),
-    GetPage(name: splash, page: () => SplashScreen()),
-    GetPage(name: onboarding, page: () => OnboardingScreen()),
-    GetPage(name: signUp, page: () => SignUpScreen()),
-    GetPage(name: verifyUser, page: () => VerifyUser()),
-    GetPage(name: signIn, page: () => SignInScreen()),
-    GetPage(name: forgotPassword, page: () => ForgotPasswordScreen()),
-    GetPage(name: verifyEmail, page: () => VerifyScreen()),
-    GetPage(name: createPassword, page: () => CreatePassword()),
-    GetPage(name: changePassword, page: () => ChangePasswordScreen()),
-    GetPage(name: notifications, page: () => NotificationScreen()),
-    GetPage(name: chat, page: () => ChatListScreen()),
-    GetPage(name: message, page: () => MessageScreen()),
-    GetPage(name: profile, page: () => ProfileScreen()),
-    GetPage(name: editProfile, page: () => EditProfile()),
-    GetPage(name: privacyPolicy, page: () => PrivacyPolicyScreen()),
-    GetPage(name: termsOfServices, page: () => TermsOfServicesScreen()),
-    GetPage(name: setting, page: () => SettingScreen()),
-
-
-
+    GetPage(
+        name: test,
+        page: () => TestScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: splash,
+        page: () => SplashScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: onboarding,
+        page: () => OnboardingScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: signUp,
+        page: () => SignUpScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: verifyUser,
+        page: () => VerifyUser(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: signIn,
+        page: () => SignInScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: forgotPassword,
+        page: () => ForgotPasswordScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: verifyEmail,
+        page: () => VerifyScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: createPassword,
+        page: () => CreatePassword(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: changePassword,
+        page: () => ChangePasswordScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: notifications,
+        page: () => NotificationScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: chat,
+        page: () => ChatListScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: message,
+        page: () => MessageScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: profile,
+        page: () => ProfileScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: editProfile,
+        page: () => EditProfile(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: privacyPolicy,
+        page: () => PrivacyPolicyScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: termsOfServices,
+        page: () => TermsOfServicesScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: setting,
+        page: () => SettingScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: welcome,
+        page: () => WelcomeScreen(),
+        transition: Transition.rightToLeftWithFade),
   ];
 }

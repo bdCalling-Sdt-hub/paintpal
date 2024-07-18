@@ -1,25 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/app_colors.dart';
 
-class CustomText extends StatelessWidget {
-  const CustomText(
+class CommonText extends StatelessWidget {
+  const CommonText(
       {super.key,
       this.maxLines = 1,
-      this.textAlign = TextAlign.start,
+      this.textAlign = TextAlign.center,
       this.left = 0,
       this.right = 0,
       this.top = 0,
       this.bottom = 0,
-      this.fontSize = 14,
+      this.fontSize = 16,
       this.fontWeight = FontWeight.w500,
-      this.color = AppColors.background,
+      this.color = AppColors.white_500,
       required this.text,
       this.style = false,
-      this.overflow = TextOverflow.ellipsis
-      });
+      this.overflow = TextOverflow.ellipsis});
 
   final double left;
   final double right;
@@ -37,21 +37,21 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
+      padding: EdgeInsets.only(
+          left: left.w, right: right.w, top: top.h, bottom: bottom.h),
       child: Text(
         textAlign: textAlign,
         text,
         maxLines: maxLines,
         overflow: overflow,
         style: style == true
-            ? GoogleFonts.plusJakartaSans(
-                fontSize: fontSize,
+            ? GoogleFonts.sourceSerif4(
+                fontSize: fontSize.sp,
                 fontWeight: fontWeight,
                 color: color,
               )
             : GoogleFonts.roboto(
-                fontSize: fontSize,
+                fontSize: fontSize.sp,
                 fontWeight: fontWeight,
                 color: color,
               ),

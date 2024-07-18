@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
 import '../../../../core/app_routes.dart';
 import '../../../../utils/app_images.dart';
-import '../../../common_widgets/bottom_nav_bar/common_bottom_bar.dart';
-import '../../../common_widgets/image/common_image.dart';
-import '../../../common_widgets/other_widgets/item.dart';
-import '../../../common_widgets/pop_up/common_pop_menu.dart';
-import '../../../common_widgets/text/common_text.dart';
+import '../../../../utils/app_string.dart';
+import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../component/image/common_image.dart';
+import '../../../component/other_widgets/item.dart';
+import '../../../component/pop_up/common_pop_menu.dart';
+import '../../../component/text/common_text.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,8 +20,8 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: CommonText(
-          text: "Profile".tr,
+        title: const CommonText(
+          text: AppString.profile,
           fontWeight: FontWeight.w600,
           fontSize: 24,
         ),
@@ -46,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 const CommonText(
-                  text: "Daniel Martinez",
+                  text: "Naimul Hassan",
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   top: 20,
@@ -54,13 +56,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Item(
                   icon: Icons.person,
-                  title: "Edit Profile".tr,
+                  title: AppString.editProfile,
                   onTap: () => Get.toNamed(AppRoutes.editProfile),
                 ),
-
                 Item(
                   icon: Icons.settings,
-                  title: "Settings".tr,
+                  title: AppString.settings,
                   onTap: () => Get.toNamed(AppRoutes.setting),
                 ),
                 Container(
@@ -89,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Item(
                   icon: Icons.logout,
-                  title: "Log Out".tr,
+                  title: AppString.logOut,
                   onTap: () => logOutPopUp(),
                 ),
               ],

@@ -1,17 +1,17 @@
-
 import 'package:flutter/material.dart';
+import 'package:paintpal/utils/app_colors.dart';
+import '../../../../../core/app_routes.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../controllers/common_controller/auth/forget_password_controller.dart';
 import '../../../../../helpers/reg_exp_helper.dart';
 import '../../../../../utils/app_images.dart';
-import '../../../../common_widgets/button/common_button.dart';
-import '../../../../common_widgets/image/common_image.dart';
-import '../../../../common_widgets/text/common_text.dart';
-import '../../../../common_widgets/text_field/common_text_field.dart';
-import '../../../../../extension/my_extension.dart';
-
-
+import '../../../../../utils/app_string.dart';
+import '../../../../component/button/common_button.dart';
+import '../../../../component/image/common_image.dart';
+import '../../../../component/text/common_text.dart';
+import '../../../../component/text_field/common_text_field.dart';
 
 class CreatePassword extends StatelessWidget {
   CreatePassword({super.key});
@@ -21,13 +21,7 @@ class CreatePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CommonText(
-          text: "Create New Password".tr,
-          fontWeight: FontWeight.w700,
-          fontSize: 24,
-        ),
-      ),
+      appBar: AppBar(),
       body: GetBuilder<ForgetPasswordController>(
         builder: (controller) {
           return SingleChildScrollView(
@@ -35,28 +29,24 @@ class CreatePassword extends StatelessWidget {
             child: Form(
               key: formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   64.height,
-                  Center(
-                    child: CommonImage(
-                      imageSrc: AppImages.noImage,
-                      imageType: ImageType.png,
-                      height: 297,
-                      width: 297,
-                    ),
+                  const CommonText(
+                    text: AppString.resetPassword,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.highlight,
+                    top: 24,
                   ),
-                  CommonText(
-                    text: "Create Your New Password".tr,
-                    fontSize: 18,
-                    textAlign: TextAlign.start,
-                    top: 64,
-                    bottom: 24,
+                  const CommonText(
+                    text: AppString.passwordMustHaveCharacters,
+                    top: 24,
+                    bottom: 64,
                   ),
                   CommonTextField(
                     controller: controller.passwordController,
                     prefixIcon: const Icon(Icons.lock),
-                    labelText: "Password".tr,
+                    labelText: AppString.password,
                     isPassword: true,
                     validator: OtherHelper.passwordValidator,
                   ),
@@ -64,18 +54,18 @@ class CreatePassword extends StatelessWidget {
                   CommonTextField(
                     controller: controller.confirmPasswordController,
                     prefixIcon: const Icon(Icons.lock),
-                    labelText: "Confirm Password".tr,
+                    labelText: AppString.confirmPassword,
                     validator: (value) => OtherHelper.confirmPasswordValidator(
                         value, controller.passwordController),
                     isPassword: true,
                   ),
-                  64.height,
+                  200.height,
                   CommonButton(
-                    titleText: "Continue".tr,
+                    titleText: AppString.updatePassword,
                     isLoading: controller.isLoadingReset,
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                       controller.resetPasswordRepo();
+                        controller.resetPasswordRepo();
                       }
                     },
                   ),

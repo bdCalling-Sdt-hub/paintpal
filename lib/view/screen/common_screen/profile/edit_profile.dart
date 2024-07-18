@@ -1,16 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
 import '../../../../utils/app_images.dart';
-import '../../../common_widgets/button/common_button.dart';
-import '../../../common_widgets/image/common_image.dart';
-import '../../../common_widgets/text/common_text.dart';
+import '../../../../utils/app_string.dart';
+import '../../../component/button/common_button.dart';
+import '../../../component/image/common_image.dart';
+import '../../../component/text/common_text.dart';
 import 'widget/edit_profile_all_filed.dart';
-import '../../../../../extension/my_extension.dart';
-
 
 class EditProfile extends StatelessWidget {
   EditProfile({super.key});
@@ -24,8 +23,8 @@ class EditProfile extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: CommonText(
-              text: "Book Appointment".tr,
+            title: const CommonText(
+              text: AppString.profile,
               fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
@@ -77,7 +76,7 @@ class EditProfile extends StatelessWidget {
                   const EditProfileAllFiled(),
                   30.height,
                   CommonButton(
-                      titleText: "Save Changes".tr,
+                      titleText: AppString.saveAndChanges,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           // Get.toNamed(AppRoutes.patientsProfile);

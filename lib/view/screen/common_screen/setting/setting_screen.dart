@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/setting/setting_controller.dart';
 import '../../../../core/app_routes.dart';
 import '../../../../utils/app_colors.dart';
-import '../../../common_widgets/bottom_nav_bar/common_bottom_bar.dart';
-import '../../../common_widgets/pop_up/common_pop_menu.dart';
-import '../../../common_widgets/text/common_text.dart';
+import '../../../../utils/app_string.dart';
+import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../component/pop_up/common_pop_menu.dart';
+import '../../../component/text/common_text.dart';
 import 'widget/setting_item.dart';
-import '../../../../../extension/my_extension.dart';
-
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -19,8 +19,8 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: CommonText(
-          text: "Settings".tr,
+        title: const CommonText(
+          text: AppString.settings,
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
@@ -34,22 +34,22 @@ class SettingScreen extends StatelessWidget {
                 70.height,
                 GestureDetector(
                   onTap: () => Get.toNamed(AppRoutes.changePassword),
-                  child: SettingItem(
-                    title: "Change Password".tr,
+                  child: const SettingItem(
+                    title: AppString.changePassword,
                     iconDate: Icons.lock_outline,
                   ),
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed(AppRoutes.termsOfServices),
-                  child: SettingItem(
-                    title: "Terms of Services".tr,
+                  child: const SettingItem(
+                    title: AppString.termsOfServices,
                     iconDate: Icons.gavel,
                   ),
                 ),
                 GestureDetector(
                   onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
-                  child: SettingItem(
-                    title: "Privacy Policy".tr,
+                  child: const SettingItem(
+                    title: AppString.privacyPolicy,
                     iconDate: Icons.network_wifi_1_bar,
                   ),
                 ),
@@ -71,7 +71,7 @@ class SettingScreen extends StatelessWidget {
                           color: AppColors.secondary,
                         ),
                         CommonText(
-                          text: "Delete account".tr,
+                          text: AppString.deleteAccount,
                           color: AppColors.secondary,
                           left: 12.w,
                         ),

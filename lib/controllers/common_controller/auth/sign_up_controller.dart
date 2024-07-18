@@ -35,8 +35,8 @@ class SignUpController extends GetxController {
 
   TextEditingController nameController =
       TextEditingController(text: kDebugMode ? "Namimul Hassan" : "");
-  TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? "user@gmail.com" : '');
+  TextEditingController emailController = TextEditingController(
+      text: kDebugMode ? "developernaimul00@gmail.com" : '');
   TextEditingController passwordController =
       TextEditingController(text: kDebugMode ? 'hello123' : '');
   TextEditingController confirmPasswordController =
@@ -50,6 +50,11 @@ class SignUpController extends GetxController {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  getProfileImage() async {
+    image = await OtherHelper.openGallery();
+    update();
   }
 
   onCountryChange(Country value) {

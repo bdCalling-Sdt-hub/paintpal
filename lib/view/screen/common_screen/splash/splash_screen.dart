@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:paintpal/utils/app_string.dart';
+import 'package:paintpal/view/component/text/common_text.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/app_routes.dart';
 import '../../../../utils/app_images.dart';
-import '../../../common_widgets/image/common_image.dart';
-import '../../../common_widgets/other_widgets/common_loader.dart';
-import '../../../../../extension/my_extension.dart';
-
-
+import '../../../component/image/common_image.dart';
+import '../../../component/other_widgets/common_loader.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,6 +20,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    changeScreen();
     Future.delayed(
       const Duration(seconds: 3),
       () {
@@ -29,11 +31,28 @@ class _SplashScreenState extends State<SplashScreen> {
         //     Get.offAllNamed(AppRoutes.patientsHome);
         //   }
         // } else {
-          Get.offAllNamed(AppRoutes.onboarding);
-
+         Get.offAllNamed(AppRoutes.welcome);
       },
     );
     super.initState();
+  }
+
+  changeScreen() {
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        secondScreen = true;
+        setState(() {});
+      },
+    );
+  }
+
+  bool secondScreen = false;
+
+  @override
+  void dispose() {
+    secondScreen = false;
+    super.dispose();
   }
 
   @override
@@ -46,15 +65,32 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            Center(
-                child: CommonImage(
-              imageSrc: AppImages.noImage,
-              height: 70,
-              imageType: ImageType.png,
-            )),
+            secondScreen
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CommonImage(
+                        imageSrc: AppImages.logo,
+                        height: 150,
+                        width: 150,
+                        imageType: ImageType.png,
+                      ),
+                      16.width,
+                      const CommonText(
+                        text: AppString.paintPal,
+                        fontSize: 48,
+                        color: Colors.white,
+                      )
+                    ],
+                  )
+                : Center(
+                    child: CommonImage(
+                    imageSrc: AppImages.logo,
+                    height: 260,
+                    width: 260,
+                    imageType: ImageType.png,
+                  )),
             const Spacer(),
-            const CommonLoader(),
-           20.height,
           ],
         ),
       ),

@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import '../../../../controllers/common_controller/notifications/notifications_controller.dart';
 import '../../../../models/api_response_model.dart';
 import '../../../../models/notification_model.dart';
-import '../../../common_widgets/bottom_nav_bar/common_bottom_bar.dart';
-import '../../../common_widgets/other_widgets/common_loader.dart';
-import '../../../common_widgets/other_widgets/no_data.dart';
-import '../../../common_widgets/screen/error_screen.dart';
-import '../../../common_widgets/text/common_text.dart';
+
+import '../../../../utils/app_url.dart';
+import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../component/other_widgets/common_loader.dart';
+import '../../../component/other_widgets/no_data.dart';
+import '../../../component/screen/error_screen.dart';
+import '../../../component/text/common_text.dart';
 import 'widget/notification_item.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class NotificationScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: CommonText(
-          text: "Notification".tr,
+          text: AppUrls.notifications,
           fontWeight: FontWeight.w600,
           fontSize: 24.sp,
         ),

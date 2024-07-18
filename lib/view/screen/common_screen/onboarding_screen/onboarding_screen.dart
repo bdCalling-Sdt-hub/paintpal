@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../core/app_routes.dart';
 import '../../../../utils/app_images.dart';
-import '../../../common_widgets/button/common_button.dart';
-import '../../../common_widgets/image/common_image.dart';
-import '../../../../../extension/my_extension.dart';
-
-
+import '../../../../utils/app_string.dart';
+import '../../../component/button/common_button.dart';
+import '../../../component/image/common_image.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -22,19 +21,19 @@ class OnboardingScreen extends StatelessWidget {
             180.height,
             Center(
                 child: CommonImage(
-              imageSrc: AppImages.noImage,
-              height: 70,
-              width: 70,
+              imageSrc: AppImages.logo,
+              height: 250,
+              width: 250,
               imageType: ImageType.png,
             )),
             120.height,
             CommonButton(
-              titleText: "Sign in with password".tr,
+              titleText: AppString.signInWithPassword,
               onTap: () => Get.toNamed(AppRoutes.signIn),
             ),
             24.height,
             CommonButton(
-              titleText: "Sign up".tr,
+              titleText: AppString.signUp,
               onTap: () => Get.toNamed(AppRoutes.signUp),
             ),
           ],

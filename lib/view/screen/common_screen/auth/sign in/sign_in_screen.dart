@@ -1,17 +1,16 @@
-
 import 'package:flutter/material.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../controllers/common_controller/auth/sign_in_controller.dart';
 import '../../../../../core/app_routes.dart';
 import '../../../../../helpers/reg_exp_helper.dart';
 import '../../../../../utils/app_colors.dart';
-import '../../../../common_widgets/button/common_button.dart';
-import '../../../../common_widgets/text/common_text.dart';
-import '../../../../common_widgets/text_field/common_text_field.dart';
+import '../../../../../utils/app_string.dart';
+import '../../../../component/button/common_button.dart';
+import '../../../../component/text/common_text.dart';
+import '../../../../component/text_field/common_text_field.dart';
 import 'widget/do_not_account.dart';
-import '../../../../../extension/my_extension.dart';
-
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -30,54 +29,77 @@ class SignInScreen extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-
-                    CommonText(
-                      text: "Login to Your Account".tr,
+                    const CommonText(
+                      text: AppString.welcomeBack,
                       fontSize: 32,
-                      bottom: 20,
-                      top: 36,
-                    ),
+                      bottom: 12,
+                      top: 100,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.highlight,
+                    ).start,
+                    const CommonText(
+                      text: AppString.pleaseEnterYourMailAndPassword,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.white_600,
+                    ).start,
                     20.height,
+                    const Divider(
+                      color: AppColors.highlight,
+                      thickness: 0.5,
+                    ),
+                    const CommonText(
+                      text: AppString.email,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      top: 80,
+                      bottom: 12,
+                    ).start,
                     CommonTextField(
                       controller: controller.emailController,
-                      prefixIcon: const Icon(Icons.mail),
-                      labelText: "Email".tr,
+                      prefixIcon: const Icon(
+                        Icons.mail,
+                        color: AppColors.white_500,
+                      ),
+                      hintText: AppString.email,
                       validator: OtherHelper.emailValidator,
                     ),
                     40.height,
                     CommonTextField(
                       controller: controller.passwordController,
-                      prefixIcon: const Icon(Icons.lock),
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: AppColors.white_500,
+                      ),
                       isPassword: true,
-                      labelText: "Password".tr,
+                      labelText: AppString.password,
                       validator: OtherHelper.passwordValidator,
                     ),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () => Get.toNamed(AppRoutes.forgotPassword),
-                        child: CommonText(
-                          text: "Forgot the password".tr,
+                        child: const CommonText(
+                          text: AppString.forgotThePassword,
                           top: 10,
                           bottom: 30,
-                          color: AppColors.primaryColor,
+                          color: AppColors.highlight,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                     CommonButton(
-                      titleText: "Sign in".tr,
+                      titleText: AppString.signIn,
                       isLoading: controller.isLoading,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                         controller.signInUser();
+                          controller.signInUser();
                         }
                       },
                     ),
-
                     30.height,
-                    const DoNotHaveAccont()
+                    const DoNotHaveAccount()
                   ],
                 ),
               ),

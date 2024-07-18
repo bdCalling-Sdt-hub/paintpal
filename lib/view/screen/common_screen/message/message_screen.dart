@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/message/message_controller.dart';
 import '../../../../models/chat_message_model.dart';
-import '../../../common_widgets/image/common_image.dart';
-import '../../../common_widgets/text/common_text.dart';
-import '../../../common_widgets/text_field/common_text_field.dart';
+import '../../../../utils/app_string.dart';
+import '../../../component/image/common_image.dart';
+import '../../../component/text/common_text.dart';
+import '../../../component/text_field/common_text_field.dart';
 import 'widget/chat_bubble_message.dart';
-import '../../../../../extension/my_extension.dart';
-
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -95,12 +95,12 @@ class _MessageScreenState extends State<MessageScreen> {
             child: Padding(
               padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 24.h),
               child: CommonTextField(
-                hintText: "message here".tr,
+                hintText: AppString.messageHere,
                 suffixIcon: GestureDetector(
                   onTap: controller.addNewMessage,
                   child: Padding(
                     padding: EdgeInsets.all(16.sp),
-                    child:  const Icon(Icons.send),
+                    child: const Icon(Icons.send),
                   ),
                 ),
                 borderColor: Colors.white,
