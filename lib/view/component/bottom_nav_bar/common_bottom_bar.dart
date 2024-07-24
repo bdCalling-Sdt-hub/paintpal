@@ -18,17 +18,19 @@ class CommonBottomNavBar extends StatefulWidget {
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   var bottomNavIndex = 0;
   List<Widget> unselectedIcons = [
-    const Icon(Icons.settings_outlined, color: AppColors.black),
+    const Icon(Icons.home, color: AppColors.black),
     const Icon(Icons.notifications_outlined, color: AppColors.black),
-    const Icon(Icons.chat, color: AppColors.black),
+    const Icon(Icons.add, color: AppColors.black),
+    const Icon(Icons.settings_outlined, color: AppColors.black),
     const Icon(Icons.person_2_outlined, color: AppColors.black),
   ];
 
   List<Widget> selectedIcons = [
-    const Icon(Icons.settings_outlined, color: AppColors.primaryColor),
-    const Icon(Icons.notifications, color: AppColors.primaryColor),
-    const Icon(Icons.chat, color: AppColors.primaryColor),
-    const Icon(Icons.person, color: AppColors.primaryColor),
+    const Icon(Icons.home, color: AppColors.highlight),
+    const Icon(Icons.notifications, color: AppColors.highlight),
+    const Icon(Icons.add, color: AppColors.highlight),
+    const Icon(Icons.settings_outlined, color: AppColors.highlight),
+    const Icon(Icons.person, color: AppColors.highlight),
   ];
 
   @override
@@ -78,7 +80,7 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
     }
     if (index == 0) {
       if (!(widget.currentIndex == 0)) {
-        Get.toNamed(AppRoutes.setting);
+        Get.toNamed(AppRoutes.home);
       }
     } else if (index == 1) {
       if (!(widget.currentIndex == 1)) {
@@ -86,10 +88,14 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       }
     } else if (index == 2) {
       if (!(widget.currentIndex == 2)) {
-        Get.toNamed(AppRoutes.chat);
+        Get.toNamed(AppRoutes.addRoom);
       }
     } else if (index == 3) {
       if (!(widget.currentIndex == 3)) {
+        Get.toNamed(AppRoutes.setting);
+      }
+    } else if (index == 4) {
+      if (!(widget.currentIndex == 4)) {
         Get.toNamed(AppRoutes.profile);
       }
     }

@@ -85,7 +85,7 @@ class SettingScreen extends StatelessWidget {
         },
       ),
       bottomNavigationBar: const CommonBottomNavBar(
-        currentIndex: 0,
+        currentIndex: 3,
       ),
     );
   }
