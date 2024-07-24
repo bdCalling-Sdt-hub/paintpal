@@ -88,6 +88,7 @@ class AddRoom extends StatelessWidget {
                   ),
                 ).end,
                 20.height,
+
                 const CommonButton(titleText: AppString.save),
 
                 30.height,
