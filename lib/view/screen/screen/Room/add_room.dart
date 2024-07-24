@@ -4,6 +4,7 @@ import 'package:paintpal/controllers/room/add_room_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/utils/app_string.dart';
+import 'package:paintpal/view/component/button/common_button.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/add_surface_filed.dart';
@@ -86,7 +87,10 @@ class AddRoom extends StatelessWidget {
                     ),
                   ),
                 ).end,
-                30.height
+                20.height,
+                const CommonButton(titleText: AppString.save),
+
+                30.height,
               ],
             ),
           ),
