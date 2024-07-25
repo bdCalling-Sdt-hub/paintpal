@@ -104,4 +104,5 @@ class AppString {
   static const String surfaceOrCornerName = "Surface or Corner Name";
   static const String surfaceOrCornerNameHint = "Ex. Left or Right Wall";
   static const String addSurface = "Add surface";
+  static const String address = "Address";
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:paintpal/extension/my_extension.dart';
-
-import '../../../../../utils/app_string.dart';
 import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 

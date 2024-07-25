@@ -13,7 +13,9 @@ import '../../../../component/text_field/common_phone_number_text_filed.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class EditProfileAllFiled extends StatelessWidget {
-  const EditProfileAllFiled({super.key});
+  const EditProfileAllFiled({super.key, this.isEditable = false});
+
+  final bool isEditable;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class EditProfileAllFiled extends StatelessWidget {
               text: AppString.fullName,
               fontWeight: FontWeight.w700,
               fontSize: 20,
-              bottom: 12,
+              bottom: 4,
             ),
             CommonTextField(
               controller: controller.nameController,
@@ -35,109 +37,58 @@ class EditProfileAllFiled extends StatelessWidget {
               prefixIcon: const Icon(Icons.person),
               keyboardType: TextInputType.text,
               borderColor: AppColors.black,
-              fillColor: AppColors.transparent,
+              enabled: isEditable,
             ),
+            isEditable
+                ? 0.height
+                : const CommonText(
+                    text: AppString.email,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    bottom: 4,
+                    top: 20,
+                  ),
+            isEditable
+                ? 0.height
+                : CommonTextField(
+                    controller: controller.emailController,
+                    validator: OtherHelper.validator,
+                    hintText: AppString.email,
+                    prefixIcon: const Icon(Icons.mail_outline_outlined),
+                    keyboardType: TextInputType.text,
+                    borderColor: AppColors.black,
+                    enabled: isEditable,
+                  ),
             const CommonText(
-              text: AppString.contact,
-              fontSize: 20,
+              text: AppString.phoneNumber,
               fontWeight: FontWeight.w700,
+              fontSize: 20,
+              bottom: 4,
               top: 20,
-              bottom: 12,
-            ),
-            CommonPhoneNumberTextFiled(
-              controller: controller.numberController,
-              countryChange: (value) {
-                if (kDebugMode) {
-                  print(value);
-                }
-              },
-            ),
-            20.height,
-            Row(
-              children: [
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CommonText(
-                      text: AppString.dateOfBirth,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      bottom: 12,
-                    ),
-                    CommonTextField(
-                      controller: controller.dateOfBirthController,
-                      validator: OtherHelper.validator,
-                      keyboardType: TextInputType.none,
-                      borderColor: AppColors.black,
-                      fillColor: AppColors.transparent,
-                      borderRadius: 10.r,
-                      onTap: () => OtherHelper.datePicker(
-                          controller.dateOfBirthController),
-                      hintText: AppString.dateOfBirth,
-                    ),
-                  ],
-                )),
-                20.height,
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CommonText(
-                      text: AppString.age,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      bottom: 12,
-                    ),
-                    CommonTextField(
-                      controller: controller.ageController,
-                      validator: OtherHelper.validator,
-                      keyboardType: TextInputType.number,
-                      hintText: AppString.age,
-                      borderColor: AppColors.black,
-                      fillColor: AppColors.transparent,
-                    ),
-                  ],
-                )),
-              ],
-            ),
-            const CommonText(
-              text: AppString.aboutMe,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              bottom: 12,
             ),
             CommonTextField(
-              controller: controller.descriptionController,
+              controller: controller.numberController,
               validator: OtherHelper.validator,
+              hintText: AppString.phoneNumber,
+              prefixIcon: const Icon(Icons.call),
               keyboardType: TextInputType.number,
               borderColor: AppColors.black,
-              fillColor: AppColors.transparent,
-              hintText: AppString.aboutMe,
+              enabled: isEditable,
             ),
-            30.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CommonText(
-                  text: AppString.gender,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                ),
-                SizedBox(
-                  width: 150.w,
-                  child: CommonTextField(
-                    controller: controller.genderController,
-                    fillColor: AppColors.black,
-                    hintText: AppString.gender,
-                    suffixIcon: PopUpMenu(
-                        items: controller.gender,
-                        iconColor: AppColors.white,
-                        selectedItem: [controller.genderController.text],
-                        onTap: controller.selectedGender),
-                  ),
-                )
-              ],
+            const CommonText(
+              text: AppString.address,
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+              bottom: 4,
+              top: 20,
+            ),
+            CommonTextField(
+              controller: controller.addressController,
+              validator: OtherHelper.validator,
+              hintText: AppString.address,
+              keyboardType: TextInputType.text,
+              borderColor: AppColors.black,
+              enabled: isEditable,
             ),
           ],
         );

@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:paintpal/utils/app_colors.dart';
 import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
+import '../../../../core/app_routes.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/button/common_button.dart';
@@ -39,47 +41,53 @@ class EditProfile extends StatelessWidget {
                     children: [
                       Center(
                         child: CircleAvatar(
-                          radius: 85.sp,
+                          radius: 50.sp,
                           backgroundColor: Colors.transparent,
                           child: ClipOval(
                             child: controller.image != null
                                 ? Image.file(
                                     File(controller.image!),
-                                    width: 170,
-                                    height: 170,
+                                    width: 100,
+                                    height: 100,
                                     fit: BoxFit.fill,
                                   )
                                 : CommonImage(
                                     imageSrc: AppImages.profile,
                                     imageType: ImageType.png,
-                                    height: 170,
-                                    width: 170,
+                                    height: 100,
+                                    width: 100,
                                   ),
                           ),
                         ),
                       ),
                       Positioned(
                           bottom: 0,
-                          left: Get.width * 0.53,
+                          left: Get.width * 0.50,
                           child: IconButton(
                               style: ButtonStyle(
+                                  fixedSize: WidgetStateProperty.all<Size>(
+                                      const Size(24, 24)),
                                   backgroundColor: WidgetStateColor.resolveWith(
-                                (states) => Colors.black,
-                              )),
+                                    (states) => AppColors.white_500,
+                                  )),
                               onPressed: controller.getProfileImage,
+                              padding: EdgeInsets.zero,
                               icon: const Icon(
-                                Icons.edit,
-                                color: Colors.white,
+                                Icons.edit_outlined,
+                                color: Colors.black,
                               )))
                     ],
                   ),
-                  const EditProfileAllFiled(),
-                  30.height,
+                  50.height,
+                  const EditProfileAllFiled(
+                    isEditable: true,
+                  ),
+                  150.height,
                   CommonButton(
                       titleText: AppString.saveAndChanges,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          // Get.toNamed(AppRoutes.patientsProfile);
+                          Get.offAllNamed(AppRoutes.profile);
                         }
                       }),
                 ],

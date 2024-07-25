@@ -7,30 +7,31 @@ import '../../../utils/app_colors.dart';
 import '../text/common_text.dart';
 
 class CommonTextField extends StatelessWidget {
-  CommonTextField(
-      {super.key,
-      this.hintText,
-      this.labelText,
-      this.prefixIcon,
-      this.isPassword = false,
-      this.controller,
-      this.textInputAction = TextInputAction.next,
-      this.keyboardType = TextInputType.text,
-      this.mexLength,
-      this.validator,
-      this.prefixText,
-      this.paddingHorizontal = 12,
-      this.paddingVertical = 10,
-      this.borderRadius = 10,
-      this.inputFormatters,
-      this.fillColor = AppColors.blue_400,
-      this.hintTextColor = AppColors.textFiledColor,
-      this.labelTextColor = AppColors.textFiledColor,
-      this.textColor = AppColors.white_500,
-      this.borderColor = AppColors.transparent,
-      this.onSubmitted,
-      this.onTap,
-      this.suffixIcon});
+  CommonTextField({super.key,
+    this.hintText,
+    this.labelText,
+    this.prefixIcon,
+    this.isPassword = false,
+    this.controller,
+    this.textInputAction = TextInputAction.next,
+    this.keyboardType = TextInputType.text,
+    this.mexLength,
+    this.validator,
+    this.prefixText,
+    this.paddingHorizontal = 12,
+    this.paddingVertical = 10,
+    this.borderRadius = 10,
+    this.inputFormatters,
+    this.fillColor = AppColors.blue_400,
+    this.hintTextColor = AppColors.white_500,
+    this.labelTextColor = AppColors.textFiledColor,
+    this.textColor = AppColors.white_500,
+    this.borderColor = AppColors.transparent,
+    this.enabled = true,
+
+    this.onSubmitted,
+    this.onTap,
+    this.suffixIcon});
 
   final String? hintText;
   final String? labelText;
@@ -51,6 +52,7 @@ class CommonTextField extends StatelessWidget {
   final int? mexLength;
 
   final bool isPassword;
+  final bool enabled;
   RxBool obscureText = false.obs;
 
   final Function(String)? onSubmitted;
@@ -65,73 +67,77 @@ class CommonTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: keyboardType,
-        validator: validator,
-        controller: controller,
-        obscureText: obscureText.value,
-        textInputAction: textInputAction,
-        maxLength: mexLength,
-        cursorColor: AppColors.white,
-        inputFormatters: inputFormatters,
-        style: TextStyle(fontSize: 14, color: textColor),
-        onFieldSubmitted: onSubmitted,
-        onTap: onTap,
-        decoration: InputDecoration(
-          errorMaxLines: 2,
-          filled: true,
-          prefixIcon: prefixIcon,
-          fillColor: fillColor,
-          counterText: "",
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: paddingHorizontal.w, vertical: paddingVertical.h),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius.r),
-            borderSide: BorderSide(color: borderColor),
+          () =>
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: keyboardType,
+            validator: validator,
+            controller: controller,
+            obscureText: obscureText.value,
+            textInputAction: textInputAction,
+            maxLength: mexLength,
+            cursorColor: AppColors.white,
+            inputFormatters: inputFormatters,
+            enabled: enabled,
+            style: TextStyle(fontSize: 14, color: textColor),
+            onFieldSubmitted: onSubmitted,
+            onTap: onTap,
+            decoration: InputDecoration(
+              errorMaxLines: 2,
+              filled: true,
+              prefixIcon: prefixIcon,
+              fillColor: fillColor,
+              counterText: "",
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: paddingHorizontal.w, vertical: paddingVertical.h),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius.r),
+                borderSide: BorderSide(color: borderColor),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius.r),
+                borderSide: BorderSide(color: borderColor),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius.r),
+                borderSide: BorderSide(color: borderColor),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius.r),
+                borderSide: BorderSide(color: borderColor),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius.r),
+                borderSide: BorderSide(color: borderColor),
+              ),
+              hintText: hintText,
+              labelText: labelText,
+              hintStyle: GoogleFonts.roboto(fontSize: 14, color: hintTextColor),
+              labelStyle: GoogleFonts.roboto(
+                  fontSize: 14, color: labelTextColor),
+              prefix: CommonText(
+                text: prefixText ?? "",
+                fontWeight: FontWeight.w400,
+              ),
+              suffixIcon: isPassword
+                  ? GestureDetector(
+                onTap: toggle,
+                child: Padding(
+                    padding: EdgeInsetsDirectional.only(end: 10.w),
+                    child: Obx(
+                          () =>
+                          Icon(
+                            obscureText.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            size: 20.sp,
+                            color: textColor,
+                          ),
+                    )),
+              )
+                  : suffixIcon,
+            ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius.r),
-            borderSide: BorderSide(color: borderColor),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius.r),
-            borderSide: BorderSide(color: borderColor),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius.r),
-            borderSide: BorderSide(color: borderColor),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius.r),
-            borderSide: BorderSide(color: borderColor),
-          ),
-          hintText: hintText,
-          labelText: labelText,
-          hintStyle: GoogleFonts.roboto(fontSize: 14, color: hintTextColor),
-          labelStyle: GoogleFonts.roboto(fontSize: 14, color: labelTextColor),
-          prefix: CommonText(
-            text: prefixText ?? "",
-            fontWeight: FontWeight.w400,
-          ),
-          suffixIcon: isPassword
-              ? GestureDetector(
-                  onTap: toggle,
-                  child: Padding(
-                      padding: EdgeInsetsDirectional.only(end: 10.w),
-                      child: Obx(
-                        () => Icon(
-                          obscureText.value
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          size: 20.sp,
-                          color: textColor,
-                        ),
-                      )),
-                )
-              : suffixIcon,
-        ),
-      ),
     );
   }
 

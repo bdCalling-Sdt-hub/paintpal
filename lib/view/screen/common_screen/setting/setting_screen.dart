@@ -31,7 +31,7 @@ class SettingScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 30.w),
             child: Column(
               children: [
-                70.height,
+                50.height,
                 GestureDetector(
                   onTap: () => Get.toNamed(AppRoutes.changePassword),
                   child: const SettingItem(
@@ -39,20 +39,20 @@ class SettingScreen extends StatelessWidget {
                     iconDate: Icons.lock_outline,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.termsOfServices),
-                  child: const SettingItem(
-                    title: AppString.termsOfServices,
-                    iconDate: Icons.gavel,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
-                  child: const SettingItem(
-                    title: AppString.privacyPolicy,
-                    iconDate: Icons.network_wifi_1_bar,
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () => Get.toNamed(AppRoutes.termsOfServices),
+                //   child: const SettingItem(
+                //     title: AppString.termsOfServices,
+                //     iconDate: Icons.gavel,
+                //   ),
+                // ),
+                // GestureDetector(
+                //   onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
+                //   child: const SettingItem(
+                //     title: AppString.privacyPolicy,
+                //     iconDate: Icons.network_wifi_1_bar,
+                //   ),
+                // ),
                 GestureDetector(
                   onTap: () => deletePopUp(
                       controller: controller.passwordController,
@@ -62,17 +62,17 @@ class SettingScreen extends StatelessWidget {
                     height: 52.h,
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     decoration: BoxDecoration(
-                        color: AppColors.blueLight,
+                        color: AppColors.blue_400,
                         borderRadius: BorderRadius.circular(4.r)),
                     child: Row(
                       children: [
                         const Icon(
                           Icons.delete_outline_rounded,
-                          color: AppColors.secondary,
+                          color: AppColors.white_500,
                         ),
                         CommonText(
                           text: AppString.deleteAccount,
-                          color: AppColors.secondary,
+                          color: AppColors.white_500,
                           left: 12.w,
                         ),
                       ],

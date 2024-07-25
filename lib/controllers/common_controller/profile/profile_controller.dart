@@ -10,29 +10,14 @@ class ProfileController extends GetxController {
   String selectedLanguage = "English";
   String? image;
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  TextEditingController dateOfBirthController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController nameController = TextEditingController(text: "Naimul Hassan");
+  TextEditingController emailController = TextEditingController(text: "naimul@gmail.com");
 
-
-
-  selectedGender(int index) {
-    genderController.text = gender[index].toString();
-    update();
-    Get.back();
-  }
+  TextEditingController numberController = TextEditingController(text: "0123456789");
+  TextEditingController addressController = TextEditingController(text: "Dhaka, Bangladesh");
 
   getProfileImage() async {
     image = await OtherHelper.openGallery();
     update();
-  }
-
-  selectLanguage(int index) {
-    selectedLanguage = languages[index];
-    update();
-    Get.back();
   }
 }

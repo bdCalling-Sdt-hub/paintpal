@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:paintpal/extension/my_extension.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
 import '../../../../core/app_routes.dart';
+import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
@@ -11,6 +13,7 @@ import '../../../component/image/common_image.dart';
 import '../../../component/other_widgets/item.dart';
 import '../../../component/pop_up/common_pop_menu.dart';
 import '../../../component/text/common_text.dart';
+import 'widget/edit_profile_all_filed.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         title: const CommonText(
@@ -34,72 +38,59 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Center(
                   child: CircleAvatar(
-                    radius: 85.sp,
+                    radius: 50.sp,
                     backgroundColor: Colors.transparent,
                     child: ClipOval(
                       child: CommonImage(
                         imageSrc: AppImages.profile,
                         imageType: ImageType.png,
-                        height: 170,
-                        width: 170,
+                        height: 100,
+                        width: 100,
                         defaultImage: AppImages.profile,
                       ),
                     ),
                   ),
                 ),
-                const CommonText(
-                  text: "Naimul Hassan",
+                CommonText(
+                  text: controller.nameController.text,
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  top: 20,
+                  top: 12,
                   bottom: 24,
                 ),
-                Item(
-                  icon: Icons.person,
-                  title: AppString.editProfile,
+                GestureDetector(
                   onTap: () => Get.toNamed(AppRoutes.editProfile),
-                ),
-                Item(
-                  icon: Icons.settings,
-                  title: AppString.settings,
-                  onTap: () => Get.toNamed(AppRoutes.setting),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.language),
-                          CommonText(
-                            text: controller.selectedLanguage,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 18,
-                            left: 16,
-                          ),
-                          const Spacer(),
-                          PopUpMenu(
-                              items: controller.languages,
-                              selectedItem: [controller.selectedLanguage],
-                              onTap: controller.selectLanguage)
-                        ],
-                      ),
-                      const Divider()
-                    ],
+                  child: Container(
+                    width: 90,
+                    height: 34,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: AppColors.highlight)),
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          color: AppColors.highlight,
+                        ),
+                        CommonText(
+                          text: AppString.edit,
+                          color: AppColors.highlight,
+                          left: 6,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Item(
-                  icon: Icons.logout,
-                  title: AppString.logOut,
-                  onTap: () => logOutPopUp(),
-                ),
+                ).end,
+                const EditProfileAllFiled()
               ],
             ),
           );
         },
       ),
       bottomNavigationBar: const CommonBottomNavBar(
-        currentIndex: 3,
+        currentIndex: 4,
       ),
     );
   }

@@ -16,22 +16,22 @@ class SettingItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       margin: EdgeInsets.only(bottom: 15.h),
       decoration: BoxDecoration(
-          color: AppColors.blueLight, borderRadius: BorderRadius.circular(4.r)),
+          color: AppColors.blue_400, borderRadius: BorderRadius.circular(4.r)),
       child: Row(
         children: [
           Icon(
             iconDate,
-            color: AppColors.secondary,
+            color: AppColors.white_500,
           ),
           CommonText(
             text: title,
-            color: AppColors.secondary,
+            color: AppColors.white_500,
             left: 12,
           ),
           const Spacer(),
           const Icon(
             Icons.arrow_forward_ios,
-            color: AppColors.secondary,
+            color: AppColors.white_500,
           ),
         ],
       ),
