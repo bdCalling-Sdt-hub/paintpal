@@ -110,4 +110,5 @@ class AppString {
   static const String uploadCoverImage = "Upload cover image";
   static const String scan = "Scan QR Code";
   static const String generateQRCode = "Generate QR Code";
+  static const String export = "Export";
 }
