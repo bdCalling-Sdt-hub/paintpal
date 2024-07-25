@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/rowItem.dart';
 
+import '../../../../../helpers/other_helper.dart';
 import '../../../../../utils/app_colors.dart';
 import '../../../../../utils/app_images.dart';
 import '../../../../../utils/app_string.dart';
@@ -18,6 +21,8 @@ class AddSurfaceFiled extends StatefulWidget {
 }
 
 class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
+  String? image;
+
   @override
   void dispose() {
     widget.isShow = false;
@@ -51,6 +56,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                   8.height,
                   CommonTextField(
                     hintText: AppString.surfaceOrCornerNameHint,
+                    validator: OtherHelper.validator,
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 16),
@@ -64,19 +70,31 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                     ),
                     child: Container(
                       color: AppColors.blue_400.withOpacity(0.5),
-                      child: const Center(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add,
-                            size: 48,
-                            color: AppColors.white_500,
-                          ),
-                          CommonText(text: AppString.uploadSurfaceImage)
-                        ],
-                      )),
+                      child: Center(
+                        child: image != null
+                            ? Image.file(
+                                File(image!),
+                                fit: BoxFit.fill,
+                              )
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    onPressed: () async {
+                                      image = await OtherHelper.openGallery();
+                                      setState(() {});
+                                    },
+                                    icon: const Icon(
+                                      Icons.add,
+                                      size: 48,
+                                      color: AppColors.white_500,
+                                    ).center,
+                                  ),
+                                  const CommonText(
+                                      text: AppString.uploadSurfaceImage)
+                                ],
+                              ),
+                      ),
                     ),
                   ),
                   16.height,

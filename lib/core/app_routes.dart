@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:paintpal/view/screen/common_screen/setting/about_us.dart';
 import 'package:paintpal/view/screen/screen/Room/add_room.dart';
 import 'package:paintpal/view/screen/screen/Room/edit_wall.dart';
 import 'package:paintpal/view/screen/screen/Room/room_details.dart';
+import 'package:paintpal/view/screen/screen/Room/edit_room.dart';
 import 'package:paintpal/view/screen/screen/home/home_screen.dart';
 import 'package:paintpal/view/screen/screen/location/location_screen.dart';
 import 'package:paintpal/view/screen/screen/welcome_screen.dart';
@@ -50,6 +52,8 @@ class AppRoutes {
   static const String editWall = "/edit_wall.dart";
   static const String addRoom = "/add_room.dart";
   static const String location = "/location_screen.dart";
+  static const String about = "/about_us.dart";
+  static const String editRoom = "/edit_room.dart";
 
   static List<GetPage> routes = [
     GetPage(
@@ -140,15 +144,21 @@ class AppRoutes {
         name: editWall,
         page: () => EditWall(),
         transition: Transition.rightToLeftWithFade),
- GetPage(
+    GetPage(
         name: addRoom,
         page: () => AddRoom(),
         transition: Transition.rightToLeftWithFade),
-GetPage(
+    GetPage(
         name: location,
         page: () => LocationScreen(),
         transition: Transition.rightToLeftWithFade),
-
-
+    GetPage(
+        name: about,
+        page: () => AboutUs(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: editRoom,
+        page: () => EditRoomScreen(),
+        transition: Transition.rightToLeftWithFade),
   ];
 }

@@ -10,7 +10,7 @@ class HtmlModel {
   factory HtmlModel.fromJson(Map<String, dynamic> json) {
     return HtmlModel(
       id: json['_id'] ?? '',
-      content: json['content'] ?? 'No Data Found',
+      content: json['content'] ?? '<p style="color: white;">No Data Found</p>',
     );
   }
 }

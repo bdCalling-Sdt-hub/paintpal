@@ -8,6 +8,7 @@ import '../controllers/common_controller/message/chat_controller.dart';
 import '../controllers/common_controller/message/message_controller.dart';
 import '../controllers/common_controller/notifications/notifications_controller.dart';
 import '../controllers/common_controller/profile/profile_controller.dart';
+import '../controllers/common_controller/setting/about_us_controller.dart';
 import '../controllers/common_controller/setting/privacy_policy_controller.dart';
 import '../controllers/common_controller/setting/setting_controller.dart';
 import '../controllers/common_controller/setting/terms_of_services_controller.dart';
@@ -32,5 +33,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => HomeController(), fenix: true);
     Get.lazyPut(() => RoomDetailsController(), fenix: true);
     Get.lazyPut(() => AddRoomController(), fenix: true);
+    Get.lazyPut(() => AboutUsController(), fenix: true);
   }
 }

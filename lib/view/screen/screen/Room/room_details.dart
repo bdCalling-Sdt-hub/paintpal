@@ -101,85 +101,89 @@ class _RoomDetailsState extends State<RoomDetails>
   }
 
   wallItem() {
-    return Column(
-      children: [
-        const RowItem(
-          leftText: AppString.colorCode,
-          leftTextHint: AppString.colorCodeHint,
-          rightText: AppString.colorDetails,
-          rightTextHint: AppString.colorDetailsHint,
-        ),
-        8.height,
-        const RowItem(
-          leftText: AppString.purchaseLocation,
-          leftTextHint: AppString.purchaseLocationHint,
-          rightText: AppString.purchaseDate,
-          rightTextHint: AppString.purchaseDateHint,
-        ),
-        8.height,
-        const RowItem(
-          leftText: AppString.colorBrandName,
-          leftTextHint: AppString.colorBrandNameHint,
-          rightText: AppString.finish,
-          rightTextHint: AppString.finishHint,
-        ),
-        const CommonText(
-          text: AppString.paintTextureDetails,
-          top: 8,
-          bottom: 8,
-        ).start,
-        CommonTextField(
-          hintText: AppString.paintTextureDetails,
-          fillColor: AppColors.transparent,
-          borderColor: AppColors.white_500,
-          borderRadius: 50,
-        ),
-        30.height,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const CommonButton(
-              onTap: deleteWall,
-              titleText: AppString.delete,
-              titleColor: AppColors.white_500,
-              buttonColor: AppColors.blue_400,
-              borderColor: AppColors.transparent,
-              buttonRadius: 50,
-              buttonHeight: 34,
-              titleSize: 16,
-              buttonWidth: 90,
-            ),
-            GestureDetector(
-              onTap: () => Get.toNamed(AppRoutes.editWall, parameters: {
-                "name": name,
-                "image": image,
-              }),
-              child: Container(
-                width: 90,
-                height: 34,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: AppColors.highlight)),
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.edit,
-                      color: AppColors.highlight,
-                    ),
-                    CommonText(
-                      text: AppString.edit,
-                      color: AppColors.highlight,
-                      left: 6,
-                    )
-                  ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const RowItem(
+            leftText: AppString.colorCode,
+            leftTextHint: AppString.colorCodeHint,
+            rightText: AppString.colorDetails,
+            rightTextHint: AppString.colorDetailsHint,
+          ),
+          8.height,
+          const RowItem(
+            leftText: AppString.purchaseLocation,
+            leftTextHint: AppString.purchaseLocationHint,
+            rightText: AppString.purchaseDate,
+            rightTextHint: AppString.purchaseDateHint,
+          ),
+          8.height,
+          const RowItem(
+            leftText: AppString.colorBrandName,
+            leftTextHint: AppString.colorBrandNameHint,
+            rightText: AppString.finish,
+            rightTextHint: AppString.finishHint,
+          ),
+          const CommonText(
+            text: AppString.paintTextureDetails,
+            top: 8,
+            bottom: 8,
+          ).start,
+          CommonTextField(
+            hintText: AppString.paintTextureDetails,
+            fillColor: AppColors.transparent,
+            borderColor: AppColors.white_500,
+            borderRadius: 50,
+          ),
+          30.height,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const CommonButton(
+                onTap: deleteWall,
+                titleText: AppString.delete,
+                titleColor: AppColors.white_500,
+                buttonColor: AppColors.blue_400,
+                borderColor: AppColors.transparent,
+                buttonRadius: 50,
+                buttonHeight: 34,
+                titleSize: 16,
+                buttonWidth: 90,
+              ),
+              GestureDetector(
+                onTap: () => Get.toNamed(AppRoutes.editWall, parameters: {
+                  "name": name,
+                  "image": image,
+                }),
+                child: Container(
+                  width: 90,
+                  height: 34,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: AppColors.highlight)),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: AppColors.highlight,
+                      ),
+                      CommonText(
+                        text: AppString.edit,
+                        color: AppColors.highlight,
+                        left: 6,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        )
-      ],
+
+            ],
+          ),
+          30.height
+        ],
+      ),
     );
   }
 }

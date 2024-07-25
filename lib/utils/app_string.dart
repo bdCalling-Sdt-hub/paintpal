@@ -105,4 +105,7 @@ class AppString {
   static const String surfaceOrCornerNameHint = "Ex. Left or Right Wall";
   static const String addSurface = "Add surface";
   static const String address = "Address";
+  static const String myProfile = "My profile";
+  static const String about = "About us";
+  static const String uploadCoverImage = "Upload cover image";
 }

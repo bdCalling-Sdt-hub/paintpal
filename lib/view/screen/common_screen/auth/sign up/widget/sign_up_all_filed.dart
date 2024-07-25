@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:get/get.dart';
 import '../../../../../../controllers/common_controller/auth/sign_up_controller.dart';
-import '../../../../../../helpers/reg_exp_helper.dart';
+import '../../../../../../helpers/other_helper.dart';
 import '../../../../../../utils/app_colors.dart';
 import '../../../../../../utils/app_images.dart';
 import '../../../../../../utils/app_string.dart';

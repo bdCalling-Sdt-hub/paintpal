@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import '../../../../../helpers/other_helper.dart';
 import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
@@ -31,6 +32,7 @@ class RowItem extends StatelessWidget {
             ).start,
             CommonTextField(
               hintText: leftTextHint,
+              validator: OtherHelper.validator,
             )
           ],
         )),
@@ -45,6 +47,7 @@ class RowItem extends StatelessWidget {
             ).start,
             CommonTextField(
               hintText: rightTextHint,
+              validator: OtherHelper.validator,
             )
           ],
         )),

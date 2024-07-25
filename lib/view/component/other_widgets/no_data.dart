@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paintpal/utils/app_colors.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/app_string.dart';
 import '../image/common_image.dart';
@@ -24,6 +25,7 @@ class NoData extends StatelessWidget {
             text: AppString.noData,
             fontSize: 16,
             top: 8,
+            color: AppColors.white_500,
           )
         ],
       ),
