@@ -108,4 +108,6 @@ class AppString {
   static const String myProfile = "My profile";
   static const String about = "About us";
   static const String uploadCoverImage = "Upload cover image";
+  static const String scan = "Scan QR Code";
+  static const String generateQRCode = "Generate QR Code";
 }

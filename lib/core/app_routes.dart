@@ -6,6 +6,7 @@ import 'package:paintpal/view/screen/screen/Room/room_details.dart';
 import 'package:paintpal/view/screen/screen/Room/edit_room.dart';
 import 'package:paintpal/view/screen/screen/home/home_screen.dart';
 import 'package:paintpal/view/screen/screen/location/location_screen.dart';
+import 'package:paintpal/view/screen/screen/qr_code/generate_qr_code.dart';
 import 'package:paintpal/view/screen/screen/welcome_screen.dart';
 
 import '../view/screen/common_screen/auth/change_password/change_password_screen.dart';
@@ -54,6 +55,7 @@ class AppRoutes {
   static const String location = "/location_screen.dart";
   static const String about = "/about_us.dart";
   static const String editRoom = "/edit_room.dart";
+  static const String generate = "/generate_qr_code.dart";
 
   static List<GetPage> routes = [
     GetPage(
@@ -159,6 +161,10 @@ class AppRoutes {
     GetPage(
         name: editRoom,
         page: () => EditRoomScreen(),
+        transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: generate,
+        page: () => GenerateQrCode(),
         transition: Transition.rightToLeftWithFade),
   ];
 }

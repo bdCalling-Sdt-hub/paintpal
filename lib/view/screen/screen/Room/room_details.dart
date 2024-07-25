@@ -178,8 +178,15 @@ class _RoomDetailsState extends State<RoomDetails>
                   ),
                 ),
               ),
-
             ],
+          ),
+          16.height,
+          CommonButton(
+            titleText: AppString.generateQRCode,
+            onTap: () => Get.toNamed(AppRoutes.generate, parameters: {
+              "name" : name,
+              "image" : image,
+            }),
           ),
           30.height
         ],

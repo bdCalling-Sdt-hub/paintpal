@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/prefs_helper.dart';
@@ -42,21 +43,25 @@ class HomeDrawer extends StatelessWidget {
               color: AppColors.highlight,
             ),
             drawerItem(
+                onTap: () => HomeController.instance.scanQR(),
+                title: AppString.scan,
+                icon: Icons.document_scanner_sharp),
+            drawerItem(
+                onTap: () => Get.toNamed(AppRoutes.setting),
+                title: AppString.settings,
+                icon: Icons.settings_outlined),
+            drawerItem(
                 onTap: () => Get.toNamed(AppRoutes.about),
                 title: AppString.about,
                 icon: Icons.info_outline),
-            drawerItem(
-                onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
-                title: AppString.privacyPolicy,
-                icon: Icons.closed_caption_rounded),
             drawerItem(
                 onTap: () => Get.toNamed(AppRoutes.termsOfServices),
                 title: AppString.termsOfServices,
                 icon: Icons.list_alt_rounded),
             drawerItem(
-                onTap: () => Get.toNamed(AppRoutes.setting),
-                title: AppString.settings,
-                icon: Icons.settings_outlined),
+                onTap: () => Get.toNamed(AppRoutes.privacyPolicy),
+                title: AppString.privacyPolicy,
+                icon: Icons.closed_caption_rounded),
             50.height,
             const Divider(
               color: AppColors.highlight,
