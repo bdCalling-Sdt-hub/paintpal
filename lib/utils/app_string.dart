@@ -99,7 +99,9 @@ class AppString {
   static const String edit = "Edit";
   static const String save = "Save";
   static const String roomName = "Room Name";
+  static const String houseName = "House Name";
   static const String roomNameHint = "Ex. Bedroom";
+  static const String houseNameHint = "Ex. john vila";
   static const String uploadSurfaceImage = "Upload Surface image";
   static const String surfaceOrCornerName = "Surface or Corner Name";
   static const String surfaceOrCornerNameHint = "Ex. Left or Right Wall";
@@ -111,4 +113,5 @@ class AppString {
   static const String scan = "Scan QR Code";
   static const String generateQRCode = "Generate QR Code";
   static const String export = "Export";
+  static const String addHouse = "Add House";
 }

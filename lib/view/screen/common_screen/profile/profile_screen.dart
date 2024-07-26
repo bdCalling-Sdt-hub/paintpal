@@ -10,8 +10,6 @@ import '../../../../utils/app_images.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 import '../../../component/image/common_image.dart';
-import '../../../component/other_widgets/item.dart';
-import '../../../component/pop_up/common_pop_menu.dart';
 import '../../../component/text/common_text.dart';
 import 'widget/edit_profile_all_filed.dart';
 

@@ -49,6 +49,7 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
         buttonBackgroundColor: AppColors.highlight,
         backgroundColor: AppColors.transparent,
         animationCurve: Curves.easeInOut,
+
         animationDuration: const Duration(milliseconds: 500),
         items: selectedIcons);
 

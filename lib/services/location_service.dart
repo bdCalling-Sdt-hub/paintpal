@@ -51,7 +51,9 @@ class LocationService {
         bool isPermission = await locationPermission();
         if (isPermission) {
           positions = await Geolocator.getCurrentPosition();
-          print(positions);
+          if (kDebugMode) {
+            print(positions);
+          }
 
           return positions;
         }
@@ -99,12 +101,15 @@ class LocationService {
             lat,
             long,
           );
-          print(placeMarks.first.street);
-          print(placeMarks.first.country);
-          print(placeMarks.first.administrativeArea);
-          print(placeMarks.first.subLocality);
-          print(placeMarks.first.isoCountryCode);
-          print(placeMarks);
+          if (kDebugMode) {
+            print(placeMarks.first.street);
+            print(placeMarks.first.country);
+            print(placeMarks.first.administrativeArea);
+            print(placeMarks.first.subLocality);
+            print(placeMarks.first.isoCountryCode);
+            print(placeMarks);
+          }
+
           return placeMarks;
         }
       }

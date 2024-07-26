@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/utils/app_images.dart';
 import 'package:paintpal/utils/app_string.dart';
 import '../../../core/app_routes.dart';
 import '../../component/text/common_text.dart';
@@ -26,17 +27,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 20.h),
-        child: Container(
-          child: const Center(
-              child: CommonText(
-            text: AppString.welcomeDetails,
-            textAlign: TextAlign.start,
-            maxLines: 10000,
-            fontSize: 20,
-          )),
-        ),
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+          fit: BoxFit.fill,
+          image: AssetImage(
+            AppImages.onboardingBackground,
+          ),
+        )),
+        child: const Center(
+            child: CommonText(
+          text: AppString.welcomeDetails,
+          textAlign: TextAlign.start,
+          maxLines: 10000,
+          fontSize: 20,
+        )),
       ),
     );
   }

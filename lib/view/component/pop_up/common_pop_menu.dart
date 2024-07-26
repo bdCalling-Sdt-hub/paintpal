@@ -20,11 +20,11 @@ class PopUpMenu extends StatelessWidget {
       this.unselectedColor = Colors.transparent,
       this.style,
       this.isContainer = false,
-      this.iconColor = AppColors.black,
+      this.iconColor = AppColors.white_500,
       this.iconData = Icons.keyboard_arrow_down_outlined});
 
   final List items;
-  final List selectedItem;
+  final String selectedItem;
   final Color selectedColor;
   final Color iconColor;
   final Color unselectedColor;

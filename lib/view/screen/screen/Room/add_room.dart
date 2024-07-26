@@ -9,6 +9,7 @@ import 'package:paintpal/helpers/other_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
+import 'package:paintpal/view/component/pop_up/common_pop_menu.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/add_surface_filed.dart';
@@ -32,10 +33,26 @@ class AddRoom extends StatelessWidget {
               child: Column(
                 children: [
                   const CommonText(
+                    text: AppString.houseName,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    bottom: 8,
+                  ).start,
+                  CommonTextField(
+                    hintText: AppString.houseNameHint,
+                    validator: OtherHelper.validator,
+                    suffixIcon: PopUpMenu(
+
+                        items: controller.items,
+                        selectedItem: controller.houseNameController.text,
+                        onTap: controller.selectItem),
+                  ),
+                  const CommonText(
                     text: AppString.roomName,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     bottom: 8,
+                    top: 12,
                   ).start,
                   CommonTextField(
                     hintText: AppString.roomNameHint,

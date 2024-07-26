@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/utils/app_images.dart';
@@ -19,7 +20,6 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.put(HomeController());
 
   Future<void> scanQR() async {
-    print("dfjkhdskfhkj");
     try {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(
           "#ff6666", "Cancel", true, ScanMode.QR);
@@ -29,7 +29,9 @@ class HomeController extends GetxController {
         qrResult = qrCode.toString();
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

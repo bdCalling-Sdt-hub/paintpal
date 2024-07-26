@@ -12,8 +12,8 @@ class AppImages {
   static const String otpImage = "$baseurl/otp_image.png";
   static const String backgroundImage = "$baseurl/background.png";
   static const String marker = "$baseurl/marker.png";
-
-
+  static const String onboardingBackground =
+      "$baseurl/onboarding_background.png";
 
   ///=================+> removeable file <+==========================
   static const String badRoom = "$baseurl/badroom.png";
