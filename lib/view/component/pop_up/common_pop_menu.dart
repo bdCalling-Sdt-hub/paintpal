@@ -16,7 +16,7 @@ class PopUpMenu extends StatelessWidget {
       required this.selectedItem,
       required this.onTap,
       this.height = 30,
-      this.selectedColor = AppColors.primaryColor,
+      this.selectedColor = AppColors.highlight,
       this.unselectedColor = Colors.transparent,
       this.style,
       this.isContainer = false,
