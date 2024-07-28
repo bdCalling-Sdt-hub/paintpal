@@ -10,7 +10,7 @@ Widget drawerItem(
     onTap: onTap,
     child: Container(
       height: 42,
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.white_600,
         borderRadius: BorderRadius.circular(6),

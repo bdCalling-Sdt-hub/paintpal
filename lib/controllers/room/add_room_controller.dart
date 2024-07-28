@@ -14,13 +14,11 @@ class AddRoomController extends GetxController {
 
   selectItem(int index) {
     if (items[index] == "Add House") {
-      print("object");
       addNewHouse(
         addressController: addressController,
         houseController: newHouseNameController,
         onTap: () {
           items.add(newHouseNameController.text);
-          print(items);
           Get.back();
         },
       );

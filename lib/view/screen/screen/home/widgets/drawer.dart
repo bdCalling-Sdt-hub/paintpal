@@ -47,6 +47,13 @@ class HomeDrawer extends StatelessWidget {
                 title: AppString.scan,
                 icon: Icons.document_scanner_sharp),
             drawerItem(
+                onTap: () => Get.toNamed(AppRoutes.generate, parameters: {
+                      "name": "House-1",
+                      "image": AppImages.profile,
+                    }),
+                title: AppString.generateQRCode,
+                icon: Icons.qr_code_scanner_outlined),
+            drawerItem(
                 onTap: () => Get.toNamed(AppRoutes.setting),
                 title: AppString.settings,
                 icon: Icons.settings_outlined),

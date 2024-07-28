@@ -6,10 +6,8 @@ import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
 
-import '../../../../helpers/other_helper.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../component/text/common_text.dart';
-import '../../../component/text_field/common_text_field.dart';
 import 'widgets/add_house_item.dart';
 
 class AddHouseScreen extends StatefulWidget {

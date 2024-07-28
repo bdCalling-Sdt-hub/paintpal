@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/utils/app_images.dart';
 import 'package:paintpal/utils/app_string.dart';
@@ -30,7 +29,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Container(
         height: Get.height,
         width: Get.width,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
             image: DecorationImage(
           fit: BoxFit.fill,
@@ -38,13 +36,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             AppImages.onboardingBackground,
           ),
         )),
-        child: const Center(
-            child: CommonText(
-          text: AppString.welcomeDetails,
-          textAlign: TextAlign.start,
-          maxLines: 10000,
-          fontSize: 20,
-        )),
+        child: Container(
+          height: Get.height,
+          width: Get.width,
+          color: const Color(0xff222222).withOpacity(0.5),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: const Center(
+              child: CommonText(
+            text: AppString.welcomeDetails,
+            textAlign: TextAlign.start,
+            maxLines: 10000,
+            fontSize: 20,
+          )),
+        ),
       ),
     );
   }

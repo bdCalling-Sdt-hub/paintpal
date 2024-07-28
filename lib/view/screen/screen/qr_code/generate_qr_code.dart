@@ -29,6 +29,9 @@ class GenerateQrCode extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+
+
             Center(
               child: QrImageView(
                 data: "jkfdhfhdskfkfljsdfkldfjklds",
@@ -37,7 +40,10 @@ class GenerateQrCode extends StatelessWidget {
               ),
             ),
             100.height,
-            const CommonButton(titleText: AppString.export),
+            CommonButton(
+              titleText: AppString.export,
+              onTap: () => Get.back(),
+            ),
           ],
         ),
       ),

@@ -17,21 +17,6 @@ class CommonBottomNavBar extends StatefulWidget {
 
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   var bottomNavIndex = 0;
-  List<Widget> unselectedIcons = [
-    const Icon(Icons.home, color: AppColors.black),
-    const Icon(Icons.location_on_outlined, color: AppColors.black),
-    const Icon(Icons.add, color: AppColors.black),
-    const Icon(Icons.settings_outlined, color: AppColors.black),
-    const Icon(Icons.person_2_outlined, color: AppColors.black),
-  ];
-
-  List<Widget> selectedIcons = [
-    const Icon(Icons.home, color: AppColors.white_500),
-    const Icon(Icons.location_on_outlined, color: AppColors.white_500),
-    const Icon(Icons.add, color: AppColors.white_500),
-    const Icon(Icons.settings_outlined, color: AppColors.white_500),
-    const Icon(Icons.person, color: AppColors.white_500),
-  ];
 
   @override
   void initState() {
@@ -42,16 +27,38 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
-        index: widget.currentIndex,
+        index: widget.currentIndex > 5 ? 2 : widget.currentIndex,
         height: 60,
         onTap: onTap,
-        color: AppColors.transparent,
+        color: AppColors.white,
         buttonBackgroundColor: AppColors.highlight,
-        backgroundColor: AppColors.transparent,
+        backgroundColor: widget.currentIndex == 1
+            ? AppColors.white_500
+            : AppColors.transparent,
         animationCurve: Curves.easeInOut,
-
-        animationDuration: const Duration(milliseconds: 500),
-        items: selectedIcons);
+        animationDuration: const Duration(milliseconds: 900),
+        items: [
+          Icon(Icons.home,
+              color: widget.currentIndex == 0
+                  ? AppColors.white_500
+                  : AppColors.black),
+          Icon(Icons.location_on_outlined,
+              color: widget.currentIndex == 1
+                  ? AppColors.white_500
+                  : AppColors.black),
+          Icon(Icons.add,
+              color: widget.currentIndex == 2
+                  ? AppColors.white_500
+                  : AppColors.black),
+          Icon(Icons.settings_outlined,
+              color: widget.currentIndex == 3
+                  ? AppColors.white_500
+                  : AppColors.black),
+          Icon(Icons.person,
+              color: widget.currentIndex == 4
+                  ? AppColors.white_500
+                  : AppColors.black),
+        ]);
 
     // return SingleChildScrollView(
     //   physics: const NeverScrollableScrollPhysics(),

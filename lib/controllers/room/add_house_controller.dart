@@ -17,6 +17,5 @@ class AddHouseController extends GetxController {
   addItem() {
     items.add(houseNameController.text);
     update();
-    print(items.length);
   }
 }

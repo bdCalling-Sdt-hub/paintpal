@@ -16,7 +16,5 @@ class LocationScreen extends StatelessWidget {
         currentIndex: 1,
       ),
     );
-
-
   }
 }

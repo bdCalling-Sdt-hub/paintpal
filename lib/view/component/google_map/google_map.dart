@@ -9,8 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../services/location_service.dart';
 import '../../../utils/app_images.dart';
 
-
-
 class ShowGoogleMap extends StatefulWidget {
   ShowGoogleMap(
       {super.key,
@@ -35,13 +33,6 @@ class _ShowGoogleMapState extends State<ShowGoogleMap> {
   void initState() {
     showGoogleMapController.getCurrentLocation();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    showGoogleMapController.dispose();
-
-    super.dispose();
   }
 
   @override
@@ -77,9 +68,13 @@ class ShowGoogleMapController extends GetxController {
   double longitude = 0;
   List<Marker> markers = [];
 
-  markerIcon() async {
-    return await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(size: Size(48, 48)), AppImages.marker);
+  Future<BitmapDescriptor> markerIcon() async {
+    return await BitmapDescriptor.asset(
+        ImageConfiguration(
+            devicePixelRatio: MediaQuery.of(Get.context!).devicePixelRatio),
+        AppImages.marker,
+        height: 60,
+        width: 44);
   }
 
   final Completer<GoogleMapController> controller =
