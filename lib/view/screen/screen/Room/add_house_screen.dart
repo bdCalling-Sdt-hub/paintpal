@@ -42,13 +42,13 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.items.length +1,
+                  itemCount: controller.items.length + 1,
                   itemBuilder: (context, index) {
                     return AddHouseItem(
                       name: index < controller.items.length
                           ? controller.items[index]
                           : " ",
-                      isShow: (controller.items.length ) == index,
+                      isShow: (controller.items.length) == index,
                     );
                   },
                 ),
@@ -86,7 +86,7 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                 30.height,
                 CommonButton(
                   titleText: AppString.save,
-                  onTap: () => Get.toNamed(AppRoutes.addRoom),
+                  onTap: () => Get.toNamed(AppRoutes.home),
                 )
               ],
             ),
