@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/room/add_room_controller.dart';
+import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/other_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
@@ -42,7 +43,6 @@ class AddRoom extends StatelessWidget {
                     hintText: AppString.houseNameHint,
                     validator: OtherHelper.validator,
                     suffixIcon: PopUpMenu(
-
                         items: controller.items,
                         selectedItem: controller.houseNameController.text,
                         onTap: controller.selectItem),
@@ -132,7 +132,14 @@ class AddRoom extends StatelessWidget {
                     ),
                   ).end,
                   20.height,
-                  const CommonButton(titleText: AppString.save),
+                  CommonButton(
+                    titleText: AppString.save,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        Get.offAllNamed(AppRoutes.home);
+                      }
+                    },
+                  ),
                   30.height,
                 ],
               ),

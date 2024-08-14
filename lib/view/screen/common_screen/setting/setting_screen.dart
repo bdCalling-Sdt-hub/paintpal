@@ -23,6 +23,7 @@ class SettingScreen extends StatelessWidget {
           text: AppString.settings,
           fontSize: 20,
           fontWeight: FontWeight.w600,
+
         ),
       ),
       body: GetBuilder<SettingController>(
