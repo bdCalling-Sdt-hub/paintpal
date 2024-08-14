@@ -21,16 +21,14 @@ class AppUrls {
   static const addRoom = "$baseUrl/room/add";
   static const allRoom = "$baseUrl/room/all";
   static const getRoom = "$baseUrl/room/get";
+  static const updateRoomName = "$baseUrl/room/roomName";
+  static const room = "$baseUrl/room";
+  static const surface = "$baseUrl/surface"; // Surface "add" or "update"
 
 
   static const logOut = "$baseUrl/users/user/logout/true";
 
   static const verifyEmail = "$baseUrl/users/verify-email";
-
-
-
-
-
 
   static const notifications = "$baseUrl/notifications";
   static const privacyPolicies = "$baseUrl/privacy-policies";
