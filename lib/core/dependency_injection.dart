@@ -4,8 +4,6 @@ import '../controllers/common_controller/auth/change_password_controller.dart';
 import '../controllers/common_controller/auth/forget_password_controller.dart';
 import '../controllers/common_controller/auth/sign_in_controller.dart';
 import '../controllers/common_controller/auth/sign_up_controller.dart';
-import '../controllers/common_controller/message/chat_controller.dart';
-import '../controllers/common_controller/message/message_controller.dart';
 import '../controllers/common_controller/notifications/notifications_controller.dart';
 import '../controllers/common_controller/profile/profile_controller.dart';
 import '../controllers/common_controller/setting/about_us_controller.dart';
@@ -25,8 +23,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => ForgetPasswordController(), fenix: true);
     Get.lazyPut(() => ChangePasswordController(), fenix: true);
     Get.lazyPut(() => NotificationsController(), fenix: true);
-    Get.lazyPut(() => ChatController(), fenix: true);
-    Get.lazyPut(() => MessageController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => SettingController(), fenix: true);
     Get.lazyPut(() => PrivacyPolicyController(), fenix: true);
