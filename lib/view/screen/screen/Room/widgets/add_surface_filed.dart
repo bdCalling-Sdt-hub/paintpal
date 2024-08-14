@@ -26,7 +26,6 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
   @override
   void dispose() {
     widget.isShow = false;
-    setState(() {});
     super.dispose();
   }
 

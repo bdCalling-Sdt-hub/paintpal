@@ -201,7 +201,8 @@ deletePopUp(
                 child: CommonButton(
                   titleText: AppString.done,
                   titleColor: AppColors.white,
-                  buttonRadius: 4.r,
+                  buttonColor: AppColors.secondary,
+                  buttonRadius: 8.r,
                   buttonHeight: 48.h,
                   onTap: () {
                     if (formKey.currentState!.validate()) {

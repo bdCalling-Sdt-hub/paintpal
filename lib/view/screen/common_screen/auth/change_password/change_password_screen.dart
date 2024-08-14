@@ -44,6 +44,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     prefixIcon: Icon(
                       Icons.lock,
                       size: 20.sp,
+                      color: AppColors.white,
                     ),
                   ),
                   16.height,
@@ -55,6 +56,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     prefixIcon: Icon(
                       Icons.lock,
                       size: 20.sp,
+                      color: AppColors.white,
                     ),
                   ),
                   16.height,
@@ -67,6 +69,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     prefixIcon: Icon(
                       Icons.lock,
                       size: 20.sp,
+                      color: AppColors.white,
                     ),
                   ),
                   Align(
@@ -79,7 +82,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         fontSize: 18.sp,
                         top: 16.h,
-                        bottom: 20.h,
+                        bottom: 80.h,
                       ),
                     ),
                   ),
