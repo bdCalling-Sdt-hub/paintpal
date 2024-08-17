@@ -14,6 +14,7 @@ import 'package:paintpal/view/component/pop_up/common_pop_menu.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/add_surface_filed.dart';
+import 'package:paintpal/view/screen/screen/Room/widgets/house_pop_up.dart';
 
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 
@@ -41,8 +42,9 @@ class AddRoom extends StatelessWidget {
                   ).start,
                   CommonTextField(
                     hintText: AppString.houseNameHint,
+                    controller: controller.houseNameController,
                     validator: OtherHelper.validator,
-                    suffixIcon: PopUpMenu(
+                    suffixIcon: HousePopUp(
                         items: controller.items,
                         selectedItem: controller.houseNameController.text,
                         onTap: controller.selectItem),

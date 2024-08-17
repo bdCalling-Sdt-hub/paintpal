@@ -14,7 +14,8 @@ class AppUrls {
   static const resetPassword = "$baseUrl/users/reset-password";
   static const changePassword = "$baseUrl/users/change-password";
   static const user = "$baseUrl/users";
-  static const addHouse = "$baseUrl/house/add";  // Add house "multiple" or "single"
+  static const addHouse = "$baseUrl/house/single";  // Add house "multiple" or "single"
+  static const ownHouse = "$baseUrl//house/user/all-name";  // Add house "multiple" or "single"
   static const allHouse = "$baseUrl/house";  // Get house "all" or "single"
   static const userHouse = "$baseUrl/house/user";
   static const houseScan = "$baseUrl/house/scan";

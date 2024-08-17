@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/models/house_name.dart';
 
 import '../../helpers/other_helper.dart';
 import '../../services/api_service.dart';
@@ -8,7 +11,7 @@ import '../../utils/app_url.dart';
 import '../../view/screen/screen/Room/widgets/add_new_house.dart';
 
 class AddRoomController extends GetxController {
-  List items = ["item-1", "item-2", "Add House"];
+  List items = [HouseName(houseName: "Add House", id: "")];
 
   bool isLoading = false;
 
@@ -16,8 +19,10 @@ class AddRoomController extends GetxController {
   TextEditingController newHouseNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
+  String seletedHouse = "";
+
   selectItem(int index) {
-    if (items[index] == "Add House") {
+    if (items[index].houseName == "Add House") {
       addNewHouse(
           addressController: addressController,
           houseController: newHouseNameController,
@@ -25,7 +30,11 @@ class AddRoomController extends GetxController {
           isLoading: isLoading);
       return;
     }
-    houseNameController.text = items[index];
+
+    houseNameController.text = items[index].houseName;
+    seletedHouse = items[index].id;
+    update();
+    Get.back();
   }
 
   int value = 1;
@@ -33,6 +42,12 @@ class AddRoomController extends GetxController {
   addSurface() {
     value++;
     update();
+  }
+
+  @override
+  void onInit() {
+    getOwnHouseRepo();
+    super.onInit();
   }
 
   Future<void> addHouse() async {
@@ -45,7 +60,7 @@ class AddRoomController extends GetxController {
     };
 
     var response = await ApiService.postApi(
-      AppUrls.signIn,
+      AppUrls.addHouse,
       body,
     ).timeout(const Duration(seconds: 30));
 
@@ -53,6 +68,28 @@ class AddRoomController extends GetxController {
       Get.back();
       newHouseNameController.clear();
       addressController.clear();
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    isLoading = false;
+    update();
+  }
+
+  Future<void> getOwnHouseRepo() async {
+    isLoading = true;
+    update();
+
+    var response = await ApiService.getApi(
+      AppUrls.ownHouse,
+    ).timeout(const Duration(seconds: 30));
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)["data"];
+
+      for (var item in data) {
+        items.insert(0, HouseName.fromJson(item));
+      }
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }

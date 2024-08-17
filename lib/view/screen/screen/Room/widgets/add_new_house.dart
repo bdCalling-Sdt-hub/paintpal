@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/controllers/room/add_room_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 
 import '../../../../../helpers/other_helper.dart';
@@ -67,16 +68,20 @@ addNewHouse(
           ),
         ),
         actions: [
-          CommonButton(
+          GetBuilder<AddRoomController>(builder: (controller) => CommonButton(
             titleText: AppString.save,
             titleColor: AppColors.black,
-            isLoading: isLoading,
+            isLoading: controller.isLoading,
             borderColor: AppColors.black,
             buttonColor: AppColors.transparent,
             buttonRadius: 4.r,
             buttonHeight: 48,
-            onTap: onTap,
-          ).center
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                onTap();
+              }
+            },
+          ).center,)
         ],
       );
     },

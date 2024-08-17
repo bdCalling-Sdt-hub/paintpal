@@ -32,14 +32,14 @@ class SignInController extends GetxController {
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
-      Get.toNamed(AppRoutes.home);
+
       var data = jsonDecode(response.body);
 
       PrefsHelper.token = data['data']["accessToken"];
-      PrefsHelper.userId = data['data']["user"]["_id"];
-      PrefsHelper.myImage = data['data']["user"]["photo"];
-      PrefsHelper.myName = data['data']["user"]["fullName"];
-      PrefsHelper.myEmail = data['data']["user"]["email"];
+      PrefsHelper.userId = data['data']["_id"];
+      PrefsHelper.myImage = data['data']["photo"];
+      PrefsHelper.myName = data['data']["fullName"];
+      PrefsHelper.myEmail = data['data']["email"];
       PrefsHelper.isLogIn = true;
 
       PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
