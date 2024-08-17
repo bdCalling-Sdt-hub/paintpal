@@ -131,20 +131,23 @@ class HomeScreen extends StatelessWidget {
                   } else {
                     return Column(
                       children: [
-                        DottedBorder(
-                          borderType: BorderType.RRect,
-                          radius: const Radius.circular(12),
-                          dashPattern: const [8],
-                          color: AppColors.white_500,
-                          strokeWidth: 1.5,
-                          child: Container(
-                            height: 160,
-                            width: 160,
-                            child: const Icon(
-                              Icons.add,
-                              size: 48,
-                              color: AppColors.white_500,
-                            ).center,
+                        GestureDetector(
+                          onTap: () => Get.toNamed(AppRoutes.addRoom),
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(12),
+                            dashPattern: const [8],
+                            color: AppColors.white_500,
+                            strokeWidth: 1.5,
+                            child: Container(
+                              height: 160,
+                              width: 160,
+                              child: const Icon(
+                                Icons.add,
+                                size: 48,
+                                color: AppColors.white_500,
+                              ).center,
+                            ),
                           ),
                         ),
                         const CommonText(

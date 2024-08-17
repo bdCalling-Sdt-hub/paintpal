@@ -120,7 +120,7 @@ class SignUpController extends GetxController {
   }
 
   Future<void> verifyOtpRepo() async {
-    Get.toNamed(AppRoutes.addHouse);
+    Get.toNamed(AppRoutes.home);
     return;
     isLoadingVerify = true;
     update();
