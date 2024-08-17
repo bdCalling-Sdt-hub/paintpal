@@ -70,6 +70,7 @@ addNewHouse(
           CommonButton(
             titleText: AppString.save,
             titleColor: AppColors.black,
+            isLoading: isLoading,
             borderColor: AppColors.black,
             buttonColor: AppColors.transparent,
             buttonRadius: 4.r,
