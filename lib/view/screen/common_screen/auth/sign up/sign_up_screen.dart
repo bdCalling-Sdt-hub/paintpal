@@ -45,7 +45,6 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         controller.signUpUser();
-                        PrefsHelper.myRole = controller.selectRole;
                       }
                     },
                   ),

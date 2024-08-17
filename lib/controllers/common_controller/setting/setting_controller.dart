@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 
 import '../../../core/app_routes.dart';
 import '../../../services/api_service.dart';
@@ -19,7 +20,7 @@ class SettingController extends GetxController {
 
     var body = {"password": passwordController.text};
 
-    var response = await ApiService.deleteApi(AppUrls.user, body: body);
+    var response = await ApiService.deleteApi("${AppUrls.user}/${PrefsHelper.userId}", body: body);
 
     if (response.statusCode == 200) {
       Get.offAllNamed(AppRoutes.signIn);

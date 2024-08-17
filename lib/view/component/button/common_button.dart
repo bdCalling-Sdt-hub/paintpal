@@ -55,9 +55,15 @@ class CommonButton extends StatelessWidget {
             ),
             elevation: WidgetStateProperty.all(0)),
         child: isLoading
-            ? Platform.isIOS
-                ? const CupertinoActivityIndicator()
-                : const CircularProgressIndicator()
+            ? SizedBox(
+                height: buttonHeight * .50,
+                width: buttonHeight * 0.50,
+                child: Platform.isIOS
+                    ? const CupertinoActivityIndicator()
+                    : const CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              )
             : Text(
                 titleText,
                 maxLines: 1,

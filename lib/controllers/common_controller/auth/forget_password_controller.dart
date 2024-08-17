@@ -17,6 +17,7 @@ class ForgetPasswordController extends GetxController {
   bool isLoadingReset = false;
 
   String forgetPasswordToken = '';
+  String otpToken = '';
 
   int start = 0;
   Timer? _timer;
@@ -63,8 +64,6 @@ class ForgetPasswordController extends GetxController {
   }
 
   Future<void> forgotPasswordRepo() async {
-    Get.toNamed(AppRoutes.verifyEmail);
-    return;
     isLoadingEmail = true;
     update();
 
@@ -75,6 +74,8 @@ class ForgetPasswordController extends GetxController {
 
     if (response.statusCode == 200) {
       Utils.toastMessage(response.message);
+      forgetPasswordToken = jsonDecode(response.body)["data"];
+      print(forgetPasswordToken);
       Get.toNamed(AppRoutes.verifyEmail);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
@@ -86,22 +87,20 @@ class ForgetPasswordController extends GetxController {
   ///<<<===================Verify Password Repo==============================>>>
 
   Future<void> verifyOtpRepo() async {
-    Get.toNamed(AppRoutes.createPassword);
-    return;
     isLoadingVerify = true;
     update();
     Map<String, String> body = {
-      "email": emailController.text,
-      "otp": otpController.text
+      "verifyToken": forgetPasswordToken,
+      "otp": otpController.text,
     };
-    var response = await ApiService.postApi(
-      AppUrls.verifyOtp,
-      body,
+    var response = await ApiService.patchApi(
+      AppUrls.forgotPasswordOTP,
+      body: body,
     );
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      forgetPasswordToken = data['data']['forgetPasswordToken'];
+      otpToken = data['data'];
       Get.toNamed(AppRoutes.createPassword);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
@@ -114,20 +113,17 @@ class ForgetPasswordController extends GetxController {
   ///<<<===================Verify Password Repo==============================>>>
 
   Future<void> resetPasswordRepo() async {
-    Get.offAllNamed(AppRoutes.signIn);
-    return;
     isLoadingReset = true;
     update();
-    Map<String, String> header = {
-      "Forget-password": "Forget-password $forgetPasswordToken",
-    };
 
     Map<String, String> body = {
-      "email": emailController.text,
+      "verifyToken": otpToken,
       "password": passwordController.text
     };
-    var response =
-        await ApiService.postApi(AppUrls.resetPassword, body, header: header);
+    var response = await ApiService.patchApi(
+      AppUrls.resetPassword,
+      body : body,
+    );
 
     if (response.statusCode == 200) {
       Utils.toastMessage(response.message);

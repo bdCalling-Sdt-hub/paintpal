@@ -23,9 +23,6 @@ class SignUpController extends GetxController {
 
   String time = "";
 
-  List selectedOption = ["User", "Consultant"];
-
-  String selectRole = "User";
   String countryCode = "+880";
   String? image;
 
@@ -61,38 +58,28 @@ class SignUpController extends GetxController {
     countryCode = value.dialCode.toString();
   }
 
-  setSelectedRole(value) {
-    selectRole = value;
-    update();
-  }
-
   openGallery() async {
     image = await OtherHelper.openGallery();
     update();
   }
 
   signUpUser() async {
-    Get.toNamed(AppRoutes.verifyUser);
-    return;
     isLoading = true;
     update();
     Map<String, String> body = {
       "fullName": nameController.text,
       "email": emailController.text,
-      "phoneNumber": numberController.text,
+      "phone": numberController.text,
       "countryCode": countryCode,
       "password": passwordController.text,
-      "role": selectRole.toLowerCase()
     };
 
-    var response = await ApiService.postApi(
-      AppUrls.signUp,
-      body,
-    );
+    var response = await ApiService.multipartRequest(
+        url: AppUrls.signUp, body: body, imageName: "photo", imagePath: image);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      signUpToken = data['data']['signUpToken'];
+      signUpToken = data['data'];
       Get.toNamed(AppRoutes.verifyUser);
     } else {
       Utils.snackBarMessage(response.statusCode.toString(), response.message);
@@ -120,24 +107,25 @@ class SignUpController extends GetxController {
   }
 
   Future<void> verifyOtpRepo() async {
-    Get.toNamed(AppRoutes.home);
-    return;
     isLoadingVerify = true;
     update();
-    Map<String, String> body = {"otp": otpController.text};
-    Map<String, String> header = {"SignUpToken": "signUpToken $signUpToken"};
-    var response =
-        await ApiService.postApi(AppUrls.verifyEmail, body, header: header);
+    Map<String, String> body = {
+      "otp": otpController.text,
+      "userToken": signUpToken
+    };
+    var response = await ApiService.postApi(
+      AppUrls.verifyOtp,
+      body,
+    );
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
 
       PrefsHelper.token = data['data']["accessToken"];
-      PrefsHelper.userId = data['data']["attributes"]["_id"];
-      PrefsHelper.myImage = data['data']["attributes"]["image"];
-      PrefsHelper.myName = data['data']["attributes"]["fullName"];
-      PrefsHelper.myRole = data['data']["attributes"]["role"];
-      PrefsHelper.myEmail = data['data']["attributes"]["email"];
+      PrefsHelper.userId = data['data']["user"]["_id"];
+      PrefsHelper.myImage = data['data']["user"]["photo"];
+      PrefsHelper.myName = data['data']["user"]["fullName"];
+      PrefsHelper.myEmail = data['data']["user"]["email"];
       PrefsHelper.isLogIn = true;
 
       PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
@@ -146,14 +134,8 @@ class SignUpController extends GetxController {
       PrefsHelper.setString("myImage", PrefsHelper.myImage);
       PrefsHelper.setString("myName", PrefsHelper.myName);
       PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
-      PrefsHelper.setString("myRole", PrefsHelper.myRole);
-      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
 
-      // if (PrefsHelper.myRole == 'consultant') {
-      //   Get.toNamed(AppRoutes.personalInformation);
-      // } else {
-      //   Get.offAllNamed(AppRoutes.patientsHome);
-      // }
+      Get.toNamed(AppRoutes.home);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }

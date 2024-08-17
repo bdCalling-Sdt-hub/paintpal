@@ -17,8 +17,7 @@ class SignInController extends GetxController {
       TextEditingController(text: kDebugMode ? 'hello123' : "");
 
   Future<void> signInUser() async {
-    // Get.toNamed(AppRoutes.home);
-    // return;
+
     isLoading = true;
     update();
 
@@ -33,29 +32,24 @@ class SignInController extends GetxController {
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
+      Get.toNamed(AppRoutes.home);
       var data = jsonDecode(response.body);
 
       PrefsHelper.token = data['data']["accessToken"];
-      PrefsHelper.userId = data['data']["attributes"]["_id"];
-      PrefsHelper.myImage = data['data']["attributes"]["image"];
-      PrefsHelper.myName = data['data']["attributes"]["fullName"];
-      PrefsHelper.myRole = data['data']["attributes"]["role"];
-      PrefsHelper.myEmail = data['data']["attributes"]["email"];
+      PrefsHelper.userId = data['data']["user"]["_id"];
+      PrefsHelper.myImage = data['data']["user"]["photo"];
+      PrefsHelper.myName = data['data']["user"]["fullName"];
+      PrefsHelper.myEmail = data['data']["user"]["email"];
       PrefsHelper.isLogIn = true;
 
+      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
       PrefsHelper.setString('token', PrefsHelper.token);
       PrefsHelper.setString("userId", PrefsHelper.userId);
       PrefsHelper.setString("myImage", PrefsHelper.myImage);
       PrefsHelper.setString("myName", PrefsHelper.myName);
       PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
-      PrefsHelper.setString("myRole", PrefsHelper.myRole);
-      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
 
-      // if (PrefsHelper.myRole == 'consultant') {
-      //   Get.offAllNamed(AppRoutes.doctorHome);
-      // } else {
-      //   Get.offAllNamed(AppRoutes.patientsHome);
-      // }
+
       Get.toNamed(AppRoutes.home);
 
       emailController.clear();
