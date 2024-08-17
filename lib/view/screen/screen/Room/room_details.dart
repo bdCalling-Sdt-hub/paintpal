@@ -104,21 +104,21 @@ class _RoomDetailsState extends State<RoomDetails>
     return SingleChildScrollView(
       child: Column(
         children: [
-          const RowItem(
+          RowItem(
             leftText: AppString.colorCode,
             leftTextHint: AppString.colorCodeHint,
             rightText: AppString.colorDetails,
             rightTextHint: AppString.colorDetailsHint,
           ),
           8.height,
-          const RowItem(
+          RowItem(
             leftText: AppString.purchaseLocation,
             leftTextHint: AppString.purchaseLocationHint,
             rightText: AppString.purchaseDate,
             rightTextHint: AppString.purchaseDateHint,
           ),
           8.height,
-          const RowItem(
+          RowItem(
             leftText: AppString.colorBrandName,
             leftTextHint: AppString.colorBrandNameHint,
             rightText: AppString.finish,

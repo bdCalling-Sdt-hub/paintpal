@@ -5,18 +5,24 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class RowItem extends StatelessWidget {
-  const RowItem(
+  RowItem(
       {super.key,
       required this.leftText,
       required this.leftTextHint,
       required this.rightText,
-      required this.rightTextHint});
+      required this.rightTextHint,
+      this.rightController,
+      this.leftController});
 
   final String leftText;
   final String leftTextHint;
 
   final String rightText;
   final String rightTextHint;
+  TextEditingController? rightController;
+  TextEditingController? leftController;
+  TextEditingController defealtLeftController = TextEditingController();
+  TextEditingController defealtRightController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class RowItem extends StatelessWidget {
               bottom: 8,
             ).start,
             CommonTextField(
+              controller: leftController ?? defealtLeftController,
               hintText: leftTextHint,
               validator: OtherHelper.validator,
             )
@@ -46,6 +53,7 @@ class RowItem extends StatelessWidget {
               bottom: 8,
             ).start,
             CommonTextField(
+              controller: rightController ?? defealtRightController,
               hintText: rightTextHint,
               validator: OtherHelper.validator,
             )

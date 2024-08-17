@@ -58,14 +58,15 @@ class AddRoom extends StatelessWidget {
                   ).start,
                   CommonTextField(
                     hintText: AppString.roomNameHint,
+                    controller: controller.roomController,
                     validator: OtherHelper.validator,
                   ),
                   16.height,
-                  controller.image != null
+                  controller.coverImage != null
                       ? SizedBox(
                           height: 200,
                           child: Image.file(
-                            File(controller.image!),
+                            File(controller.coverImage!),
                             fit: BoxFit.fill,
                           ),
                         )
@@ -137,9 +138,7 @@ class AddRoom extends StatelessWidget {
                   CommonButton(
                     titleText: AppString.save,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        Get.offAllNamed(AppRoutes.home);
-                      }
+                      if (formKey.currentState!.validate()) {}
                     },
                   ),
                   30.height,
