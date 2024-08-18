@@ -14,9 +14,11 @@ import '../../../../../utils/app_string.dart';
 import '../../../../component/text/common_text.dart';
 
 class AddSurfaceFiled extends StatefulWidget {
-  AddSurfaceFiled({super.key, required this.isShow});
+  AddSurfaceFiled({super.key, required this.isShow, required this.item});
 
   bool isShow;
+
+  var item;
 
   @override
   State<AddSurfaceFiled> createState() => _AddSurfaceFiledState();
@@ -55,6 +57,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                   children: [
                     8.height,
                     CommonTextField(
+                      controller: widget.item["surfaceName"],
                       hintText: AppString.surfaceOrCornerNameHint,
                       validator: OtherHelper.validator,
                     ),
@@ -71,9 +74,9 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                       child: Container(
                         color: AppColors.blue_400.withOpacity(0.5),
                         child: Center(
-                          child: controller.surfaceImage != null
+                          child: widget.item["surfaceImage"] != null
                               ? Image.file(
-                                  File(controller.surfaceImage!),
+                                  File(widget.item["surfaceImage"]),
                                   fit: BoxFit.fill,
                                 )
                               : Column(
@@ -81,7 +84,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                                   children: [
                                     IconButton(
                                       onPressed: () async {
-                                        controller.surfaceImage =
+                                        widget.item["surfaceImage"] =
                                             await OtherHelper.openGallery();
                                         setState(() {});
                                       },
@@ -100,8 +103,8 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                     ),
                     16.height,
                     RowItem(
-                      leftController: controller.colorCodeController,
-                      rightController: controller.colorNameController,
+                      leftController: widget.item["colorCode"],
+                      rightController: widget.item["colorDetails"],
                       leftText: AppString.colorCode,
                       leftTextHint: AppString.colorCodeHint,
                       rightText: AppString.colorDetails,
@@ -109,8 +112,8 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                     ),
                     8.height,
                     RowItem(
-                      leftController: controller.purchaseLocationController,
-                      rightController: controller.purchaseDateController,
+                      leftController: widget.item["purchesLocation"],
+                      rightController: widget.item["purchesDate"],
                       leftText: AppString.purchaseLocation,
                       leftTextHint: AppString.purchaseLocationHint,
                       rightText: AppString.purchaseDate,
@@ -118,8 +121,8 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                     ),
                     8.height,
                     RowItem(
-                      leftController: controller.colorBrandNameController,
-                      rightController: controller.finishController,
+                      leftController: widget.item["colorBrandName"],
+                      rightController: widget.item["finish"],
                       leftText: AppString.colorBrandName,
                       leftTextHint: AppString.colorBrandNameHint,
                       rightText: AppString.finish,

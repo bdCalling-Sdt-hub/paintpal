@@ -355,4 +355,87 @@ class ApiService {
       return ApiResponseModel(400, e.toString(), "");
     }
   }
+
+  static Future<ApiResponseModel> addRoomRequest({
+    required String url,
+    method = "POST",
+    String? imagePath,
+    required List surfaceFile,
+    imageName = 'image',
+    required body,
+    Map<String, String>? header,
+  }) async {
+    try {
+      Map<String, String> mainHeader = {
+        'Authorization': PrefsHelper.token,
+      };
+
+      if (kDebugMode) {
+        print("===============================================>url $url");
+        print("===============================================>body $body");
+        print("=========================>header ${header ?? mainHeader}");
+      }
+
+      var request = http.MultipartRequest(method, Uri.parse(url));
+      body.forEach((key, value) {
+        request.fields[key] = value;
+      });
+
+      print("aaaaaa :${surfaceFile.length}");
+
+      int value = 0;
+
+      for (var item in surfaceFile) {
+        var mimeType = lookupMimeType(item ?? imagePath);
+        var shopImage = await http.MultipartFile.fromPath(
+            "surfaceImage$value", item ?? " ",
+            contentType: MediaType.parse(mimeType!));
+        request.files.add(shopImage);
+        value++;
+      }
+
+      if (imageName != null) {
+        var mimeType = lookupMimeType(imagePath!);
+        var shopImage = await http.MultipartFile.fromPath(
+            "coverImage", imagePath,
+            contentType: MediaType.parse(mimeType!));
+        request.files.add(shopImage);
+      }
+
+      Map<String, String> headers = header ?? mainHeader;
+
+      headers.forEach((key, value) {
+        request.headers[key] = value;
+      });
+
+      var response = await request.send();
+
+      if (kDebugMode) {
+        print(
+            "===============================================>statusCode ${response.statusCode}");
+      }
+
+      if (response.statusCode == 200) {
+        String data = await response.stream.bytesToString();
+
+        return ApiResponseModel(200, jsonDecode(data)['message'], data);
+      } else if (response.statusCode == 201) {
+        String data = await response.stream.bytesToString();
+
+        return ApiResponseModel(200, jsonDecode(data)['message'], data);
+      } else {
+        String data = await response.stream.bytesToString();
+        return ApiResponseModel(
+            response.statusCode, jsonDecode(data)['message'], data);
+      }
+    } on SocketException {
+      return ApiResponseModel(503, "No internet connection", '');
+    } on FormatException {
+      return ApiResponseModel(400, "Bad Response Request", '');
+    } on TimeoutException {
+      return ApiResponseModel(408, "Request Time Out", "");
+    } catch (e) {
+      return ApiResponseModel(400, e.toString(), "");
+    }
+  }
 }

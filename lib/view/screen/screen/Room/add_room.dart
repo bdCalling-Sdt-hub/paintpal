@@ -18,10 +18,24 @@ import 'package:paintpal/view/screen/screen/Room/widgets/house_pop_up.dart';
 
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 
-class AddRoom extends StatelessWidget {
+class AddRoom extends StatefulWidget {
   AddRoom({super.key});
 
+  @override
+  State<AddRoom> createState() => _AddRoomState();
+}
+
+class _AddRoomState extends State<AddRoom> {
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    Future.delayed(
+      Duration.zero,
+      () => AddRoomController.instance.addSurface(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +115,12 @@ class AddRoom extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.value,
                     itemBuilder: (context, index) {
+                      print("surfaces :${controller.surfaces}");
+                      print(
+                          "surfacesController :${controller.surfacesController}");
                       return AddSurfaceFiled(
                         isShow: (controller.value - 1) == index,
+                        item: controller.surfacesController[index],
                       );
                     },
                   ),
@@ -137,8 +155,11 @@ class AddRoom extends StatelessWidget {
                   20.height,
                   CommonButton(
                     titleText: AppString.save,
+                    isLoading: controller.addRoomIsLoading,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        controller.addRoomRepo();
+                      }
                     },
                   ),
                   30.height,

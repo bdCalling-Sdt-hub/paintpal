@@ -14,22 +14,19 @@ import '../../view/screen/screen/Room/widgets/add_new_house.dart';
 class AddRoomController extends GetxController {
   List items = [HouseName(houseName: "Add House", id: "")];
   List surfaces = [];
+  List surfacesFile = [];
+  List surfacesController = [];
 
   bool isLoading = false;
   bool addRoomIsLoading = false;
+
+  String? coverImage;
 
   TextEditingController houseNameController = TextEditingController();
   TextEditingController newHouseNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
   TextEditingController roomController = TextEditingController();
-  TextEditingController surfaceController = TextEditingController();
-  TextEditingController colorCodeController = TextEditingController();
-  TextEditingController colorNameController = TextEditingController();
-  TextEditingController purchaseLocationController = TextEditingController();
-  TextEditingController purchaseDateController = TextEditingController();
-  TextEditingController colorBrandNameController = TextEditingController();
-  TextEditingController finishController = TextEditingController();
 
   String seletedHouse = "";
   String roomId = "";
@@ -50,15 +47,31 @@ class AddRoomController extends GetxController {
     Get.back();
   }
 
-  int value = 1;
+  int value = 0;
 
   addSurface() {
-    if (value == 0) {
-      addRoomRepo();
-      value++;
-      return;
-    }
     value++;
+
+    TextEditingController surfaceController = TextEditingController();
+    TextEditingController colorCodeController = TextEditingController();
+    TextEditingController colorNameController = TextEditingController();
+    TextEditingController purchaseLocationController = TextEditingController();
+    TextEditingController purchaseDateController = TextEditingController();
+    TextEditingController colorBrandNameController = TextEditingController();
+    TextEditingController finishController = TextEditingController();
+
+    String? surfaceImage;
+
+    surfacesController.add({
+      "surfaceName": surfaceController,
+      "colorCode": colorCodeController,
+      "colorDetails": colorNameController,
+      "purchesLocation": purchaseLocationController,
+      "purchesDate": purchaseDateController,
+      "colorBrandName": colorBrandNameController,
+      "finish": finishController,
+      "surfaceImage": surfaceImage,
+    });
     update();
   }
 
@@ -122,9 +135,6 @@ class AddRoomController extends GetxController {
     update();
   }
 
-  String? coverImage;
-  String? surfaceImage;
-
   getProfileImage() async {
     coverImage = await OtherHelper.openGallery();
     update();
@@ -136,21 +146,48 @@ class AddRoomController extends GetxController {
     addRoomIsLoading = true;
     update();
 
+    surfaces.clear();
+    surfacesFile.clear();
+
+    for (var item in surfacesController) {
+      surfaces.add({
+        "surfaceName": item["surfaceName"].text,
+        "colorCode": item["colorCode"].text,
+        "colorDetails": item["colorDetails"].text,
+        "purchesLocation": item["purchesLocation"].text,
+        "purchesDate": item["purchesDate"].text,
+        "colorBrandName": item["colorBrandName"].text,
+        "finish": item["finish"].text,
+      });
+      surfacesFile.add(item["surfaceImage"]);
+    }
+
     var body = {
       "houseID": seletedHouse,
       "roomName": roomController.text,
+      "surface": jsonEncode(surfaces)
     };
 
-    var response = await ApiService.multipartRequest(
+    print("body :${body}");
+
+    var response = await ApiService.addRoomRequest(
       url: AppUrls.room,
       imageName: "coverImage",
       imagePath: coverImage,
+      surfaceFile: surfacesFile,
       body: body,
     ).timeout(const Duration(seconds: 30));
 
+    print("statusCode ${response.message}");
+
     if (response.statusCode == 200) {
-      print(response.body);
+      print("gfkljgljfgsdjlfjlksd");
+      print("statusCode ${response.body}");
+      addRoomIsLoading = false;
+      update();
     } else {
+      addRoomIsLoading = false;
+      update();
       Get.snackbar(response.statusCode.toString(), response.message);
     }
 
@@ -162,21 +199,20 @@ class AddRoomController extends GetxController {
     addRoomIsLoading = true;
     update();
 
-    var body = {
-      "surfaceName": surfaceController.text,
-      "colorCode": colorCodeController.text,
-      "colorDetails": colorNameController.text,
-      "purchesLocation": purchaseLocationController.text,
-      "purchesDate": purchaseDateController.text,
-      "colorBrandName": colorBrandNameController.text,
-      "finish": colorBrandNameController.text
-    };
+    // var body = {
+    //   "surfaceName": surfaceController.text,
+    //   "colorCode": colorCodeController.text,
+    //   "colorDetails": colorNameController.text,
+    //   "purchesLocation": purchaseLocationController.text,
+    //   "purchesDate": purchaseDateController.text,
+    //   "colorBrandName": colorBrandNameController.text,
+    //   "finish": colorBrandNameController.text
+    // };
 
     var response = await ApiService.multipartRequest(
       url: AppUrls.room,
       imageName: "surfaceImage",
-      imagePath: surfaceImage,
-      body: body,
+      body: {},
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
