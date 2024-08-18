@@ -6,8 +6,6 @@ import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
-import '../../../../core/app_routes.dart';
-import '../../../../utils/app_images.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/button/common_button.dart';
 import '../../../component/image/common_image.dart';
