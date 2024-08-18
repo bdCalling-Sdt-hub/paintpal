@@ -13,6 +13,7 @@ import '../controllers/common_controller/setting/terms_of_services_controller.da
 import '../controllers/home/home_controller.dart';
 import '../controllers/room/add_house_controller.dart';
 import '../controllers/room/add_room_controller.dart';
+import '../controllers/room/edit_room_controller.dart';
 import '../controllers/room/room_details_controller.dart';
 
 class DependencyInjection extends Bindings {
@@ -32,5 +33,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => AddRoomController(), fenix: true);
     Get.lazyPut(() => AboutUsController(), fenix: true);
     Get.lazyPut(() => AddHouseController(), fenix: true);
+    Get.lazyPut(() => EditRoomController(), fenix: true);
   }
 }

@@ -17,6 +17,7 @@ class HomeController extends GetxController {
   List houses = [];
   Status status = Status.completed;
   bool houseStatus = false;
+  bool otherHouse = false;
 
   List rooms = [];
 
@@ -61,10 +62,18 @@ class HomeController extends GetxController {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)["data"]["ownHouse"];
+      var otherHouse = jsonDecode(response.body)["data"]["otherHouse"];
+
+      print(otherHouse);
 
       houses.clear();
 
       for (var item in data) {
+        houses.add(HouseName.fromJson(item));
+      }
+
+      for (var item in otherHouse) {
+        item["otherHouse"] = true;
         houses.add(HouseName.fromJson(item));
       }
 
@@ -87,6 +96,10 @@ class HomeController extends GetxController {
     houseController.text = houses[index].houseName.toString();
     update();
     getAllRoomRepo(houseId: houses[index].id);
+
+    otherHouse = houses[index].otherHouse ;
+
+    print(otherHouse);
     Get.back();
   }
 

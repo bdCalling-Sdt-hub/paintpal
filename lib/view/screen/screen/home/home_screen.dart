@@ -97,47 +97,49 @@ class HomeScreen extends StatelessWidget {
                             //     ),
                             //   ),
                             // ),
-                            Positioned(
-                                bottom: 46,
-                                right: 6,
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: IconButton(
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () => Get.toNamed(
-                                            AppRoutes.editRoom,
-                                            parameters: {
-                                              "image": item.image,
-                                              "name": item.roomName
-                                            },
-                                          ),
-                                      icon:
-                                          const Icon(Icons.mode_edit_outlined),
-                                      iconSize: 20,
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            WidgetStateProperty.all(
-                                                AppColors.white_500),
-                                      )),
-                                )),
-                            Positioned(
-                                bottom: 6,
-                                right: 6,
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: IconButton(
-                                      padding: EdgeInsets.zero,
-                                      onPressed: deleteRoom,
-                                      icon: const Icon(CupertinoIcons.delete),
-                                      iconSize: 20,
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            WidgetStateProperty.all(
-                                                AppColors.white_500),
-                                      )),
-                                ))
+                            if (!controller.otherHouse)
+                              Positioned(
+                                  bottom: 46,
+                                  right: 6,
+                                  child: SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () => Get.toNamed(
+                                              AppRoutes.editRoom,
+                                              parameters: {
+                                                "image": item.image,
+                                                "name": item.roomName
+                                              },
+                                            ),
+                                        icon: const Icon(
+                                            Icons.mode_edit_outlined),
+                                        iconSize: 20,
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all(
+                                                  AppColors.white_500),
+                                        )),
+                                  )),
+                            if (!controller.otherHouse)
+                              Positioned(
+                                  bottom: 6,
+                                  right: 6,
+                                  child: SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        onPressed: deleteRoom,
+                                        icon: const Icon(CupertinoIcons.delete),
+                                        iconSize: 20,
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateProperty.all(
+                                                  AppColors.white_500),
+                                        )),
+                                  ))
                           ],
                         ),
                         CommonText(
