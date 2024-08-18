@@ -10,6 +10,7 @@ class LocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ShowGoogleMap(
+        // ignore: avoid_print
         onTapLatLong: (value) => print(value),
       ),
       bottomNavigationBar: const CommonBottomNavBar(

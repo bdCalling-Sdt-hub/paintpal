@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../view/screen/screen/Room/widgets/add_new_house.dart';
 
 class AddHouseController extends GetxController {
   List items = [

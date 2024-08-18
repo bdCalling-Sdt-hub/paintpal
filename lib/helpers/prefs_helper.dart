@@ -13,6 +13,9 @@ class PrefsHelper extends GetxController {
   static String myImage = "";
   static String myName = "";
   static String myEmail = "";
+  static String houseName = "";
+  static String houseId = "";
+  static bool otherHouse = false;
 
   static String mySubscription = "shopping";
   static String localizationLanguageCode = 'en';
@@ -22,7 +25,8 @@ class PrefsHelper extends GetxController {
 
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString("token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik5hbWltdWwgSGFzc2FuIiwicm9sZSI6InVzZXIiLCJlbWFpbCI6ImRldmVsb3Blcm5haW11bDAwQGdtYWlsLmNvbSIsInBob25lIjoiMTg2NTk2NTU4MSIsImlkIjoiNjZjMDE5NWU3MDEwZTg4NDI4NjE2OGFjIiwiaWF0IjoxNzIzODY5MTc5LCJleHAiOjE3MjQ0NzM5Nzl9.RU2VYEPPHVRKjdr1YvF-zxfNefB-lHENwLTk7JhXRfg";
+    token = preferences.getString("token") ??
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik5hbWltdWwgSGFzc2FuIiwicm9sZSI6InVzZXIiLCJlbWFpbCI6ImRldmVsb3Blcm5haW11bDAwQGdtYWlsLmNvbSIsInBob25lIjoiMTg2NTk2NTU4MSIsImlkIjoiNjZjMDE5NWU3MDEwZTg4NDI4NjE2OGFjIiwiaWF0IjoxNzIzODY5MTc5LCJleHAiOjE3MjQ0NzM5Nzl9.RU2VYEPPHVRKjdr1YvF-zxfNefB-lHENwLTk7JhXRfg";
     refreshToken = preferences.getString("refreshToken") ?? "";
     userId = preferences.getString("userId") ?? "";
     myImage = preferences.getString("myImage") ?? "";
@@ -42,6 +46,10 @@ class PrefsHelper extends GetxController {
         preferences.getString("localizationCountryCode") ?? "US";
     localizationLanguageCode =
         preferences.getString("localizationLanguageCode") ?? "en";
+
+    houseId = preferences.getString("houseId") ?? "";
+    houseName = preferences.getString("houseName") ?? "";
+    otherHouse = preferences.getBool("otherHouse") ?? false;
 
     if (kDebugMode) {
       print(userId);

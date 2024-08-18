@@ -5,13 +5,12 @@ import 'package:get/get.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/models/api_response_model.dart';
 import 'package:paintpal/models/room_name.dart';
 import 'package:paintpal/utils/app_colors.dart';
-import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/image/common_image.dart';
 import 'package:paintpal/view/component/other_widgets/common_loader.dart';
-import 'package:paintpal/view/component/pop_up/common_pop_menu.dart';
 import 'package:paintpal/view/component/screen/error_screen.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
@@ -20,8 +19,27 @@ import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 import '../Room/widgets/house_pop_up.dart';
 import 'widgets/delete_room.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    Future.delayed(
+      Duration.zero,
+      () {
+        HomeController.instance.getAllHouseRepo();
+        print("HomeController.houseId ${PrefsHelper.houseId}");
+      },
+    );
+    super.initState();
+  }
+
+  HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                             //     ),
                             //   ),
                             // ),
-                            if (!controller.otherHouse)
+                            if (!PrefsHelper.otherHouse)
                               Positioned(
                                   bottom: 46,
                                   right: 6,
@@ -110,7 +128,8 @@ class HomeScreen extends StatelessWidget {
                                               AppRoutes.editRoom,
                                               parameters: {
                                                 "image": item.image,
-                                                "name": item.roomName
+                                                "name": item.roomName,
+                                                "id": item.id
                                               },
                                             ),
                                         icon: const Icon(
@@ -122,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                                                   AppColors.white_500),
                                         )),
                                   )),
-                            if (!controller.otherHouse)
+                            if (!PrefsHelper.otherHouse)
                               Positioned(
                                   bottom: 6,
                                   right: 6,

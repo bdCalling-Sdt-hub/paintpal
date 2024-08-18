@@ -381,7 +381,6 @@ class ApiService {
         request.fields[key] = value;
       });
 
-      print("aaaaaa :${surfaceFile.length}");
 
       int value = 0;
 

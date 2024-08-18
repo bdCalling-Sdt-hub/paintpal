@@ -75,7 +75,6 @@ class ForgetPasswordController extends GetxController {
     if (response.statusCode == 200) {
       Utils.toastMessage(response.message);
       forgetPasswordToken = jsonDecode(response.body)["data"];
-      print(forgetPasswordToken);
       Get.toNamed(AppRoutes.verifyEmail);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);

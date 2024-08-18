@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:paintpal/controllers/room/edit_room_controller.dart';
-import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
@@ -24,6 +23,9 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
   final String roomName = Get.parameters["name"] ?? "";
 
   final String image = Get.parameters["image"] ?? "";
+  final String id = Get.parameters["id"] ?? "";
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,70 +41,79 @@ class _EditRoomScreenState extends State<EditRoomScreen> {
       body: GetBuilder<EditRoomController>(
         builder: (controller) => SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              100.height,
-              controller.fileImage != null
-                  ? GestureDetector(
-                      onTap: () async {
-                        controller.fileImage = await OtherHelper.openGallery();
-                        setState(() {});
-                      },
-                      child: Image.file(
-                        File(controller.fileImage!),
-                        height: 200,
-                        width: double.infinity,
-                        fit: BoxFit.contain,
-                      ),
-                    )
-                  : image.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () async {
-                            controller.fileImage =
-                                await OtherHelper.openGallery();
-                            setState(() {});
-                          },
-                          child: CommonImage(
-                            imageSrc: image,
-                            imageType: ImageType.network,
-                            fill: BoxFit.contain,
-                            height: 200,
-                            width: double.infinity,
-                          ),
-                        )
-                      : GestureDetector(
-                          onTap: () async {
-                            controller.fileImage =
-                                await OtherHelper.openGallery();
-                            setState(() {});
-                          },
-                          child: Container(
-                            height: 200,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: AssetImage(image),
-                                fit: BoxFit.fill,
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                100.height,
+                controller.fileImage != null
+                    ? GestureDetector(
+                        onTap: () async {
+                          controller.fileImage =
+                              await OtherHelper.openGallery();
+                          setState(() {});
+                        },
+                        child: Image.file(
+                          File(controller.fileImage!),
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                        ),
+                      )
+                    : image.isNotEmpty
+                        ? GestureDetector(
+                            onTap: () async {
+                              controller.fileImage =
+                                  await OtherHelper.openGallery();
+                              setState(() {});
+                            },
+                            child: CommonImage(
+                              imageSrc: image,
+                              imageType: ImageType.network,
+                              fill: BoxFit.contain,
+                              height: 200,
+                              width: double.infinity,
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: () async {
+                              controller.fileImage =
+                                  await OtherHelper.openGallery();
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage(image),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-              30.height,
-              const CommonText(
-                text: AppString.roomName,
-                bottom: 8,
-              ).start,
-              CommonTextField(
-                controller: controller.roomNameController,
-              ),
-              80.height,
-              CommonButton(
-                titleText: AppString.saveAndChanges,
-                onTap: () => Get.offAllNamed(AppRoutes.home),
-              ),
-              40.height
-            ],
+                30.height,
+                const CommonText(
+                  text: AppString.roomName,
+                  bottom: 8,
+                ).start,
+                CommonTextField(
+                  controller: controller.roomNameController,
+                ),
+                80.height,
+                CommonButton(
+                  titleText: AppString.saveAndChanges,
+                  isLoading: controller.isLoading,
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      controller.editRoomRepo(id);
+                    }
+                  },
+                ),
+                40.height
+              ],
+            ),
           ),
         ),
       ),

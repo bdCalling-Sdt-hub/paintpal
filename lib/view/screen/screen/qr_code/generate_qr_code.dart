@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/button/common_button.dart';
 import '../../../component/pop_up/common_pop_menu.dart';
-import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
 
 class GenerateQrCode extends StatelessWidget {
@@ -29,10 +29,10 @@ class GenerateQrCode extends StatelessWidget {
             paddingHorizontal: 8,
             fontSize: 24,
             hintText: "",
-            controller: HomeController.instance.houseController,
+            keyboardType: TextInputType.none,
             suffixIcon: PopUpMenu(
                 items: HomeController.instance.houses,
-                selectedItem: HomeController.instance.houseController.text,
+                selectedItem: PrefsHelper.houseName,
                 onTap: HomeController.instance.selectHouse),
           ),
         ),

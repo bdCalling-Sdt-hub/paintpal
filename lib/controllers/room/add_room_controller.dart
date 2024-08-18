@@ -168,7 +168,6 @@ class AddRoomController extends GetxController {
       "surface": jsonEncode(surfaces)
     };
 
-    print("body :${body}");
 
     var response = await ApiService.addRoomRequest(
       url: AppUrls.room,
@@ -178,11 +177,9 @@ class AddRoomController extends GetxController {
       body: body,
     ).timeout(const Duration(seconds: 30));
 
-    print("statusCode ${response.message}");
 
     if (response.statusCode == 200) {
-      print("gfkljgljfgsdjlfjlksd");
-      print("statusCode ${response.body}");
+
       addRoomIsLoading = false;
       update();
     } else {

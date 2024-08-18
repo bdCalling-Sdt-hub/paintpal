@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/models/api_response_model.dart';
 import 'package:paintpal/models/house_name.dart';
 import 'package:paintpal/models/room_name.dart';
-import 'package:paintpal/utils/app_images.dart';
 
 import '../../core/app_routes.dart';
 import '../../services/api_service.dart';
@@ -26,14 +26,15 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.put(HomeController());
 
   TextEditingController houseController =
-      TextEditingController(text: "house-1");
+      TextEditingController(text: PrefsHelper.houseName);
 
-  Future<void> getAllRoomRepo({required String houseId}) async {
+  Future<void> getAllRoomRepo() async {
+    if (PrefsHelper.houseId == "") return;
     status = Status.loading;
     update();
 
     var response = await ApiService.getApi(
-      "${AppUrls.allHouse}/$houseId",
+      "${AppUrls.allHouse}/${PrefsHelper.houseId}",
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
@@ -60,11 +61,12 @@ class HomeController extends GetxController {
       AppUrls.houseShortDetails,
     ).timeout(const Duration(seconds: 30));
 
+    houseStatus = false;
+    update();
+
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)["data"]["ownHouse"];
       var otherHouse = jsonDecode(response.body)["data"]["otherHouse"];
-
-      print(otherHouse);
 
       houses.clear();
 
@@ -77,29 +79,42 @@ class HomeController extends GetxController {
         houses.add(HouseName.fromJson(item));
       }
 
-      if (houses.isNotEmpty) {
+      if (houses.isNotEmpty && PrefsHelper.houseId.isEmpty) {
+        PrefsHelper.houseName = houses[0].houseName;
         houseController.text = houses[0].houseName;
-        getAllRoomRepo(houseId: houses[0].id);
+        PrefsHelper.houseId = houses[0].id;
+
+        PrefsHelper.setString("houseId", PrefsHelper.houseId);
+        PrefsHelper.setString("houseName", PrefsHelper.houseName);
       }
 
-      houseStatus = false;
-      ;
-      update();
+
+      if (PrefsHelper.houseId.isEmpty) return;
+      getAllRoomRepo();
     } else {
       houseStatus = false;
       update();
       Get.snackbar(response.statusCode.toString(), response.message);
     }
+
+    houseStatus = false;
+    update();
   }
 
   selectHouse(int index) {
-    houseController.text = houses[index].houseName.toString();
-    update();
-    getAllRoomRepo(houseId: houses[index].id);
+    PrefsHelper.houseName = houses[index].houseName;
+    houseController.text = houses[index].houseName;
+    PrefsHelper.houseId = houses[index].id;
 
-    otherHouse = houses[index].otherHouse ;
+    otherHouse = houses[index].otherHouse;
+    PrefsHelper.otherHouse = houses[index].otherHouse;
 
-    print(otherHouse);
+
+
+    PrefsHelper.setString("houseId", PrefsHelper.houseId);
+    PrefsHelper.setString("houseName", PrefsHelper.houseName);
+    PrefsHelper.setBool("otherHouse", PrefsHelper.otherHouse);
+    getAllRoomRepo();
     Get.back();
   }
 
@@ -119,9 +134,5 @@ class HomeController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    getAllHouseRepo();
-    super.onInit();
-  }
+
 }

@@ -4,13 +4,11 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/room/add_room_controller.dart';
-import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/other_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
-import 'package:paintpal/view/component/pop_up/common_pop_menu.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/add_surface_filed.dart';
@@ -115,9 +113,7 @@ class _AddRoomState extends State<AddRoom> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.value,
                     itemBuilder: (context, index) {
-                      print("surfaces :${controller.surfaces}");
-                      print(
-                          "surfacesController :${controller.surfacesController}");
+
                       return AddSurfaceFiled(
                         isShow: (controller.value - 1) == index,
                         item: controller.surfacesController[index],
