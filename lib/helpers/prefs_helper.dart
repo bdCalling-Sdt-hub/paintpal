@@ -52,7 +52,7 @@ class PrefsHelper extends GetxController {
     otherHouse = preferences.getBool("otherHouse") ?? false;
 
     if (kDebugMode) {
-      print(userId);
+      print(myImage);
     }
   }
 

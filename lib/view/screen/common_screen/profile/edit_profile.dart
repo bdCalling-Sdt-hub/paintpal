@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,8 +53,8 @@ class EditProfile extends StatelessWidget {
                                     fit: BoxFit.fill,
                                   )
                                 : CommonImage(
-                                    imageSrc: AppImages.profile,
-                                    imageType: ImageType.png,
+                                    imageSrc: PrefsHelper.myImage,
+                                    imageType: ImageType.network,
                                     height: 100,
                                     width: 100,
                                   ),
@@ -85,9 +86,10 @@ class EditProfile extends StatelessWidget {
                   150.height,
                   CommonButton(
                       titleText: AppString.saveAndChanges,
+                      isLoading: controller.updateIsLoading,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          Get.offAllNamed(AppRoutes.profile);
+                          controller.updateProfileRepo();
                         }
                       }),
                 ],

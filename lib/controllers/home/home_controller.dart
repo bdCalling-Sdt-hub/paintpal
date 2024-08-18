@@ -15,7 +15,7 @@ import '../../utils/app_url.dart';
 
 class HomeController extends GetxController {
   List houses = [];
-  Status status = Status.completed;
+  Status status = Status.loading;
   bool houseStatus = false;
   bool otherHouse = false;
 
