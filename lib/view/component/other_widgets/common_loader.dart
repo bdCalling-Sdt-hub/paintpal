@@ -11,12 +11,14 @@ class CommonLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: size.sp,
-      width: size.sp,
-      child: Platform.isIOS
-          ? const CupertinoActivityIndicator()
-          : const CircularProgressIndicator(),
+    return Center(
+      child: SizedBox(
+        height: size,
+        width: size,
+        child: Platform.isIOS
+            ? const CupertinoActivityIndicator()
+            : const CircularProgressIndicator(),
+      ),
     );
   }
 }

@@ -1,34 +1,93 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/models/api_response_model.dart';
+import 'package:paintpal/models/house_name.dart';
+import 'package:paintpal/models/room_name.dart';
 import 'package:paintpal/utils/app_images.dart';
 
 import '../../core/app_routes.dart';
+import '../../services/api_service.dart';
+import '../../utils/app_url.dart';
 
 class HomeController extends GetxController {
-  List houses = ["house-1", "house-2", "house-3"];
+  List houses = [];
+  Status status = Status.completed;
+  bool houseStatus = false;
 
-  List items = [
-    // {"image": AppImages.badRoom, "name": "Badroom : 01"},
-    // {"image": AppImages.livingRoom, "name": "Living room painting"},
-    // {"image": AppImages.prayerRoom, "name": "Prayer room design"},
-    // {"image": AppImages.studyRoom, "name": "Study room designs"},
-    // {"image": AppImages.droingRoom, "name": "Drawing Room"},
-    // {"image": AppImages.dryingRoom, "name": "Drying Room"},
-  ];
+  List rooms = [];
 
   String qrResult = "";
 
   static HomeController get instance => Get.put(HomeController());
 
-  TextEditingController houseController = TextEditingController(text: "house-1");
+  TextEditingController houseController =
+      TextEditingController(text: "house-1");
+
+  Future<void> getAllRoomRepo({required String houseId}) async {
+    status = Status.loading;
+    update();
+
+    var response = await ApiService.getApi(
+      "${AppUrls.allHouse}/$houseId",
+    ).timeout(const Duration(seconds: 30));
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)["data"]["room"];
+
+      rooms.clear();
+      for (var item in data) {
+        rooms.add(RoomName.fromJson(item));
+      }
+      status = Status.completed;
+      update();
+    } else {
+      status = Status.error;
+      update();
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+  }
+
+  Future<void> getAllHouseRepo() async {
+    houseStatus = true;
+    update();
+
+    var response = await ApiService.getApi(
+      AppUrls.houseShortDetails,
+    ).timeout(const Duration(seconds: 30));
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)["data"]["ownHouse"];
+
+      houses.clear();
+
+      for (var item in data) {
+        houses.add(HouseName.fromJson(item));
+      }
+
+      if (houses.isNotEmpty) {
+        houseController.text = houses[0].houseName;
+        getAllRoomRepo(houseId: houses[0].id);
+      }
+
+      houseStatus = false;
+      ;
+      update();
+    } else {
+      houseStatus = false;
+      update();
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+  }
 
   selectHouse(int index) {
-    houseController.text = houses[index].toString();
+    houseController.text = houses[index].houseName.toString();
     update();
+    getAllRoomRepo(houseId: houses[index].id);
     Get.back();
-
   }
 
   Future<void> scanQR() async {
@@ -45,5 +104,11 @@ class HomeController extends GetxController {
         print(e);
       }
     }
+  }
+
+  @override
+  void onInit() {
+    getAllHouseRepo();
+    super.onInit();
   }
 }
