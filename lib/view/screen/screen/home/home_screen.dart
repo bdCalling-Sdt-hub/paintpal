@@ -33,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Duration.zero,
       () {
         HomeController.instance.getAllHouseRepo();
-        print("HomeController.houseId ${PrefsHelper.houseId}");
       },
     );
     super.initState();
