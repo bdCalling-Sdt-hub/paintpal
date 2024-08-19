@@ -35,7 +35,6 @@ class RoomDetailsController extends GetxController {
 
       surfaceNumber = roomDetailsModel.surface.length;
 
-
       status = Status.completed;
       update();
     } else {
