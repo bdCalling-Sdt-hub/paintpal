@@ -149,7 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 30,
                                     child: IconButton(
                                         padding: EdgeInsets.zero,
-                                        onPressed: deleteRoom,
+                                        onPressed: () => deleteRoom(
+                                              () {
+                                                controller
+                                                    .deleteRoomRepo(item.id);
+                                              },
+                                            ),
                                         icon: const Icon(CupertinoIcons.delete),
                                         iconSize: 20,
                                         style: ButtonStyle(

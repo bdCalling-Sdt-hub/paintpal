@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/app_routes.dart';
+import '../../../../helpers/prefs_helper.dart';
 import '../../../../utils/app_images.dart';
 import '../../../component/image/common_image.dart';
 
@@ -20,19 +21,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     changeScreen();
-    Future.delayed(
-      const Duration(seconds: 3),
-      () {
-        // if (PrefsHelper.isLogIn) {
-        //   if (PrefsHelper.myRole == 'consultant') {
-        //     Get.offAllNamed(AppRoutes.doctorHome);
-        //   } else {
-        //     Get.offAllNamed(AppRoutes.patientsHome);
-        //   }
-        // } else {
-         Get.offAllNamed(AppRoutes.welcome);
-      },
-    );
+    Future.delayed(const Duration(seconds: 3), () {
+      if (PrefsHelper.isLogIn) {
+        Get.offAllNamed(AppRoutes.home);
+      } else {
+        Get.offAllNamed(AppRoutes.welcome);
+      }
+    });
     super.initState();
   }
 

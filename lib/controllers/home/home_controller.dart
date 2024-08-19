@@ -18,6 +18,7 @@ class HomeController extends GetxController {
   Status status = Status.loading;
   bool houseStatus = false;
   bool otherHouse = false;
+  bool deleteIsLoading = false;
 
   List rooms = [];
 
@@ -51,6 +52,24 @@ class HomeController extends GetxController {
       update();
       Get.snackbar(response.statusCode.toString(), response.message);
     }
+  }
+
+  Future<void> deleteRoomRepo(id) async {
+    deleteIsLoading = true;
+    update();
+
+    var response = await ApiService.deleteApi(
+      "${AppUrls.room}/$id",
+    );
+
+    if (response.statusCode == 200) {
+      Get.offAllNamed(AppRoutes.home);
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    deleteIsLoading = false;
+    update();
   }
 
   Future<void> getAllHouseRepo() async {
@@ -88,7 +107,6 @@ class HomeController extends GetxController {
         PrefsHelper.setString("houseName", PrefsHelper.houseName);
       }
 
-
       if (PrefsHelper.houseId.isEmpty) return;
       getAllRoomRepo();
     } else {
@@ -108,8 +126,6 @@ class HomeController extends GetxController {
 
     otherHouse = houses[index].otherHouse;
     PrefsHelper.otherHouse = houses[index].otherHouse;
-
-
 
     PrefsHelper.setString("houseId", PrefsHelper.houseId);
     PrefsHelper.setString("houseName", PrefsHelper.houseName);
@@ -133,6 +149,4 @@ class HomeController extends GetxController {
       }
     }
   }
-
-
 }
