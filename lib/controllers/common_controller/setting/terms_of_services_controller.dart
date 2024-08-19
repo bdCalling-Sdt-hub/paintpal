@@ -22,8 +22,7 @@ class TermsOfServicesController extends GetxController {
     var response = await ApiService.getApi(AppUrls.termsOfServices);
 
     if (response.statusCode == 200) {
-      data =
-          HtmlModel.fromJson(jsonDecode(response.body)['data']);
+      data = HtmlModel.fromJson(jsonDecode(response.body)['data']);
 
       status = Status.completed;
       update();
