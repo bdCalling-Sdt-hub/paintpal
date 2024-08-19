@@ -31,8 +31,9 @@ class AppUrls {
   static const logOut = "$baseUrl/users/user/logout/true";
   static const verifyEmail = "$baseUrl/users/verify-email";
   static const notifications = "$baseUrl/notifications";
-  static const privacyPolicies = "$baseUrl/privacy-policies";
-  static const termsOfServices = "$baseUrl/terms-and-conditions";
+  static const privacyPolicies = "$baseUrl/setting?title=privacyPolicy";
+  static const aboutUs = "$baseUrl/setting?title=aboutUs";
+  static const termsOfServices = "$baseUrl/setting?title=termsOfService";
 }
 
 

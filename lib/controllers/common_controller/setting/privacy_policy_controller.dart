@@ -16,7 +16,6 @@ class PrivacyPolicyController extends GetxController {
       Get.put(PrivacyPolicyController());
 
   getPrivacyPolicyRepo() async {
-    return ;
     status = Status.loading;
     update();
 
@@ -24,7 +23,7 @@ class PrivacyPolicyController extends GetxController {
 
     if (response.statusCode == 200) {
       data =
-          HtmlModel.fromJson(jsonDecode(response.body)['data']['attributes']);
+          HtmlModel.fromJson(jsonDecode(response.body)['data']);
 
       status = Status.completed;
       update();

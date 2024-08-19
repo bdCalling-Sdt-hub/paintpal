@@ -16,15 +16,14 @@ class AboutUsController extends GetxController {
       Get.put(AboutUsController());
 
   geTermsOfServicesRepo() async {
-    return;
     status = Status.loading;
     update();
 
-    var response = await ApiService.getApi(AppUrls.termsOfServices);
+    var response = await ApiService.getApi(AppUrls.aboutUs);
 
     if (response.statusCode == 200) {
       data =
-          HtmlModel.fromJson(jsonDecode(response.body)['data']['attributes']);
+          HtmlModel.fromJson(jsonDecode(response.body)['data']);
 
       status = Status.completed;
       update();
