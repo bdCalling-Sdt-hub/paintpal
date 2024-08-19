@@ -91,7 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   return InkWell(
                     onTap: () => Get.toNamed(
                       AppRoutes.roomDetails,
-                      parameters: {"image": item.image, "name": item.roomName},
+                      parameters: {
+                        "image": item.image,
+                        "name": item.roomName,
+                        "id": item.id
+                      },
                     ),
                     child: Column(
                       children: [

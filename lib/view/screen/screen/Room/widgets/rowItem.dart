@@ -12,10 +12,12 @@ class RowItem extends StatelessWidget {
       required this.rightText,
       required this.rightTextHint,
       this.rightController,
+      this.isEnabled = true,
       this.leftController});
 
   final String leftText;
   final String leftTextHint;
+  final bool isEnabled;
 
   final String rightText;
   final String rightTextHint;
@@ -40,6 +42,7 @@ class RowItem extends StatelessWidget {
               controller: leftController ?? defealtLeftController,
               hintText: leftTextHint,
               validator: OtherHelper.validator,
+              enabled: isEnabled,
             )
           ],
         )),
@@ -56,6 +59,7 @@ class RowItem extends StatelessWidget {
               controller: rightController ?? defealtRightController,
               hintText: rightTextHint,
               validator: OtherHelper.validator,
+              enabled: isEnabled,
             )
           ],
         )),

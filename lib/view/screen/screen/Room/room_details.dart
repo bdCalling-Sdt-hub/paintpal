@@ -3,8 +3,13 @@ import 'package:get/get.dart';
 import 'package:paintpal/controllers/room/room_details_controller.dart';
 import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/models/api_response_model.dart';
+import 'package:paintpal/models/room_details_model.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
+import 'package:paintpal/view/component/image/common_image.dart';
+import 'package:paintpal/view/component/other_widgets/common_loader.dart';
+import 'package:paintpal/view/component/screen/error_screen.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/delete_wall.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
@@ -13,23 +18,22 @@ import '../../../component/text_field/common_text_field.dart';
 import 'widgets/rowItem.dart';
 
 class RoomDetails extends StatefulWidget {
-  RoomDetails({super.key});
+  const RoomDetails({super.key});
 
   @override
   State<RoomDetails> createState() => _RoomDetailsState();
 }
 
 class _RoomDetailsState extends State<RoomDetails>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   String name = Get.parameters["name"] ?? "";
-
   String image = Get.parameters["image"] ?? "";
+  String id = Get.parameters["id"] ?? "";
 
   @override
   void initState() {
     super.initState();
-    RoomDetailsController.instance.tabController =
-        TabController(length: 3, vsync: this);
+    RoomDetailsController.instance.getRoomDetailsRepo(id);
   }
 
   @override
@@ -43,56 +47,87 @@ class _RoomDetailsState extends State<RoomDetails>
         ),
       ),
       body: GetBuilder<RoomDetailsController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Container(
-                height: 180,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage(image),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+        builder: (controller) {
+          RoomDetailsController.instance.tabController = TabController(
+              length: RoomDetailsController.instance.surfaceNumber,
+              vsync: this);
+          return switch (controller.status) {
+            Status.loading => const CommonLoader(),
+            Status.error => ErrorScreen(
+                onTap: () => controller.getRoomDetailsRepo(id),
               ),
-              TabBar(
-                indicatorColor: AppColors.highlight,
-                controller: controller.tabController,
-                labelColor: AppColors.white_500,
-                unselectedLabelColor: AppColors.white_500,
-                // onTap: (int) => controller.myIncomeRepo(),
-                indicatorWeight: 2,
-                indicatorSize: TabBarIndicatorSize.tab,
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.zero,
-                automaticIndicatorColorAdjustment: true,
-
-                labelStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                tabs: const [
-                  Tab(
-                    text: 'Left wall',
-                  ),
-                  Tab(text: 'Center wall'),
-                  Tab(text: 'Right wall'),
-                ],
-              ),
-              20.height,
-              Expanded(
-                child: TabBarView(
-                  controller: controller.tabController,
+            Status.completed => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
                   children: [
-                    wallItem(),
-                    wallItem(),
-                    wallItem(),
+                    CommonImage(
+                      imageSrc: image,
+                      imageType: ImageType.network,
+                      height: 180,
+                      width: double.infinity,
+                    ),
+
+                    // Expanded(
+                    //   child: ListView.builder(
+                    //     itemCount: controller.roomDetailsModel.surface.length,
+                    //     itemBuilder: (context, index) {
+                    //
+                    //
+                    //     return wallItem();
+                    //   },),
+                    // ),
+
+                    TabBar(
+                        indicatorColor: AppColors.highlight,
+                        controller: controller.tabController,
+                        labelColor: AppColors.white_500,
+                        isScrollable: true,
+                        unselectedLabelColor: AppColors.white_500,
+                        // onTap: (int) => controller.myIncomeRepo(),
+                        indicatorWeight: 2,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        padding: EdgeInsets.zero,
+                        tabAlignment: TabAlignment.center,
+                        automaticIndicatorColorAdjustment: true,
+                        labelStyle: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                        // tabs: const [
+                        //   Tab(
+                        //     text: 'Left wall',
+                        //   ),
+                        //   Tab(text: 'Center wall'),
+                        //   Tab(text: 'Right wall'),
+                        // ],
+
+                        tabs: List.generate(
+                          controller.roomDetailsModel.surface.length,
+                          (index) {
+                            Surface surface =
+                                controller.roomDetailsModel.surface[index];
+                            return Tab(
+                              text: surface.surfaceName,
+                            );
+                          },
+                        )),
+                    20.height,
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller.tabController,
+                        children: List.generate(
+                          controller.surfaceNumber,
+                          (index) {
+                            Surface surface =
+                                controller.roomDetailsModel.surface[index];
+                            return wallItem(surface);
+                          },
+                        ),
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+          };
+        },
       ),
       bottomNavigationBar: const CommonBottomNavBar(
         currentIndex: 9,
@@ -100,29 +135,51 @@ class _RoomDetailsState extends State<RoomDetails>
     );
   }
 
-  wallItem() {
+  wallItem(Surface surface) {
+    TextEditingController surfaceController = TextEditingController();
+    TextEditingController colorCodeController =
+        TextEditingController(text: surface.colorCode);
+    TextEditingController colorNameController =
+        TextEditingController(text: surface.colorDetails);
+    TextEditingController purchaseLocationController =
+        TextEditingController(text: surface.purchesLocation);
+    TextEditingController purchaseDateController =
+        TextEditingController(text: surface.purchesDate);
+    TextEditingController colorBrandNameController =
+        TextEditingController(text: surface.colorBrandName);
+    TextEditingController finishController =
+        TextEditingController(text: surface.finish);
     return SingleChildScrollView(
       child: Column(
         children: [
           RowItem(
+            leftController: colorCodeController,
+            rightController: colorBrandNameController,
             leftText: AppString.colorCode,
             leftTextHint: AppString.colorCodeHint,
             rightText: AppString.colorDetails,
             rightTextHint: AppString.colorDetailsHint,
+            isEnabled: false,
           ),
           8.height,
           RowItem(
+            leftController: purchaseLocationController,
+            rightController: purchaseDateController,
             leftText: AppString.purchaseLocation,
             leftTextHint: AppString.purchaseLocationHint,
             rightText: AppString.purchaseDate,
             rightTextHint: AppString.purchaseDateHint,
+            isEnabled: false,
           ),
           8.height,
           RowItem(
+            leftController: colorBrandNameController,
+            rightController: finishController,
             leftText: AppString.colorBrandName,
             leftTextHint: AppString.colorBrandNameHint,
             rightText: AppString.finish,
             rightTextHint: AppString.finishHint,
+            isEnabled: false,
           ),
           const CommonText(
             text: AppString.paintTextureDetails,
@@ -134,13 +191,18 @@ class _RoomDetailsState extends State<RoomDetails>
             fillColor: AppColors.transparent,
             borderColor: AppColors.white_500,
             borderRadius: 50,
+            enabled: false,
           ),
           30.height,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const CommonButton(
-                onTap: deleteWall,
+              CommonButton(
+                onTap: () => deleteWall(
+                  () {
+                    RoomDetailsController.instance.deleteRoomRepo(surface.id);
+                  },
+                ),
                 titleText: AppString.delete,
                 titleColor: AppColors.white_500,
                 buttonColor: AppColors.blue_400,

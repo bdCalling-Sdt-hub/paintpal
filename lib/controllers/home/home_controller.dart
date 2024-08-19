@@ -78,7 +78,7 @@ class HomeController extends GetxController {
 
     var response = await ApiService.getApi(
       AppUrls.houseShortDetails,
-    ).timeout(const Duration(seconds: 30));
+    );
 
     houseStatus = false;
     update();
