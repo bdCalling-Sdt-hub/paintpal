@@ -68,20 +68,22 @@ addNewHouse(
           ),
         ),
         actions: [
-          GetBuilder<AddRoomController>(builder: (controller) => CommonButton(
-            titleText: AppString.save,
-            titleColor: AppColors.black,
-            isLoading: controller.isLoading,
-            borderColor: AppColors.black,
-            buttonColor: AppColors.transparent,
-            buttonRadius: 4.r,
-            buttonHeight: 48,
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                onTap();
-              }
-            },
-          ).center,)
+          GetBuilder<AddRoomController>(
+            builder: (controller) => CommonButton(
+              titleText: AppString.save,
+              titleColor: AppColors.black,
+              isLoading: controller.isLoading,
+              borderColor: AppColors.black,
+              buttonColor: AppColors.transparent,
+              buttonRadius: 4.r,
+              buttonHeight: 48,
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  onTap();
+                }
+              },
+            ).center,
+          )
         ],
       );
     },

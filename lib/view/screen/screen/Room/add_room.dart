@@ -113,7 +113,6 @@ class _AddRoomState extends State<AddRoom> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.value,
                     itemBuilder: (context, index) {
-
                       return AddSurfaceFiled(
                         isShow: (controller.value - 1) == index,
                         item: controller.surfacesController[index],
