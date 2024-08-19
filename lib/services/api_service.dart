@@ -381,7 +381,6 @@ class ApiService {
         request.fields[key] = value;
       });
 
-
       int value = 0;
 
       for (var item in surfaceFile) {
