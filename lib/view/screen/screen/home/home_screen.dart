@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           dashPattern: const [8],
                           color: AppColors.white_500,
                           strokeWidth: 1.5,
-                          child: Container(
+                          child: SizedBox(
                             height: 160,
                             width: 160,
                             child: const Icon(

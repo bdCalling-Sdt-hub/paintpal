@@ -13,7 +13,7 @@ import '../../../component/text/common_text.dart';
 import 'package:get/get.dart';
 
 class EditRoomScreen extends StatefulWidget {
-  EditRoomScreen({super.key});
+  const EditRoomScreen({super.key});
 
   @override
   State<EditRoomScreen> createState() => _EditRoomScreenState();

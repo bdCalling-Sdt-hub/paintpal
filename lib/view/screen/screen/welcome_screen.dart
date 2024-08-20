@@ -13,6 +13,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
   void initState() {
     Future.delayed(
       const Duration(seconds: 3),

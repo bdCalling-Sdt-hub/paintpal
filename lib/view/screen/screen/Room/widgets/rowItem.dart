@@ -5,7 +5,7 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class RowItem extends StatelessWidget {
-  RowItem(
+   RowItem(
       {super.key,
       required this.leftText,
       required this.leftTextHint,

@@ -18,7 +18,7 @@ import '../../../component/text_field/common_text_field.dart';
 import 'widgets/rowItem.dart';
 
 class EditWall extends StatefulWidget {
-  EditWall({super.key});
+  const EditWall({super.key});
 
   @override
   State<EditWall> createState() => _EditWallState();

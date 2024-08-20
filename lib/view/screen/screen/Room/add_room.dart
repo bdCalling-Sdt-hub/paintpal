@@ -17,7 +17,7 @@ import 'package:paintpal/view/screen/screen/Room/widgets/house_pop_up.dart';
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 
 class AddRoom extends StatefulWidget {
-  AddRoom({super.key});
+  const AddRoom({super.key});
 
   @override
   State<AddRoom> createState() => _AddRoomState();
