@@ -15,6 +15,7 @@ import '../controllers/room/add_house_controller.dart';
 import '../controllers/room/add_room_controller.dart';
 import '../controllers/room/edit_room_controller.dart';
 import '../controllers/room/room_details_controller.dart';
+import '../controllers/room/update_surface_controller.dart';
 
 class DependencyInjection extends Bindings {
   @override
@@ -34,5 +35,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => AboutUsController(), fenix: true);
     Get.lazyPut(() => AddHouseController(), fenix: true);
     Get.lazyPut(() => EditRoomController(), fenix: true);
+    Get.lazyPut(() => UpdateSurfaceController(), fenix: true);
   }
 }

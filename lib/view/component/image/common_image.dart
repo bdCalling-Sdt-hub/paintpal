@@ -76,8 +76,12 @@ class CommonImage extends StatelessWidget {
             ),
           ),
         ),
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            CircularProgressIndicator(value: downloadProgress.progress),
+        progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
+            height: 60,
+            width: 60,
+            child: CircularProgressIndicator(
+              value: downloadProgress.progress,
+            )),
         errorWidget: (context, url, error) {
           if (kDebugMode) {
             print(error);

@@ -118,7 +118,7 @@ class _RoomDetailsState extends State<RoomDetails>
                           (index) {
                             Surface surface =
                                 controller.roomDetailsModel.surface[index];
-                            return wallItem(surface);
+                            return wallItem(surface, index);
                           },
                         ),
                       ),
@@ -135,7 +135,7 @@ class _RoomDetailsState extends State<RoomDetails>
     );
   }
 
-  wallItem(Surface surface) {
+  wallItem(Surface surface, index) {
     TextEditingController surfaceController = TextEditingController();
     TextEditingController colorCodeController =
         TextEditingController(text: surface.colorCode);
@@ -216,6 +216,8 @@ class _RoomDetailsState extends State<RoomDetails>
                 onTap: () => Get.toNamed(AppRoutes.editWall, parameters: {
                   "name": name,
                   "image": image,
+                  "id": id,
+                  "index": "$index"
                 }),
                 child: Container(
                   width: 90,
