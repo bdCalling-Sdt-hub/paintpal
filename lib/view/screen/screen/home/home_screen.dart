@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(
       Duration.zero,
       () {
+        if (HomeController.instance.houses.isNotEmpty) return;
+
         HomeController.instance.getAllHouseRepo();
       },
     );
