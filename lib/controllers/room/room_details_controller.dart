@@ -44,38 +44,7 @@ class RoomDetailsController extends GetxController {
     }
   }
 
-  updateSurfaceRepo(id) async {
-    status = Status.loading;
-    update();
 
-    var body = {
-      "surfaceID": "",
-      "surfaceName": "",
-      "colorCode": "",
-      "surfaceImage": "",
-      "colorDetails": "",
-      "purchesLocation": "",
-      "purchesDate": "",
-      "description": "",
-      "colorBrandName": "",
-    };
-
-    var response = await ApiService.getApi("${AppUrls.room}/$id");
-
-    if (response.statusCode == 200) {
-      roomDetailsModel =
-          RoomDetailsModel.fromJson(jsonDecode(response.body)["data"]);
-
-      surfaceNumber = roomDetailsModel.surface.length;
-
-      status = Status.completed;
-      update();
-    } else {
-      status = Status.error;
-      update();
-      Utils.snackBarMessage(response.statusCode.toString(), response.message);
-    }
-  }
 
   Future<void> deleteRoomRepo(id) async {
     deleteSurfaceIsLoading = true;
