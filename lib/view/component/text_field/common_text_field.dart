@@ -113,7 +113,8 @@ class CommonTextField extends StatelessWidget {
           ),
           hintText: hintText,
           labelText: labelText,
-          hintStyle: GoogleFonts.roboto(fontSize: fontSize, color: hintTextColor),
+          hintStyle:
+              GoogleFonts.roboto(fontSize: fontSize, color: hintTextColor),
           labelStyle:
               GoogleFonts.roboto(fontSize: fontSize, color: labelTextColor),
           prefix: CommonText(
