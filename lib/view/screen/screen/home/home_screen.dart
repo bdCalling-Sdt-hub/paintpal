@@ -215,9 +215,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
         },
       ),
-      bottomNavigationBar: const CommonBottomNavBar(
-        currentIndex: 0,
-      ),
+      // bottomNavigationBar: const CommonBottomNavBar(
+      //   currentIndex: 0,
+      // ),
     );
   }
 }
