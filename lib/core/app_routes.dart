@@ -136,11 +136,11 @@ class AppRoutes {
         transition: Transition.rightToLeftWithFade),
     GetPage(
         name: editWall,
-        page: () => EditWall(),
+        page: () => const EditWall(),
         transition: Transition.rightToLeftWithFade),
     GetPage(
         name: addRoom,
-        page: () => AddRoom(),
+        page: () => const AddRoom(),
         transition: Transition.rightToLeftWithFade),
     GetPage(
         name: location,
@@ -152,7 +152,7 @@ class AppRoutes {
         transition: Transition.rightToLeftWithFade),
     GetPage(
         name: editRoom,
-        page: () => EditRoomScreen(),
+        page: () => const EditRoomScreen(),
         transition: Transition.rightToLeftWithFade),
     GetPage(
         name: generate,

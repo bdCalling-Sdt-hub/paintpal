@@ -10,7 +10,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/button/common_button.dart';
-import '../../../component/pop_up/common_pop_menu.dart';
 import '../../../component/text_field/common_text_field.dart';
 import '../Room/widgets/house_pop_up.dart';
 

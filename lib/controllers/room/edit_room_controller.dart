@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/core/app_routes.dart';
@@ -32,7 +31,6 @@ class EditRoomController extends GetxController {
 
     if (response.statusCode == 200) {
       Get.offAllNamed(AppRoutes.home);
-
     } else {
       Utils.snackBarMessage(response.statusCode.toString(), response.message);
     }

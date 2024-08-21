@@ -44,8 +44,6 @@ class RoomDetailsController extends GetxController {
     }
   }
 
-
-
   Future<void> deleteRoomRepo(id) async {
     deleteSurfaceIsLoading = true;
     update();
