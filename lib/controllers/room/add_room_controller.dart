@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:paintpal/models/house_name.dart';
 import 'package:paintpal/models/surface_model.dart';
 
+import '../../core/app_routes.dart';
 import '../../helpers/other_helper.dart';
 import '../../services/api_service.dart';
 import '../../utils/app_url.dart';
@@ -168,7 +169,6 @@ class AddRoomController extends GetxController {
       "surface": jsonEncode(surfaces)
     };
 
-
     var response = await ApiService.addRoomRequest(
       url: AppUrls.room,
       imageName: "coverImage",
@@ -177,8 +177,8 @@ class AddRoomController extends GetxController {
       body: body,
     ).timeout(const Duration(seconds: 30));
 
-
     if (response.statusCode == 200) {
+      Get.offAllNamed(AppRoutes.home);
 
       addRoomIsLoading = false;
       update();

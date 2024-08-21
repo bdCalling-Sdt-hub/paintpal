@@ -120,8 +120,9 @@ class HomeController extends GetxController {
   }
 
   selectHouse(int index) {
-    PrefsHelper.houseName = houses[index].houseName;
     houseController.text = houses[index].houseName;
+
+    PrefsHelper.houseName = houses[index].houseName;
     PrefsHelper.houseId = houses[index].id;
 
     otherHouse = houses[index].otherHouse;
@@ -130,7 +131,9 @@ class HomeController extends GetxController {
     PrefsHelper.setString("houseId", PrefsHelper.houseId);
     PrefsHelper.setString("houseName", PrefsHelper.houseName);
     PrefsHelper.setBool("otherHouse", PrefsHelper.otherHouse);
+    update();
     getAllRoomRepo();
+
     Get.back();
   }
 
@@ -140,13 +143,43 @@ class HomeController extends GetxController {
           "#ff6666", "Cancel", true, ScanMode.QR);
 
       if (qrCode.isNotEmpty) {
-        Get.toNamed(AppRoutes.roomDetails);
+        var houseId = jsonDecode(qrCode)["houseId"];
+        var houseName = jsonDecode(qrCode)["houseName"];
+
+        PrefsHelper.houseId = houseId;
+        PrefsHelper.houseName = houseName;
+
+        PrefsHelper.setString("houseId", PrefsHelper.houseId);
+        PrefsHelper.setString("houseName", PrefsHelper.houseName);
+
         qrResult = qrCode.toString();
+        await scanHouseRepo(houseId);
+
       }
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
     }
+  }
+
+  Future<void> scanHouseRepo(houseId) async {
+    houseStatus = true;
+    update();
+
+    var response = await ApiService.getApi(
+      "${AppUrls.scanHouse}/$houseId",
+    );
+
+    if (response.statusCode == 200) {
+      Get.offAllNamed(AppRoutes.home);
+    } else {
+      houseStatus = false;
+      update();
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    houseStatus = false;
+    update();
   }
 }

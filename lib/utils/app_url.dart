@@ -19,6 +19,7 @@ class AppUrls {
   static const houseShortDetails =
       "$baseUrl/house/user/short-details"; // Add house "multiple" or "single"
   static const allHouse = "$baseUrl/house"; // Get house "all" or "single"
+  static const scanHouse = "$baseUrl/house/scan"; // Get house "all" or "single"
   static const userHouse = "$baseUrl/house/user";
   static const houseScan = "$baseUrl/house/scan";
   static const addRoom = "$baseUrl/room/add";
