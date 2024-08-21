@@ -14,7 +14,6 @@ Future<void> main() async {
   dI.dependencies();
   await PrefsHelper.getAllPrefData();
 
-
   runApp(const MyApp());
 }
 
