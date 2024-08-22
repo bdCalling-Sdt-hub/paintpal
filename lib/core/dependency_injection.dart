@@ -10,6 +10,7 @@ import '../controllers/common_controller/setting/about_us_controller.dart';
 import '../controllers/common_controller/setting/privacy_policy_controller.dart';
 import '../controllers/common_controller/setting/setting_controller.dart';
 import '../controllers/common_controller/setting/terms_of_services_controller.dart';
+import '../controllers/google map/google_map_controller.dart';
 import '../controllers/home/home_controller.dart';
 import '../controllers/room/add_house_controller.dart';
 import '../controllers/room/add_room_controller.dart';
@@ -36,5 +37,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => AddHouseController(), fenix: true);
     Get.lazyPut(() => EditRoomController(), fenix: true);
     Get.lazyPut(() => UpdateSurfaceController(), fenix: true);
+    Get.lazyPut(() => ShowGoogleMapController(), fenix: true);
   }
 }
