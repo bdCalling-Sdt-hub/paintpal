@@ -37,6 +37,5 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => AddHouseController(), fenix: true);
     Get.lazyPut(() => EditRoomController(), fenix: true);
     Get.lazyPut(() => UpdateSurfaceController(), fenix: true);
-    Get.lazyPut(() => ShowGoogleMapController(), fenix: true);
   }
 }

@@ -15,30 +15,13 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   @override
-  void initState() {
-    ShowGoogleMapController.instance.getCurrentLocation();
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<ShowGoogleMapController>(
-        builder: (controller) => ShowGoogleMap(
-          onTapLatLong: (value) => print(value),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          print("object");
-          final GoogleMapController googleMapController =
-              await ShowGoogleMapController.instance.controller.future;
-          await googleMapController.animateCamera(
-              CameraUpdate.newCameraPosition(const CameraPosition(
-                  target: LatLng(23.02, 90.36), zoom: 14)));
-
-          setState(() {});
-        },
+      body: ShowGoogleMap(
+        onTapLatLong: (value) => print(value),
       ),
       bottomNavigationBar: const CommonBottomNavBar(
         currentIndex: 1,
