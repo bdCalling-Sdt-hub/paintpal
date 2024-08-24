@@ -23,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const CommonText(
           text: AppString.profile,
