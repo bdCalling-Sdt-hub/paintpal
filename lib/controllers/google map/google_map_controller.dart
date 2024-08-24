@@ -22,10 +22,7 @@ class ShowGoogleMapController extends GetxController {
   final Completer<GoogleMapController> controller =
       Completer<GoogleMapController>();
 
-  var kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14,
-  );
+  CameraPosition? kGooglePlex ;
 
   setMarker(LatLng latLng) async {
     Marker newMarker = Marker(
@@ -35,8 +32,7 @@ class ShowGoogleMapController extends GetxController {
     marker.add(newMarker);
     update();
     CameraPosition newCameraPosition = CameraPosition(
-        target: LatLng(latLng.latitude, latLng.longitude),
-        zoom: 14);
+        target: LatLng(latLng.latitude, latLng.longitude), zoom: 14);
   }
 
   getCurrentLocation() async {
@@ -44,6 +40,11 @@ class ShowGoogleMapController extends GetxController {
     if (positions != null) {
       latitude = positions.latitude;
       longitude = positions.longitude;
+
+      kGooglePlex = CameraPosition(
+        target: LatLng(positions.latitude, positions.longitude),
+        zoom: 14,
+      );
       CameraPosition newCameraPosition = CameraPosition(
           target: LatLng(positions.latitude, positions.longitude), zoom: 14);
 

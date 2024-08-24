@@ -10,7 +10,6 @@ import '../../../models/place_model.dart';
 import '../../../services/location_service.dart';
 import '../../screen/screen/location/widgets/bottom_sheet.dart';
 
-
 class ShowGoogleMap extends StatelessWidget {
   ShowGoogleMap(
       {super.key,
@@ -32,7 +31,11 @@ class ShowGoogleMap extends StatelessWidget {
       builder: (controller) {
         return GoogleMap(
           mapType: MapType.normal,
-          initialCameraPosition: controller.kGooglePlex,
+          initialCameraPosition: controller.kGooglePlex ??
+              const CameraPosition(
+                target: LatLng(37.42796133580664, -122.085749655962),
+                zoom: 14,
+              ),
           myLocationEnabled: true,
           myLocationButtonEnabled: true,
           cameraTargetBounds: CameraTargetBounds.unbounded,
@@ -49,5 +52,3 @@ class ShowGoogleMap extends StatelessWidget {
     );
   }
 }
-
-
