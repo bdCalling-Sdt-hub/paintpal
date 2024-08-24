@@ -15,13 +15,20 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   @override
+  @override
+  void initState() {
+    ShowGoogleMapController.instance.getCurrentLocation();
+    super.initState();
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ShowGoogleMap(
-        onTapLatLong: (value) => print(value),
+      body: GetBuilder<ShowGoogleMapController>(
+        builder: (controller) => ShowGoogleMap(
+          onTapLatLong: (value) => print(value),
+        ),
       ),
       bottomNavigationBar: const CommonBottomNavBar(
         currentIndex: 1,
