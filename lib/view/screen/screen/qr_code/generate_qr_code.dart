@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/prefs_helper.dart';
+import 'package:paintpal/helpers/screen_shot_helper.dart';
 import 'package:paintpal/utils/app_url.dart';
+import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_string.dart';
@@ -16,6 +19,8 @@ import '../Room/widgets/house_pop_up.dart';
 
 class GenerateQrCode extends StatelessWidget {
   GenerateQrCode({super.key});
+
+  ScreenshotController screenshotController = ScreenshotController();
 
   String name = Get.parameters["name"] ?? "";
 
@@ -48,19 +53,36 @@ class GenerateQrCode extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: QrImageView(
-                  // data: jsonEncode({"houseId" : PrefsHelper.houseId, "houseName" : PrefsHelper.houseName }),
-                  data:
-                      "${AppUrls.baseUrl}/house/scan/browser/${PrefsHelper.houseId}?name=${PrefsHelper.houseName}",
-                  size: 200,
-                  backgroundColor: Colors.white,
+              Screenshot(
+                controller: screenshotController,
+                child: Column(
+                  children: [
+                    CommonText(
+                      text: "House Name : ${PrefsHelper.houseName}",
+                      fontSize: 24,
+                    ).center,
+                    40.height,
+                    Center(
+                      child: QrImageView(
+                        // data: jsonEncode({"houseId" : PrefsHelper.houseId, "houseName" : PrefsHelper.houseName }),
+                        data:
+                            "${AppUrls.baseUrl}/house/scan/browser/${PrefsHelper.houseId}?name=${PrefsHelper.houseName}",
+                        size: 200,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               100.height,
               CommonButton(
                 titleText: AppString.export,
-                onTap: () => Get.back(),
+                onTap: () {
+                  ScreenShotHelper.captureAndSaveImage(
+                      screenshotController: screenshotController);
+                  Get.back();
+                  Get.back();
+                },
               ),
             ],
           ),
