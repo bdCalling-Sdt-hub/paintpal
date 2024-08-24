@@ -88,7 +88,7 @@ class ShowGoogleMapController extends GetxController {
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
 
-      List places = jsonDecode(data)["places"];
+      List places = jsonDecode(data)["places"] ?? [];
 
       print("places ${places}");
 

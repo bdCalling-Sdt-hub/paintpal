@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/prefs_helper.dart';
+import 'package:paintpal/utils/app_url.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../utils/app_colors.dart';
@@ -49,7 +50,9 @@ class GenerateQrCode extends StatelessWidget {
             children: [
               Center(
                 child: QrImageView(
-                  data: jsonEncode({"houseId" : PrefsHelper.houseId, "houseName" : PrefsHelper.houseName }),
+                  // data: jsonEncode({"houseId" : PrefsHelper.houseId, "houseName" : PrefsHelper.houseName }),
+                  data:
+                      "${AppUrls.baseUrl}/house/scan/browser/${PrefsHelper.houseId}?name=${PrefsHelper.houseName}",
                   size: 200,
                   backgroundColor: Colors.white,
                 ),

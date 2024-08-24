@@ -143,8 +143,11 @@ class HomeController extends GetxController {
           "#ff6666", "Cancel", true, ScanMode.QR);
 
       if (qrCode.isNotEmpty) {
-        var houseId = jsonDecode(qrCode)["houseId"];
-        var houseName = jsonDecode(qrCode)["houseName"];
+
+        Uri uri = Uri.parse(qrCode.toString());
+        String houseId = uri.pathSegments.last;
+        String houseName = uri.queryParameters['name'] ?? '';
+        
 
         PrefsHelper.houseId = houseId;
         PrefsHelper.houseName = houseName;
