@@ -31,8 +31,6 @@ class ShowGoogleMapController extends GetxController {
 
     marker.add(newMarker);
     update();
-    CameraPosition newCameraPosition = CameraPosition(
-        target: LatLng(latLng.latitude, latLng.longitude), zoom: 14);
   }
 
   getCurrentLocation() async {
@@ -53,7 +51,6 @@ class ShowGoogleMapController extends GetxController {
       await googleMapController
           .animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
       update();
-      print("sadjklfjdjkfl");
     }
   }
 
@@ -83,19 +80,16 @@ class ShowGoogleMapController extends GetxController {
 
     http.StreamedResponse response = await request.send();
 
-    print("places ${response.statusCode}");
 
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
 
       List places = jsonDecode(data)["places"] ?? [];
 
-      print("places ${places}");
 
       for (int i = 0; i < places.length; i++) {
         PlaceModel placeModel = PlaceModel.fromJson(places[i]);
 
-        print("placeModel.location.latitude ${placeModel.location.latitude}");
 
         Marker newMarker = Marker(
             markerId: MarkerId("${marker.length}"),
@@ -109,12 +103,9 @@ class ShowGoogleMapController extends GetxController {
         marker.add(newMarker);
       }
 
-      print(marker.length);
 
       update();
-      print(data);
     } else {
-      print(response.reasonPhrase);
     }
   }
 }

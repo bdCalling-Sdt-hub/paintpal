@@ -6,7 +6,6 @@ import '../../../../../models/place_model.dart';
 
 class MakePayment {
   static makePaymentSheet(PlaceModel model) {
-    print("slkfjadsfjlkdsklfljk");
 
     return showModalBottomSheet(
       backgroundColor: Colors.white,

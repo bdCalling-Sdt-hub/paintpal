@@ -1,4 +1,3 @@
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -9,20 +8,20 @@ import 'package:screenshot/screenshot.dart';
 import 'dart:typed_data';
 
 class ScreenShotHelper {
-
-
   static String downloadImagePath = "";
 
   ///============== Capture image repo=========================>>>
   static Future<Uint8List?> captureAndSaveImage(
-      {required ScreenshotController screenshotController, bool isShare = false}) async {
+      {required ScreenshotController screenshotController,
+      bool isShare = false}) async {
     final Uint8List? uint8List = await screenshotController.capture();
     if (kDebugMode) {
       print("uint8List $uint8List");
     }
 
     if (uint8List != null) {
-      final DeviceInfoPlugin info = DeviceInfoPlugin(); // import 'package:device_info_plus/device_info_plus.dart';
+      final DeviceInfoPlugin info =
+          DeviceInfoPlugin(); // import 'package:device_info_plus/device_info_plus.dart';
       final AndroidDeviceInfo androidInfo = await info.androidInfo;
       debugPrint('releaseVersion : ${androidInfo.version.release}');
       final int androidVersion = int.parse(androidInfo.version.release);
@@ -32,7 +31,9 @@ class ScreenShotHelper {
             .request(); //import 'package:permission_handler/permission_handler.dart';
         debugPrint('IsPermission Granted? : ${request.isGranted}');
         final result = await ImageGallerySaver.saveImage(
-          uint8List, name: "screen_shot_mage",);
+          uint8List,
+          name: "screen_shot_mage",
+        );
 
         if (isShare) {
           if (kDebugMode) {
@@ -43,7 +44,8 @@ class ScreenShotHelper {
         } else {
           if (result['isSuccess']) {
             Get.snackbar(
-              "Image downloaded to your phone gallery".tr, "",
+              "Image downloaded to your phone gallery".tr,
+              "",
               backgroundColor: AppColors.white,
               colorText: AppColors.secondary,
             );
@@ -61,7 +63,9 @@ class ScreenShotHelper {
         final PermissionStatus status = await Permission.storage.request();
         if (status.isGranted) {
           final result = await ImageGallerySaver.saveImage(
-            uint8List, name: "screen_shot_mage",);
+            uint8List,
+            name: "screen_shot_mage",
+          );
           if (isShare) {
             return uint8List;
           } else {
