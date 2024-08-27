@@ -118,6 +118,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                       leftTextHint: AppString.purchaseLocationHint,
                       rightText: AppString.purchaseDate,
                       rightTextHint: AppString.purchaseDateHint,
+                      isNumber: true,
                     ),
                     8.height,
                     RowItem(

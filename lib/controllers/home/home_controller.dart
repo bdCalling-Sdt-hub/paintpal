@@ -15,7 +15,7 @@ import '../../utils/app_url.dart';
 
 class HomeController extends GetxController {
   List houses = [];
-  Status status = Status.loading;
+  Status status = Status.completed;
   bool houseStatus = false;
   bool otherHouse = false;
   bool deleteIsLoading = false;
@@ -151,9 +151,11 @@ class HomeController extends GetxController {
 
         PrefsHelper.houseId = houseId;
         PrefsHelper.houseName = houseName;
+        PrefsHelper.otherHouse = true;
 
         PrefsHelper.setString("houseId", PrefsHelper.houseId);
         PrefsHelper.setString("houseName", PrefsHelper.houseName);
+        PrefsHelper.setString("otherHouse", PrefsHelper.otherHouse);
 
         qrResult = qrCode.toString();
         await scanHouseRepo(houseId);

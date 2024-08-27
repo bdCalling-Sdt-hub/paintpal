@@ -32,8 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(
       Duration.zero,
       () {
-        if (HomeController.instance.houses.isNotEmpty) return;
-
         HomeController.instance.getAllHouseRepo();
       },
     );
@@ -109,17 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 165,
                               width: 165,
                             ),
-                            // Container(
-                            //   width: 165,
-                            //   height: 165,
-                            //   decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(10),
-                            //     image: DecorationImage(
-                            //       image: AssetImage(item["image"]),
-                            //       fit: BoxFit.fill,
-                            //     ),
-                            //   ),
-                            // ),
                             if (!PrefsHelper.otherHouse)
                               Positioned(
                                   bottom: 46,

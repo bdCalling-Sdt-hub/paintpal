@@ -5,7 +5,7 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class RowItem extends StatelessWidget {
-   RowItem(
+  RowItem(
       {super.key,
       required this.leftText,
       required this.leftTextHint,
@@ -13,11 +13,13 @@ class RowItem extends StatelessWidget {
       required this.rightTextHint,
       this.rightController,
       this.isEnabled = true,
+      this.isNumber = false,
       this.leftController});
 
   final String leftText;
   final String leftTextHint;
   final bool isEnabled;
+  final bool isNumber;
 
   final String rightText;
   final String rightTextHint;
@@ -59,6 +61,8 @@ class RowItem extends StatelessWidget {
               controller: rightController ?? defealtRightController,
               hintText: rightTextHint,
               validator: OtherHelper.validator,
+              keyboardType:
+                  isNumber ? TextInputType.datetime : TextInputType.text,
               enabled: isEnabled,
             )
           ],
