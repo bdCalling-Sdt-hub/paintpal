@@ -21,13 +21,14 @@ class SettingController extends GetxController {
     var body = {"password": passwordController.text};
 
     var response = await ApiService.deleteApi("${AppUrls.user}/${PrefsHelper.userId}", body: body);
+    isLoading = false;
+    update();
 
     if (response.statusCode == 200) {
-      Get.offAllNamed(AppRoutes.signIn);
+     PrefsHelper.removeAllPrefData() ;
     } else {
       Utils.snackBarMessage(response.statusCode.toString(), response.message);
     }
-    isLoading = false;
-    update();
+
   }
 }

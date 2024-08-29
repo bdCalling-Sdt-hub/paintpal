@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import '../../../controllers/common_controller/setting/setting_controller.dart';
 import '../../../helpers/other_helper.dart';
 import '../../../helpers/prefs_helper.dart';
 import '../../../utils/app_colors.dart';
@@ -202,10 +203,11 @@ deletePopUp(
                 width: 16.w,
               ),
               Expanded(
-                child: CommonButton(
+                child: GetBuilder<SettingController>(builder: (controller) => CommonButton(
                   titleText: AppString.delete,
                   titleColor: AppColors.white,
                   buttonColor: AppColors.secondary,
+                  isLoading: controller.isLoading,
                   buttonRadius: 8,
                   buttonHeight: 48,
                   onTap: () {
@@ -213,7 +215,7 @@ deletePopUp(
                       onTap();
                     }
                   },
-                ),
+                ),),
               ),
             ],
           ),
