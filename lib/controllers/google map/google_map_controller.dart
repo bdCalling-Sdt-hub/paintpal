@@ -22,7 +22,7 @@ class ShowGoogleMapController extends GetxController {
   final Completer<GoogleMapController> controller =
       Completer<GoogleMapController>();
 
-  CameraPosition? kGooglePlex ;
+  CameraPosition? kGooglePlex;
 
   setMarker(LatLng latLng) async {
     Marker newMarker = Marker(
@@ -80,16 +80,13 @@ class ShowGoogleMapController extends GetxController {
 
     http.StreamedResponse response = await request.send();
 
-
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
 
       List places = jsonDecode(data)["places"] ?? [];
 
-
       for (int i = 0; i < places.length; i++) {
         PlaceModel placeModel = PlaceModel.fromJson(places[i]);
-
 
         Marker newMarker = Marker(
             markerId: MarkerId("${marker.length}"),
@@ -103,9 +100,57 @@ class ShowGoogleMapController extends GetxController {
         marker.add(newMarker);
       }
 
+      update();
+    } else {}
+  }
+
+  Future<void> fetchNearbyRemovePaint(positions) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': 'AIzaSyBT1HkkjBVBLJVm0pWHdj6WcG_gnUmaoaE',
+      'X-Goog-FieldMask':
+          'places.displayName,places.formattedAddress,places.location'
+    };
+    var request = http.Request('POST',
+        Uri.parse('https://places.googleapis.com/v1/places:searchNearby'));
+    request.body = json.encode({
+      "includedTypes": ["hardware_store"],
+      "maxResultCount": 10,
+      "locationRestriction": {
+        "circle": {
+          "center": {
+            "latitude": positions.latitude,
+            "longitude": positions.longitude
+          },
+          "radius": 1000
+        }
+      }
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      var data = await response.stream.bytesToString();
+
+      List places = jsonDecode(data)["places"] ?? [];
+
+      for (int i = 0; i < places.length; i++) {
+        PlaceModel placeModel = PlaceModel.fromJson(places[i]);
+
+        Marker newMarker = Marker(
+            markerId: MarkerId("${marker.length}"),
+            infoWindow: InfoWindow(
+              title: placeModel.displayName.text,
+              onTap: () => MakePayment.makePaymentSheet(placeModel),
+            ),
+            position: LatLng(
+                placeModel.location.latitude, placeModel.location.longitude));
+
+        marker.add(newMarker);
+      }
 
       update();
-    } else {
-    }
+    } else {}
   }
 }
