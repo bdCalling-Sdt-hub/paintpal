@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/helpers/prefs_helper.dart';
 
-import '../../../core/app_routes.dart';
 import '../../../services/api_service.dart';
 import '../../../utils/app_url.dart';
 import '../../../utils/app_utils.dart';

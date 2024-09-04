@@ -61,8 +61,11 @@ class _EditWallState extends State<EditWall> {
                   : GestureDetector(
                       onTap: controller.openGallery,
                       child: CommonImage(
-                        imageSrc: RoomDetailsController.instance
-                            .roomDetailsModel.surface[index].surfaceImage,
+                        imageSrc: RoomDetailsController
+                                .instance.roomDetailsModel.surface.isEmpty
+                            ? " "
+                            : RoomDetailsController.instance.roomDetailsModel
+                                .surface[index].surfaceImage,
                         imageType: ImageType.network,
                         fill: BoxFit.contain,
                         height: 200,

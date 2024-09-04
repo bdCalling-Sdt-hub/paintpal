@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -73,7 +74,9 @@ class ShowGoogleMapController extends GetxController {
   Future<void> fetchNearbyPlaces() async {
     if (positions == null) return;
 
-    print("fdsjfdlkfj;l");
+    if (kDebugMode) {
+      print("fdsjfdlkfj;l");
+    }
     var headers = {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': 'AIzaSyBT1HkkjBVBLJVm0pWHdj6WcG_gnUmaoaE',
@@ -154,7 +157,9 @@ class ShowGoogleMapController extends GetxController {
     http.StreamedResponse response = await request.send();
     var data = await response.stream.bytesToString();
 
-    print(data);
+    if (kDebugMode) {
+      print(data);
+    }
     marker.clear();
     update();
 
@@ -163,7 +168,9 @@ class ShowGoogleMapController extends GetxController {
 
       marker.clear();
 
-      print("object ${places.length}");
+      if (kDebugMode) {
+        print("object ${places.length}");
+      }
 
       for (int i = 0; i < places.length; i++) {
         PlaceModel placeModel = PlaceModel.fromJson(places[i]);
