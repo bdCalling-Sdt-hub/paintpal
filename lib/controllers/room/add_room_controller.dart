@@ -32,6 +32,15 @@ class AddRoomController extends GetxController {
   String seletedHouse = "";
   String roomId = "";
 
+  clear() {
+    surfaces.clear() ;
+    surfacesFile.clear() ;
+    surfacesController.clear() ;
+    coverImage = null ;
+    roomController.text = "" ;
+    addSurface() ;
+  }
+
   selectItem(int index) {
     if (items[index].houseName == "Add House") {
       addNewHouse(
@@ -48,10 +57,8 @@ class AddRoomController extends GetxController {
     Get.back();
   }
 
-  int value = 0;
 
   addSurface() {
-    value++;
 
     TextEditingController surfaceController = TextEditingController();
     TextEditingController colorCodeController = TextEditingController();

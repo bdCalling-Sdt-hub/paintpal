@@ -30,7 +30,10 @@ class _AddRoomState extends State<AddRoom> {
   void initState() {
     Future.delayed(
       Duration.zero,
-      () => AddRoomController.instance.addSurface(),
+      () {
+        AddRoomController.instance.addSurface();
+        AddRoomController.instance.clear();
+      },
     );
     super.initState();
   }
@@ -111,10 +114,11 @@ class _AddRoomState extends State<AddRoom> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.value,
+                    itemCount: controller.surfacesController.length,
                     itemBuilder: (context, index) {
                       return AddSurfaceFiled(
-                        isShow: (controller.value - 1) == index,
+                        isShow:
+                            (controller.surfacesController.length - 1) == index,
                         item: controller.surfacesController[index],
                       );
                     },
