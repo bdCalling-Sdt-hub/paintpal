@@ -61,8 +61,8 @@ class CommonButton extends StatelessWidget {
                 child: Platform.isIOS
                     ? const CupertinoActivityIndicator()
                     : const CircularProgressIndicator(
-                  strokeWidth: 2,
-                ),
+                        strokeWidth: 2,
+                      ),
               )
             : Text(
                 titleText,

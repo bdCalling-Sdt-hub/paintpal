@@ -6,8 +6,6 @@ import '../../../services/api_service.dart';
 import '../../../utils/app_url.dart';
 import '../../../utils/app_utils.dart';
 
-
-
 class SettingController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
@@ -19,15 +17,16 @@ class SettingController extends GetxController {
 
     var body = {"password": passwordController.text};
 
-    var response = await ApiService.deleteApi("${AppUrls.user}/${PrefsHelper.userId}", body: body);
+    var response = await ApiService.deleteApi(
+        "${AppUrls.user}/${PrefsHelper.userId}",
+        body: body);
     isLoading = false;
     update();
 
     if (response.statusCode == 200) {
-     PrefsHelper.removeAllPrefData() ;
+      PrefsHelper.removeAllPrefData();
     } else {
       Utils.snackBarMessage(response.statusCode.toString(), response.message);
     }
-
   }
 }

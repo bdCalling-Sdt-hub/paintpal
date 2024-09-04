@@ -86,7 +86,6 @@ class ChangePasswordScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   CommonButton(
                     titleText: AppString.confirm,
                     isLoading: controller.isLoading,

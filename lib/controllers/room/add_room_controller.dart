@@ -178,7 +178,6 @@ class AddRoomController extends GetxController {
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
-
       surfaces.clear();
       surfacesFile.clear();
       surfacesController.clear();

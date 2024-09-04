@@ -11,9 +11,9 @@ class Sender {
 
   factory Sender.fromJson(Map<String, dynamic> json) {
     return Sender(
-      id: json['_id']  ?? '',
-      fullName: json['fullName']  ?? '',
-      image: json['image']  ?? '',
+      id: json['_id'] ?? '',
+      fullName: json['fullName'] ?? '',
+      image: json['image'] ?? '',
     );
   }
 

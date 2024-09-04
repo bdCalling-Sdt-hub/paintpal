@@ -143,11 +143,9 @@ class HomeController extends GetxController {
           "#ff6666", "Cancel", true, ScanMode.QR);
 
       if (qrCode.isNotEmpty) {
-
         Uri uri = Uri.parse(qrCode.toString());
         String houseId = uri.pathSegments.last;
         String houseName = uri.queryParameters['name'] ?? '';
-        
 
         PrefsHelper.houseId = houseId;
         PrefsHelper.houseName = houseName;
@@ -159,7 +157,6 @@ class HomeController extends GetxController {
 
         qrResult = qrCode.toString();
         await scanHouseRepo(houseId);
-
       }
     } catch (e) {
       if (kDebugMode) {

@@ -11,13 +11,12 @@ import '../../../utils/app_url.dart';
 class SignInController extends GetxController {
   bool isLoading = false;
 
-  TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? 'developernaimul00@gmail.com' : '');
+  TextEditingController emailController = TextEditingController(
+      text: kDebugMode ? 'developernaimul00@gmail.com' : '');
   TextEditingController passwordController =
       TextEditingController(text: kDebugMode ? 'hello123' : "");
 
   Future<void> signInUser() async {
-
     isLoading = true;
     update();
 
@@ -32,7 +31,6 @@ class SignInController extends GetxController {
     ).timeout(const Duration(seconds: 30));
 
     if (response.statusCode == 200) {
-
       var data = jsonDecode(response.body);
 
       PrefsHelper.token = data['data']["accessToken"];
@@ -48,7 +46,6 @@ class SignInController extends GetxController {
       PrefsHelper.setString("myImage", PrefsHelper.myImage);
       PrefsHelper.setString("myName", PrefsHelper.myName);
       PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
-
 
       Get.toNamed(AppRoutes.home);
 

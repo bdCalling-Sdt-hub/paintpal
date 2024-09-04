@@ -121,7 +121,7 @@ class ForgetPasswordController extends GetxController {
     };
     var response = await ApiService.patchApi(
       AppUrls.resetPassword,
-      body : body,
+      body: body,
     );
 
     if (response.statusCode == 200) {

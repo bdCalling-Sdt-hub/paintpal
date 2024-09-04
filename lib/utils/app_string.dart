@@ -7,7 +7,7 @@ class AppString {
   static const String no = "No";
   static const String yes = "Yes";
   static const String areYouSure = "Are you sure";
-  static const String wantToDeleteAccount= "Want to delete account !";
+  static const String wantToDeleteAccount = "Want to delete account !";
   static const String enterYouPassword = "Enter you password";
   static const String cancel = "Cancel";
   static const String done = "Done";

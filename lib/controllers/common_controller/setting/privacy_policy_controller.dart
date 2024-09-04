@@ -23,7 +23,6 @@ class PrivacyPolicyController extends GetxController {
 
     if (response.statusCode == 200) {
       data = HtmlModel.fromJson(jsonDecode(response.body)['data']);
-
       status = Status.completed;
       update();
     } else {

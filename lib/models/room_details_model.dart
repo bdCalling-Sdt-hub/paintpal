@@ -31,8 +31,10 @@ class RoomDetailsModel {
       surface: (json['surface'] as List? ?? [])
           .map((item) => Surface.fromJson(item as Map<String, dynamic>))
           .toList(),
-      createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
-      updatedAt: DateTime.parse(json['updatedAt'] ?? DateTime.now().toIso8601String()),
+      createdAt:
+          DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
+      updatedAt:
+          DateTime.parse(json['updatedAt'] ?? DateTime.now().toIso8601String()),
       v: json['__v'] ?? 0,
     );
   }

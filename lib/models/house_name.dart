@@ -6,7 +6,7 @@ class HouseName {
   HouseName({
     required this.houseName,
     required this.id,
-     this.otherHouse = false,
+    this.otherHouse = false,
   });
 
   factory HouseName.fromJson(Map<String, dynamic> json) {

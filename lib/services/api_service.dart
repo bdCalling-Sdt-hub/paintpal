@@ -181,8 +181,7 @@ class ApiService {
     if (kDebugMode) {
       print("==================================================> url $url");
       print("==================================================> url $body");
-      print(
-          "==================================> url $header ?? $mainHeader");
+      print("==================================> url $header ?? $mainHeader");
     }
 
     try {

@@ -203,19 +203,21 @@ deletePopUp(
                 width: 16.w,
               ),
               Expanded(
-                child: GetBuilder<SettingController>(builder: (controller) => CommonButton(
-                  titleText: AppString.delete,
-                  titleColor: AppColors.white,
-                  buttonColor: AppColors.secondary,
-                  isLoading: controller.isLoading,
-                  buttonRadius: 8,
-                  buttonHeight: 48,
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      onTap();
-                    }
-                  },
-                ),),
+                child: GetBuilder<SettingController>(
+                  builder: (controller) => CommonButton(
+                    titleText: AppString.delete,
+                    titleColor: AppColors.white,
+                    buttonColor: AppColors.secondary,
+                    isLoading: controller.isLoading,
+                    buttonRadius: 8,
+                    buttonHeight: 48,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        onTap();
+                      }
+                    },
+                  ),
+                ),
               ),
             ],
           ),
