@@ -19,7 +19,6 @@ import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 import '../Room/widgets/house_pop_up.dart';
 import 'widgets/delete_room.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -49,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // Check if the tutorial has been shown before
-  void _checkFirstTimeUser(){
-    bool hasShownTutorial = PrefsHelper.hasShownTutorial;
+  Future<void> _checkFirstTimeUser() async {
+    bool hasShownTutorial = await PrefsHelper.getBool('hasShownTutorial') ?? false;
 
     if (!hasShownTutorial) {
       _initTargets();
