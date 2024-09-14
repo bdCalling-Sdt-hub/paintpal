@@ -16,6 +16,7 @@ class PrefsHelper extends GetxController {
   static String houseName = "";
   static String houseId = "";
   static bool otherHouse = false;
+  static bool hasShownTutorial = false;
 
   static String mySubscription = "shopping";
   static String localizationLanguageCode = 'en';
@@ -50,6 +51,7 @@ class PrefsHelper extends GetxController {
     houseId = preferences.getString("houseId") ?? "";
     houseName = preferences.getString("houseName") ?? "";
     otherHouse = preferences.getBool("otherHouse") ?? false;
+    hasShownTutorial = preferences.getBool("hasShownTutorial") ?? false;
 
     if (kDebugMode) {
       print(myImage);

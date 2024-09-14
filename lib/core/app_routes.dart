@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:paintpal/view/screen/common_screen/onboarding_screen/first_page.dart';
+import 'package:paintpal/view/screen/common_screen/onboarding_screen/second_page.dart';
+import 'package:paintpal/view/screen/common_screen/onboarding_screen/third_page.dart';
 import 'package:paintpal/view/screen/common_screen/setting/about_us.dart';
 import 'package:paintpal/view/screen/screen/Room/add_house_screen.dart';
 import 'package:paintpal/view/screen/screen/Room/add_room.dart';
@@ -56,6 +59,9 @@ class AppRoutes {
   static const String editRoom = "/edit_room.dart";
   static const String generate = "/generate_qr_code.dart";
   static const String addHouse = "/add_house_screen.dart";
+  static const String firstPage = "/first_page.dart";
+  static const String secondPage = "/second_page.dart";
+  static const String thirdPage = "/third_page.dart";
 
   static List<GetPage> routes = [
     GetPage(
@@ -162,5 +168,23 @@ class AppRoutes {
         name: addHouse,
         page: () => const AddHouseScreen(),
         transition: Transition.rightToLeftWithFade),
+    GetPage(
+        name: firstPage,
+        page: () => const FirstPage(),
+        transition: Transition.rightToLeftWithFade,
+      transitionDuration: Duration(milliseconds: 800)
+    ),
+    GetPage(
+        name: secondPage,
+        page: () => const SecondPage(),
+        transition: Transition.rightToLeftWithFade,
+        transitionDuration: Duration(milliseconds: 800)
+    ),
+    GetPage(
+        name: thirdPage,
+        page: () => const ThirdPage(),
+        transition: Transition.rightToLeftWithFade,
+        transitionDuration: Duration(milliseconds: 500)
+    ),
   ];
 }

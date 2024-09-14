@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/utils/app_images.dart';
 import 'package:paintpal/utils/app_string.dart';
+import 'package:paintpal/view/screen/common_screen/onboarding_screen/first_page.dart';
 import '../../../core/app_routes.dart';
 import '../../component/text/common_text.dart';
 
@@ -18,7 +19,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.offAllNamed(AppRoutes.onboarding);
+        // Get.to(()=> const FirstPage());
+        // Get.offAllNamed(AppRoutes.onboarding);
       },
     );
     super.initState();
@@ -38,9 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
         )),
         child: Container(
-          height: Get.height,
-          width: Get.width,
-          color: const Color(0xff222222).withOpacity(0.5),
+          color: const Color(0xff222222).withOpacity(0.7),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: const Center(
               child: CommonText(

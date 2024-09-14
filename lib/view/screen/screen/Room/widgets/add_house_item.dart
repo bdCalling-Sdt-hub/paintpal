@@ -9,10 +9,11 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class AddHouseItem extends StatefulWidget {
-  AddHouseItem({super.key, required this.isShow, required this.item});
+  AddHouseItem({super.key, required this.isShow, required this.item, required this.dropDownKey});
 
   bool isShow;
   var item;
+  GlobalKey dropDownKey;
 
   @override
   State<AddHouseItem> createState() => _AddHouseItemState();
@@ -33,6 +34,7 @@ class _AddHouseItemState extends State<AddHouseItem> {
               bottom: 8,
             ),
             IconButton(
+              key: widget.dropDownKey,
               onPressed: () {
                 widget.isShow = !widget.isShow;
                 setState(() {});
