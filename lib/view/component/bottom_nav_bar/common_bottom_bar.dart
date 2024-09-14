@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/view/screen/common_screen/profile/profile_screen.dart';
@@ -7,7 +6,6 @@ import 'package:paintpal/view/screen/common_screen/setting/setting_screen.dart';
 import 'package:paintpal/view/screen/screen/Room/add_room.dart';
 import 'package:paintpal/view/screen/screen/home/home_screen.dart';
 import 'package:paintpal/view/screen/screen/location/location_screen.dart';
-import '../../../core/app_routes.dart';
 import '../../../utils/app_colors.dart';
 
 class CommonBottomNavBar extends StatefulWidget {
