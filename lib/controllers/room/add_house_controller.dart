@@ -44,10 +44,8 @@ class AddHouseController extends GetxController {
 
     var response = await ApiService.postApi(
       AppUrls.multipleHouse,
-      jsonEncode(house),
+      {"data": jsonEncode(house)},
     );
-
-
 
     if (response.statusCode == 200) {
       house.clear();

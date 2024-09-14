@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/room/add_house_controller.dart';
-import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';

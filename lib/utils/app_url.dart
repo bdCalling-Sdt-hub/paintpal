@@ -14,14 +14,14 @@ class AppUrls {
   static const changePassword = "$baseUrl/users/change-password";
   static const user = "$baseUrl/users";
   static const addHouse =
-      "$baseUrl/house/single"; // Add house "multiple" or "single"
+      "$baseUrl/house/single";
   static const ownHouse =
-      "$baseUrl/house/user/all-name"; // Add house "multiple" or "single"
+      "$baseUrl/house/user/all-name";
   static const houseShortDetails =
-      "$baseUrl/house/user/short-details"; // Add house "multiple" or "single"
-  static const allHouse = "$baseUrl/house"; // Get house "all" or "single"
-  static const multipleHouse = "$baseUrl/house/add/multiple"; // Get house "all" or "single"
-  static const scanHouse = "$baseUrl/house/scan"; // Get house "all" or "single"
+      "$baseUrl/house/user/short-details";
+  static const allHouse = "$baseUrl/house";
+  static const multipleHouse = "$baseUrl/house/multiple";
+  static const scanHouse = "$baseUrl/house/scan";
   static const userHouse = "$baseUrl/house/user";
   static const houseScan = "$baseUrl/house/scan";
   static const addRoom = "$baseUrl/room/add";
@@ -29,7 +29,7 @@ class AppUrls {
   static const getRoom = "$baseUrl/room/get";
   static const updateRoomName = "$baseUrl/room/roomName";
   static const room = "$baseUrl/room";
-  static const surface = "$baseUrl/surface"; // Surface "add" or "update"
+  static const surface = "$baseUrl/surface";
 
   static const logOut = "$baseUrl/users/user/logout/true";
   static const verifyEmail = "$baseUrl/users/verify-email";

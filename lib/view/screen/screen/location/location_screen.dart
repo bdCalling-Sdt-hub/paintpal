@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:paintpal/controllers/google%20map/google_map_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
-import 'package:paintpal/view/component/button/common_button.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 
 import '../../../../utils/app_colors.dart';
