@@ -61,16 +61,18 @@ class EditProfile extends StatelessWidget {
                       ),
                       Positioned(
                           bottom: 0,
-                          left: Get.width * 0.50,
+                          left: Get.width * 0.48,
                           child: IconButton(
-                              style: ButtonStyle(
-                                  fixedSize: WidgetStateProperty.all<Size>(
-                                      const Size(24, 24)),
-                                  backgroundColor: WidgetStateColor.resolveWith(
-                                    (states) => AppColors.white_500,
-                                  )),
                               onPressed: controller.getProfileImage,
                               padding: EdgeInsets.zero,
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all(
+                                    AppColors.white_500),
+                                minimumSize: WidgetStateProperty.all(
+                                    const Size(32, 32)), // Set the size here
+                                maximumSize: WidgetStateProperty.all(
+                                    const Size(32, 32)), // Optional
+                              ),
                               icon: const Icon(
                                 Icons.edit_outlined,
                                 color: Colors.black,

@@ -131,7 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           backgroundColor:
                                               WidgetStateProperty.all(
                                                   AppColors.white_500),
-                                        )),
+                                        )
+                                    ),
                                   )),
                             if (!PrefsHelper.otherHouse)
                               Positioned(

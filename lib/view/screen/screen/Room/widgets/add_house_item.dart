@@ -9,10 +9,10 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class AddHouseItem extends StatefulWidget {
-  AddHouseItem({super.key, required this.isShow, required this.name});
+  AddHouseItem({super.key, required this.isShow, required this.item});
 
   bool isShow;
-  final String name;
+  var item;
 
   @override
   State<AddHouseItem> createState() => _AddHouseItemState();
@@ -27,7 +27,7 @@ class _AddHouseItemState extends State<AddHouseItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CommonText(
-              text: widget.isShow ? AppString.houseName : widget.name,
+              text: widget.isShow ? AppString.houseName : widget.item["houseName"].text,
               fontWeight: FontWeight.w600,
               fontSize: 16,
               bottom: 8,
@@ -48,7 +48,7 @@ class _AddHouseItemState extends State<AddHouseItem> {
             ? Column(
                 children: [
                   CommonTextField(
-                    controller: AddHouseController.instance.houseNameController,
+                    controller: widget.item["houseName"],
                     hintText: AppString.houseNameHint,
                     validator: OtherHelper.validator,
                   ),
@@ -60,7 +60,7 @@ class _AddHouseItemState extends State<AddHouseItem> {
                     bottom: 8,
                   ).start,
                   CommonTextField(
-                    controller: AddHouseController.instance.addressController,
+                    controller: widget.item["address"],
                     hintText: AppString.address,
                     validator: OtherHelper.validator,
                   ),

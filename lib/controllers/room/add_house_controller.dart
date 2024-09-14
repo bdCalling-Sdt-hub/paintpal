@@ -1,19 +1,62 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class AddHouseController extends GetxController {
-  List items = [
-    "item-1",
-    "item-2",
-  ];
+import '../../services/api_service.dart';
+import '../../utils/app_url.dart';
 
-  TextEditingController addressController = TextEditingController();
-  TextEditingController houseNameController = TextEditingController();
+class AddHouseController extends GetxController {
+  List items = [];
+
+  bool isLoading = false;
 
   static AddHouseController get instance => Get.put(AddHouseController());
 
+  clear() {
+    items.clear();
+    addItem();
+  }
+
   addItem() {
-    items.add(houseNameController.text);
+    TextEditingController addressController = TextEditingController();
+    TextEditingController houseNameController = TextEditingController();
+
+    items.add({
+      "address": addressController,
+      "houseName": houseNameController,
+    });
+    update();
+  }
+
+  addMultipleHouseRepo() async {
+    isLoading = true;
+    update();
+
+    List house = [];
+
+    for (var item in items) {
+      house.add({
+        "address": item["address"].text,
+        "houseName": item["houseName"].text,
+      });
+    }
+
+    var response = await ApiService.postApi(
+      AppUrls.multipleHouse,
+      jsonEncode(house),
+    );
+
+
+
+    if (response.statusCode == 200) {
+      house.clear();
+      items.clear();
+    } else {
+      Get.snackbar(response.statusCode.toString(), response.message);
+    }
+
+    isLoading = false;
     update();
   }
 }

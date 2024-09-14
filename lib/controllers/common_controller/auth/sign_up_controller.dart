@@ -135,7 +135,7 @@ class SignUpController extends GetxController {
       PrefsHelper.setString("myName", PrefsHelper.myName);
       PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
 
-      Get.toNamed(AppRoutes.home);
+      Get.toNamed(AppRoutes.addHouse);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }
