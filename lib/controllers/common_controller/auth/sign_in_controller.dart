@@ -11,14 +11,12 @@ import '../../../utils/app_url.dart';
 class SignInController extends GetxController {
   bool isLoading = false;
 
-  TextEditingController emailController =
-      TextEditingController(text: kDebugMode ? 'developernaimul00@gmail.com' : '');
+  TextEditingController emailController = TextEditingController(
+      text: kDebugMode ? 'developernaimul00@gmail.com' : '');
   TextEditingController passwordController =
       TextEditingController(text: kDebugMode ? 'hello123' : "");
 
   Future<void> signInUser() async {
-    Get.toNamed(AppRoutes.home);
-    return;
     isLoading = true;
     update();
 
@@ -36,26 +34,19 @@ class SignInController extends GetxController {
       var data = jsonDecode(response.body);
 
       PrefsHelper.token = data['data']["accessToken"];
-      PrefsHelper.userId = data['data']["attributes"]["_id"];
-      PrefsHelper.myImage = data['data']["attributes"]["image"];
-      PrefsHelper.myName = data['data']["attributes"]["fullName"];
-      PrefsHelper.myRole = data['data']["attributes"]["role"];
-      PrefsHelper.myEmail = data['data']["attributes"]["email"];
+      PrefsHelper.userId = data['data']["_id"];
+      PrefsHelper.myImage = data['data']["photo"];
+      PrefsHelper.myName = data['data']["fullName"];
+      PrefsHelper.myEmail = data['data']["email"];
       PrefsHelper.isLogIn = true;
 
+      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
       PrefsHelper.setString('token', PrefsHelper.token);
       PrefsHelper.setString("userId", PrefsHelper.userId);
       PrefsHelper.setString("myImage", PrefsHelper.myImage);
       PrefsHelper.setString("myName", PrefsHelper.myName);
       PrefsHelper.setString("myEmail", PrefsHelper.myEmail);
-      PrefsHelper.setString("myRole", PrefsHelper.myRole);
-      PrefsHelper.setBool("isLogIn", PrefsHelper.isLogIn);
 
-      // if (PrefsHelper.myRole == 'consultant') {
-      //   Get.offAllNamed(AppRoutes.doctorHome);
-      // } else {
-      //   Get.offAllNamed(AppRoutes.patientsHome);
-      // }
       Get.toNamed(AppRoutes.home);
 
       emailController.clear();

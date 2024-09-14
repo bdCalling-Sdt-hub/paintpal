@@ -3,7 +3,6 @@ import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../controllers/common_controller/auth/sign_up_controller.dart';
-import '../../../../../helpers/prefs_helper.dart';
 import '../../../../../utils/app_colors.dart';
 import '../../../../../utils/app_string.dart';
 import '../../../../component/button/common_button.dart';
@@ -45,7 +44,6 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         controller.signUpUser();
-                        PrefsHelper.myRole = controller.selectRole;
                       }
                     },
                   ),

@@ -7,7 +7,6 @@ import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/utils/app_images.dart';
 import 'package:paintpal/utils/app_string.dart';
-import 'package:paintpal/view/component/other_widgets/item.dart';
 
 import '../../../../component/image/common_image.dart';
 import 'drawer_item.dart';

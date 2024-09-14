@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/view/component/text/common_text.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_string.dart';
 
@@ -14,19 +16,9 @@ class ErrorScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            AppString.someThingWrong,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: AppColors.white),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          20.height,
+          const CommonText(text: AppString.someThingWrong),
+          20.height,
           ElevatedButton(
             onPressed: onTap,
             style: ElevatedButton.styleFrom(
@@ -42,7 +34,7 @@ class ErrorScreen extends StatelessWidget {
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white),
+                  color: Colors.black),
             ),
           )
         ],

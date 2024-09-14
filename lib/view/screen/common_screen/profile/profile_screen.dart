@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
+import 'package:paintpal/view/component/other_widgets/common_loader.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
 import '../../../../core/app_routes.dart';
 import '../../../../utils/app_colors.dart';
@@ -21,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const CommonText(
           text: AppString.profile,
@@ -40,8 +43,8 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     child: ClipOval(
                       child: CommonImage(
-                        imageSrc: AppImages.profile,
-                        imageType: ImageType.png,
+                        imageSrc: PrefsHelper.myImage,
+                        imageType: ImageType.network,
                         height: 100,
                         width: 100,
                         defaultImage: AppImages.profile,
@@ -81,7 +84,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ).end,
-                const EditProfileAllFiled()
+                controller.isLoading
+                    ? const CommonLoader()
+                    : const EditProfileAllFiled()
               ],
             ),
           );

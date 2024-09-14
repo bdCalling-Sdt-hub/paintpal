@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 
 import '../../../../../utils/app_colors.dart';
@@ -8,7 +9,7 @@ import '../../../../../utils/app_string.dart';
 import '../../../../component/button/common_button.dart';
 import '../../../../component/text/common_text.dart';
 
-deleteRoom() {
+deleteRoom(VoidCallback? onTap) {
   showDialog(
     context: Get.context!,
     builder: (context) {
@@ -41,14 +42,17 @@ deleteRoom() {
               )),
               16.width,
               Expanded(
-                  child: CommonButton(
-                titleText: AppString.delete,
-                buttonColor: AppColors.blue_400,
-                titleColor: AppColors.white_500,
-                buttonRadius: 6,
-                titleSize: 16,
-                buttonHeight: 42,
-                onTap: () => Get.back(),
+                  child: GetBuilder<HomeController>(
+                builder: (controller) => CommonButton(
+                  titleText: AppString.delete,
+                  isLoading: controller.deleteIsLoading,
+                  buttonColor: AppColors.blue_400,
+                  titleColor: AppColors.white_500,
+                  buttonRadius: 6,
+                  titleSize: 16,
+                  buttonHeight: 42,
+                  onTap: onTap,
+                ),
               ))
             ],
           ),

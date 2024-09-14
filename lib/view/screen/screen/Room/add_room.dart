@@ -9,17 +9,34 @@ import 'package:paintpal/helpers/other_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
-import 'package:paintpal/view/component/pop_up/common_pop_menu.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
 import 'package:paintpal/view/screen/screen/Room/widgets/add_surface_filed.dart';
+import 'package:paintpal/view/screen/screen/Room/widgets/house_pop_up.dart';
 
 import '../../../component/bottom_nav_bar/common_bottom_bar.dart';
 
-class AddRoom extends StatelessWidget {
-  AddRoom({super.key});
+class AddRoom extends StatefulWidget {
+  const AddRoom({super.key});
 
+  @override
+  State<AddRoom> createState() => _AddRoomState();
+}
+
+class _AddRoomState extends State<AddRoom> {
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    Future.delayed(
+      Duration.zero,
+      () {
+        AddRoomController.instance.addSurface();
+        AddRoomController.instance.clear();
+      },
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +57,9 @@ class AddRoom extends StatelessWidget {
                   ).start,
                   CommonTextField(
                     hintText: AppString.houseNameHint,
+                    controller: controller.houseNameController,
                     validator: OtherHelper.validator,
-                    suffixIcon: PopUpMenu(
-
+                    suffixIcon: HousePopUp(
                         items: controller.items,
                         selectedItem: controller.houseNameController.text,
                         onTap: controller.selectItem),
@@ -56,14 +73,15 @@ class AddRoom extends StatelessWidget {
                   ).start,
                   CommonTextField(
                     hintText: AppString.roomNameHint,
+                    controller: controller.roomController,
                     validator: OtherHelper.validator,
                   ),
                   16.height,
-                  controller.image != null
+                  controller.coverImage != null
                       ? SizedBox(
                           height: 200,
                           child: Image.file(
-                            File(controller.image!),
+                            File(controller.coverImage!),
                             fit: BoxFit.fill,
                           ),
                         )
@@ -96,10 +114,12 @@ class AddRoom extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.value,
+                    itemCount: controller.surfacesController.length,
                     itemBuilder: (context, index) {
                       return AddSurfaceFiled(
-                        isShow: (controller.value - 1) == index,
+                        isShow:
+                            (controller.surfacesController.length - 1) == index,
+                        item: controller.surfacesController[index],
                       );
                     },
                   ),
@@ -132,7 +152,15 @@ class AddRoom extends StatelessWidget {
                     ),
                   ).end,
                   20.height,
-                  const CommonButton(titleText: AppString.save),
+                  CommonButton(
+                    titleText: AppString.save,
+                    isLoading: controller.addRoomIsLoading,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        controller.addRoomRepo();
+                      }
+                    },
+                  ),
                   30.height,
                 ],
               ),

@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/common_controller/profile/profile_controller.dart';
-import '../../../../core/app_routes.dart';
-import '../../../../utils/app_images.dart';
 import '../../../../utils/app_string.dart';
 import '../../../component/button/common_button.dart';
 import '../../../component/image/common_image.dart';
@@ -52,8 +51,8 @@ class EditProfile extends StatelessWidget {
                                     fit: BoxFit.fill,
                                   )
                                 : CommonImage(
-                                    imageSrc: AppImages.profile,
-                                    imageType: ImageType.png,
+                                    imageSrc: PrefsHelper.myImage,
+                                    imageType: ImageType.network,
                                     height: 100,
                                     width: 100,
                                   ),
@@ -62,16 +61,18 @@ class EditProfile extends StatelessWidget {
                       ),
                       Positioned(
                           bottom: 0,
-                          left: Get.width * 0.50,
+                          left: Get.width * 0.48,
                           child: IconButton(
-                              style: ButtonStyle(
-                                  fixedSize: WidgetStateProperty.all<Size>(
-                                      const Size(24, 24)),
-                                  backgroundColor: WidgetStateColor.resolveWith(
-                                    (states) => AppColors.white_500,
-                                  )),
                               onPressed: controller.getProfileImage,
                               padding: EdgeInsets.zero,
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all(
+                                    AppColors.white_500),
+                                minimumSize: WidgetStateProperty.all(
+                                    const Size(32, 32)), // Set the size here
+                                maximumSize: WidgetStateProperty.all(
+                                    const Size(32, 32)), // Optional
+                              ),
                               icon: const Icon(
                                 Icons.edit_outlined,
                                 color: Colors.black,
@@ -85,9 +86,10 @@ class EditProfile extends StatelessWidget {
                   150.height,
                   CommonButton(
                       titleText: AppString.saveAndChanges,
+                      isLoading: controller.updateIsLoading,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
-                          Get.offAllNamed(AppRoutes.profile);
+                          controller.updateProfileRepo();
                         }
                       }),
                 ],

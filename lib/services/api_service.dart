@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import "package:http/http.dart" as http;
 
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
+import '../core/app_routes.dart';
 import '../helpers/prefs_helper.dart';
 import '../models/api_response_model.dart';
 
@@ -23,13 +25,15 @@ class ApiService {
     dynamic responseJson;
 
     Map<String, String> mainHeader = {
-      'Authorization': "Bearer ${PrefsHelper.token}",
+      'Authorization': PrefsHelper.token,
       'Accept-Language': PrefsHelper.localizationLanguageCode,
     };
 
     if (kDebugMode) {
-      print("=======================================> url $mainHeader");
       print("==================================================> url $url");
+      print("==================================================> body $body");
+      print(
+          "=======================================> header ${header ?? mainHeader} ");
     }
 
     try {
@@ -57,7 +61,7 @@ class ApiService {
     dynamic responseJson;
 
     Map<String, String> mainHeader = {
-      'Authorization': "Bearer ${PrefsHelper.token}",
+      'Authorization': PrefsHelper.token,
       'Accept-Language': PrefsHelper.localizationLanguageCode
     };
 
@@ -90,9 +94,16 @@ class ApiService {
     dynamic responseJson;
 
     Map<String, String> mainHeader = {
-      'Authorization': "Bearer ${PrefsHelper.token}",
+      'Authorization': PrefsHelper.token,
       'Accept-Language': PrefsHelper.localizationLanguageCode
     };
+
+    if (kDebugMode) {
+      print("==================================================> url $url");
+      print("==================================================> url $body");
+      print(
+          "=======================================> url $header ?? $mainHeader");
+    }
 
     try {
       final response = await http
@@ -121,10 +132,16 @@ class ApiService {
     dynamic responseJson;
 
     Map<String, String> mainHeader = {
-      'Authorization': "Bearer ${PrefsHelper.token}",
+      'Authorization': PrefsHelper.token,
       'Accept-Language': PrefsHelper.localizationLanguageCode
     };
 
+    if (kDebugMode) {
+      print("==================================================> url $url");
+      print("==================================================> url $body");
+      print(
+          "====================================> url ${header ?? mainHeader}");
+    }
     try {
       if (body != null) {
         final response = await http
@@ -157,9 +174,15 @@ class ApiService {
     dynamic responseJson;
 
     Map<String, String> mainHeader = {
-      'Authorization': "Bearer ${PrefsHelper.token}",
+      'Authorization': PrefsHelper.token,
       'Accept-Language': PrefsHelper.localizationLanguageCode
     };
+
+    if (kDebugMode) {
+      print("==================================================> url $url");
+      print("==================================================> url $body");
+      print("==================================> url $header ?? $mainHeader");
+    }
 
     try {
       if (body != null) {
@@ -173,8 +196,6 @@ class ApiService {
             .timeout(const Duration(seconds: timeOut));
         responseJson = handleResponse(response);
       }
-
-
     } on SocketException {
       return ApiResponseModel(503, "No internet connection", '');
     } on FormatException {
@@ -233,6 +254,13 @@ class ApiService {
   ///<<<================== Api Response Status Code Handle ====================>>>
 
   static dynamic handleResponse(http.Response response) {
+    if (kDebugMode) {
+      print(
+          "==================================================> statusCode ${response.statusCode}");
+      print(
+          "==================================================> body ${response.body}");
+    }
+
     switch (response.statusCode) {
       case 200:
         return ApiResponseModel(response.statusCode,
@@ -241,7 +269,7 @@ class ApiService {
         return ApiResponseModel(response.statusCode,
             jsonDecode(response.body)['message'], response.body);
       case 401:
-        // Get.offAllNamed(AppRoutes.signInScreen);
+        Get.offAllNamed(AppRoutes.signIn);
         return ApiResponseModel(response.statusCode,
             jsonDecode(response.body)['message'], response.body);
       case 400:
@@ -269,14 +297,13 @@ class ApiService {
   }) async {
     try {
       Map<String, String> mainHeader = {
-        'Authorization': "Bearer ${PrefsHelper.token}",
+        'Authorization': PrefsHelper.token,
       };
 
       if (kDebugMode) {
         print("===============================================>url $url");
         print("===============================================>body $body");
-        print(
-            "===============================================>header ${header ?? mainHeader}");
+        print("=========================>header ${header ?? mainHeader}");
       }
 
       var request = http.MultipartRequest(method, Uri.parse(url));
@@ -287,6 +314,87 @@ class ApiService {
       if (imagePath != null) {
         var mimeType = lookupMimeType(imagePath);
         var shopImage = await http.MultipartFile.fromPath(imageName, imagePath,
+            contentType: MediaType.parse(mimeType!));
+        request.files.add(shopImage);
+      }
+
+      Map<String, String> headers = header ?? mainHeader;
+
+      headers.forEach((key, value) {
+        request.headers[key] = value;
+      });
+
+      var response = await request.send();
+
+      if (kDebugMode) {
+        print(
+            "===============================================>statusCode ${response.statusCode}");
+      }
+
+      if (response.statusCode == 200) {
+        String data = await response.stream.bytesToString();
+
+        return ApiResponseModel(200, jsonDecode(data)['message'], data);
+      } else if (response.statusCode == 201) {
+        String data = await response.stream.bytesToString();
+
+        return ApiResponseModel(200, jsonDecode(data)['message'], data);
+      } else {
+        String data = await response.stream.bytesToString();
+        return ApiResponseModel(
+            response.statusCode, jsonDecode(data)['message'], data);
+      }
+    } on SocketException {
+      return ApiResponseModel(503, "No internet connection", '');
+    } on FormatException {
+      return ApiResponseModel(400, "Bad Response Request", '');
+    } on TimeoutException {
+      return ApiResponseModel(408, "Request Time Out", "");
+    } catch (e) {
+      return ApiResponseModel(400, e.toString(), "");
+    }
+  }
+
+  static Future<ApiResponseModel> addRoomRequest({
+    required String url,
+    method = "POST",
+    String? imagePath,
+    required List surfaceFile,
+    imageName = 'image',
+    required body,
+    Map<String, String>? header,
+  }) async {
+    try {
+      Map<String, String> mainHeader = {
+        'Authorization': PrefsHelper.token,
+      };
+
+      if (kDebugMode) {
+        print("===============================================>url $url");
+        print("===============================================>body $body");
+        print("=========================>header ${header ?? mainHeader}");
+      }
+
+      var request = http.MultipartRequest(method, Uri.parse(url));
+      body.forEach((key, value) {
+        request.fields[key] = value;
+      });
+
+      int value = 0;
+
+      for (var item in surfaceFile) {
+        var mimeType = lookupMimeType(item ?? imagePath);
+        var shopImage = await http.MultipartFile.fromPath(
+            "surfaceImage$value", item ?? " ",
+            contentType: MediaType.parse(mimeType!));
+        request.files.add(shopImage);
+        value++;
+      }
+
+      if (imageName != null) {
+        var mimeType = lookupMimeType(imagePath!);
+        var shopImage = await http.MultipartFile.fromPath(
+            "coverImage", imagePath,
             contentType: MediaType.parse(mimeType!));
         request.files.add(shopImage);
       }

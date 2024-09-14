@@ -12,19 +12,16 @@ class AboutUsController extends GetxController {
 
   HtmlModel data = HtmlModel.fromJson({});
 
-  static AboutUsController get instance =>
-      Get.put(AboutUsController());
+  static AboutUsController get instance => Get.put(AboutUsController());
 
   geTermsOfServicesRepo() async {
-    return;
     status = Status.loading;
     update();
 
-    var response = await ApiService.getApi(AppUrls.termsOfServices);
+    var response = await ApiService.getApi(AppUrls.aboutUs);
 
     if (response.statusCode == 200) {
-      data =
-          HtmlModel.fromJson(jsonDecode(response.body)['data']['attributes']);
+      data = HtmlModel.fromJson(jsonDecode(response.body)['data']);
 
       status = Status.completed;
       update();

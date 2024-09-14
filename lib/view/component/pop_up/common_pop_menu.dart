@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/extension/my_extension.dart';
+import '../../../controllers/common_controller/setting/setting_controller.dart';
 import '../../../helpers/other_helper.dart';
 import '../../../helpers/prefs_helper.dart';
 import '../../../utils/app_colors.dart';
@@ -155,27 +157,30 @@ deletePopUp(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: CommonText(
-                  text: AppString.areYouSure,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.black,
+                child: const CommonText(
+                  text: AppString.wantToDeleteAccount,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.highlight,
                   maxLines: 1,
-                  bottom: 24.h,
-                ),
+                  bottom: 24,
+                ).start,
               ),
-              CommonText(
+              const CommonText(
                 text: AppString.deleteDetails,
-                fontSize: 16.sp,
+                fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black,
                 maxLines: 2,
-                bottom: 20.h,
+                bottom: 20,
               ),
               CommonTextField(
                 controller: controller,
                 labelText: AppString.enterYouPassword,
                 validator: OtherHelper.validator,
+                fillColor: AppColors.transparent,
+                textColor: AppColors.black,
+                borderColor: AppColors.black,
               )
             ],
           ),
@@ -189,8 +194,8 @@ deletePopUp(
                   titleColor: AppColors.black,
                   borderColor: AppColors.black,
                   buttonColor: AppColors.transparent,
-                  buttonRadius: 4.r,
-                  buttonHeight: 48.h,
+                  buttonRadius: 4,
+                  buttonHeight: 48,
                   onTap: () => Get.back(),
                 ),
               ),
@@ -198,16 +203,20 @@ deletePopUp(
                 width: 16.w,
               ),
               Expanded(
-                child: CommonButton(
-                  titleText: AppString.done,
-                  titleColor: AppColors.white,
-                  buttonRadius: 4.r,
-                  buttonHeight: 48.h,
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      onTap();
-                    }
-                  },
+                child: GetBuilder<SettingController>(
+                  builder: (controller) => CommonButton(
+                    titleText: AppString.delete,
+                    titleColor: AppColors.white,
+                    buttonColor: AppColors.secondary,
+                    isLoading: controller.isLoading,
+                    buttonRadius: 8,
+                    buttonHeight: 48,
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        onTap();
+                      }
+                    },
+                  ),
                 ),
               ),
             ],

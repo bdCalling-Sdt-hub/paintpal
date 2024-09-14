@@ -53,16 +53,21 @@ class _SignUpAllFieldState extends State<SignUpAllField> {
                 ),
                 Positioned(
                     bottom: 0,
-                    left: Get.width * 0.50,
+                    left: Get.width * 0.48,
                     child: IconButton(
-                        style: ButtonStyle(
-                            backgroundColor: WidgetStateColor.resolveWith(
-                          (states) => AppColors.white_500,
-                        )),
                         onPressed: controller.getProfileImage,
+                        padding: EdgeInsets.zero,
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all(
+                              AppColors.white_500),
+                          minimumSize: WidgetStateProperty.all(
+                              const Size(32, 32)), // Set the size here
+                          maximumSize: WidgetStateProperty.all(
+                              const Size(32, 32)), // Optional
+                        ),
                         icon: const Icon(
-                          Icons.edit,
-                          color: AppColors.black,
+                          Icons.edit_outlined,
+                          color: Colors.black,
                         )))
               ],
             ),

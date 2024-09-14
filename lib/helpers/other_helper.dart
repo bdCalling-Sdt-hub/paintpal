@@ -19,8 +19,8 @@ class OtherHelper {
   }
 
   static String? emailValidator(
-      value,
-      ) {
+    value,
+  ) {
     if (value!.isEmpty) {
       return "This field is required".tr;
     } else if (!emailRegexp.hasMatch(value)) {
@@ -55,8 +55,8 @@ class OtherHelper {
   }
 
   static Future<String> datePicker(
-      TextEditingController controller,
-      ) async {
+    TextEditingController controller,
+  ) async {
     final DateTime? picked = await showDatePicker(
       builder: (context, child) => Theme(
           data: Theme.of(context).copyWith(
@@ -81,7 +81,7 @@ class OtherHelper {
   static Future<String?> openGallery() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (getImages == null) return null;
 
     if (kDebugMode) {
@@ -94,7 +94,7 @@ class OtherHelper {
   static Future<String?> getVideo() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
-    await picker.pickVideo(source: ImageSource.gallery);
+        await picker.pickVideo(source: ImageSource.gallery);
     if (getImages == null) return null;
 
     if (kDebugMode) {
@@ -109,7 +109,7 @@ class OtherHelper {
   static Future<String?> openCamera() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (getImages == null) return null;
 
     if (kDebugMode) {
@@ -127,7 +127,7 @@ class OtherHelper {
 
     if (picked != null) {
       controller.text =
-      "${picked.hour} : ${picked.minute < 10 ? "0${picked.minute}" : picked.minute}";
+          "${picked.hour} : ${picked.minute < 10 ? "0${picked.minute}" : picked.minute}";
       return "${picked.hour}:${picked.minute < 10 ? "0${picked.minute}" : picked.minute}";
     }
     return '';

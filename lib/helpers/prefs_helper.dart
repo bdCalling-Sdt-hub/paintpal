@@ -13,7 +13,10 @@ class PrefsHelper extends GetxController {
   static String myImage = "";
   static String myName = "";
   static String myEmail = "";
-  static String myRole = "";
+  static String houseName = "";
+  static String houseId = "";
+  static bool otherHouse = false;
+
   static String mySubscription = "shopping";
   static String localizationLanguageCode = 'en';
   static String localizationCountryCode = 'US';
@@ -22,13 +25,13 @@ class PrefsHelper extends GetxController {
 
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    token = preferences.getString("token") ?? "";
+    token = preferences.getString("token") ??
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6Ik5hbWltdWwgSGFzc2FuIiwicm9sZSI6InVzZXIiLCJlbWFpbCI6ImRldmVsb3Blcm5haW11bDAwQGdtYWlsLmNvbSIsInBob25lIjoiMTg2NTk2NTU4MSIsImlkIjoiNjZjMDE5NWU3MDEwZTg4NDI4NjE2OGFjIiwiaWF0IjoxNzIzODY5MTc5LCJleHAiOjE3MjQ0NzM5Nzl9.RU2VYEPPHVRKjdr1YvF-zxfNefB-lHENwLTk7JhXRfg";
     refreshToken = preferences.getString("refreshToken") ?? "";
     userId = preferences.getString("userId") ?? "";
     myImage = preferences.getString("myImage") ?? "";
     myName = preferences.getString("myName") ?? "";
     myEmail = preferences.getString("myEmail") ?? "";
-    myRole = preferences.getString("myRole") ?? "";
     isLogIn = preferences.getBool("isLogIn") ?? false;
     isNotifications = preferences.getBool("isNotifications") ?? true;
     mySubscription = preferences.getString("mySubscription") ?? "shopping";
@@ -44,8 +47,12 @@ class PrefsHelper extends GetxController {
     localizationLanguageCode =
         preferences.getString("localizationLanguageCode") ?? "en";
 
+    houseId = preferences.getString("houseId") ?? "";
+    houseName = preferences.getString("houseName") ?? "";
+    otherHouse = preferences.getBool("otherHouse") ?? false;
+
     if (kDebugMode) {
-      print(userId);
+      print(myImage);
     }
   }
 

@@ -21,6 +21,12 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    AddHouseController.instance.clear();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +37,7 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
         ),
       ),
       body: GetBuilder<AddHouseController>(
-        builder: (controller) => Padding(
+        builder: (controller) => SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
             key: formKey,
@@ -42,13 +48,11 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.items.length + 1,
+                  itemCount: controller.items.length,
                   itemBuilder: (context, index) {
                     return AddHouseItem(
-                      name: index < controller.items.length
-                          ? controller.items[index]
-                          : " ",
-                      isShow: (controller.items.length) == index,
+                      item: controller.items[index],
+                      isShow: controller.items.length - 1 == index,
                     );
                   },
                 ),
@@ -86,7 +90,8 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
                 30.height,
                 CommonButton(
                   titleText: AppString.save,
-                  onTap: () => Get.toNamed(AppRoutes.home),
+                  isLoading: controller.isLoading,
+                  onTap: controller.addMultipleHouseRepo,
                 )
               ],
             ),

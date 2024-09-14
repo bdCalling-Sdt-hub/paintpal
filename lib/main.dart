@@ -5,8 +5,6 @@ import 'core/app_routes.dart';
 import 'core/dependency_injection.dart';
 import 'helpers/prefs_helper.dart';
 import 'languages/language.dart';
-import 'services/notification_service.dart';
-import 'services/socket_service.dart';
 import 'theme/light_theme.dart';
 
 Future<void> main() async {
@@ -15,8 +13,6 @@ Future<void> main() async {
   DependencyInjection dI = DependencyInjection();
   dI.dependencies();
   await PrefsHelper.getAllPrefData();
-  NotificationService.initLocalNotification();
-  SocketServices.connectToSocket();
 
   runApp(const MyApp());
 }
@@ -41,7 +37,7 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale("en", "US"),
         theme: themeData,
         transitionDuration: const Duration(milliseconds: 300),
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.addHouse,
         getPages: AppRoutes.routes,
       ),
     );

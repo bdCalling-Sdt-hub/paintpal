@@ -5,18 +5,28 @@ import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
 
 class RowItem extends StatelessWidget {
-  const RowItem(
+  RowItem(
       {super.key,
       required this.leftText,
       required this.leftTextHint,
       required this.rightText,
-      required this.rightTextHint});
+      required this.rightTextHint,
+      this.rightController,
+      this.isEnabled = true,
+      this.isNumber = false,
+      this.leftController});
 
   final String leftText;
   final String leftTextHint;
+  final bool isEnabled;
+  final bool isNumber;
 
   final String rightText;
   final String rightTextHint;
+  TextEditingController? rightController;
+  TextEditingController? leftController;
+  TextEditingController defealtLeftController = TextEditingController();
+  TextEditingController defealtRightController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +41,10 @@ class RowItem extends StatelessWidget {
               bottom: 8,
             ).start,
             CommonTextField(
+              controller: leftController ?? defealtLeftController,
               hintText: leftTextHint,
               validator: OtherHelper.validator,
+              enabled: isEnabled,
             )
           ],
         )),
@@ -46,8 +58,12 @@ class RowItem extends StatelessWidget {
               bottom: 8,
             ).start,
             CommonTextField(
+              controller: rightController ?? defealtRightController,
               hintText: rightTextHint,
               validator: OtherHelper.validator,
+              keyboardType:
+                  isNumber ? TextInputType.datetime : TextInputType.text,
+              enabled: isEnabled,
             )
           ],
         )),
