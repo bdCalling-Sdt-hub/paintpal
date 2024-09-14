@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/core/app_routes.dart';
@@ -61,21 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        // actions: [
-        //   SizedBox(
-        //     width: 110,
-        //     child: CommonTextField(
-        //       fillColor: AppColors.transparent,
-        //       paddingHorizontal: 8,
-        //       hintText: "jkldsfdslfj",
-        //       controller: controller.houseController,
-        //       suffixIcon: PopUpMenu(
-        //           items: controller.houses,
-        //           selectedItem: controller.houseController.text,
-        //           onTap: controller.selectHouse),
-        //     ),
-        //   )
-        // ],
       ),
       body: GetBuilder<HomeController>(
         builder: (controller) => switch (controller.status) {
@@ -175,13 +161,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () => Get.toNamed(AppRoutes.addRoom),
                         child: DottedBorder(
                           borderType: BorderType.RRect,
+
                           radius: const Radius.circular(12),
                           dashPattern: const [8],
                           color: AppColors.white_500,
                           strokeWidth: 1.5,
-                          child: SizedBox(
-                            height: 160,
-                            width: 160,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            height: 150.sp,
+                            width: 150.sp,
                             child: const Icon(
                               Icons.add,
                               size: 48,

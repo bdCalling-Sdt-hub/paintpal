@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:paintpal/core/app_routes.dart';
 
 import '../../services/api_service.dart';
 import '../../utils/app_url.dart';
@@ -50,6 +51,7 @@ class AddHouseController extends GetxController {
     if (response.statusCode == 200) {
       house.clear();
       items.clear();
+      Get.toNamed(AppRoutes.home);
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }
