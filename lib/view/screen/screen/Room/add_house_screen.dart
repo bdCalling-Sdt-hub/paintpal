@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/controllers/room/add_house_controller.dart';
@@ -5,6 +6,7 @@ import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
 
+import '../../../../helpers/prefs_helper.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../component/text/common_text.dart';
 import 'widgets/add_house_item.dart';
@@ -20,8 +22,10 @@ class AddHouseScreen extends StatefulWidget {
 
 class _AddHouseScreenState extends State<AddHouseScreen> {
   final formKey = GlobalKey<FormState>();
-  final GlobalKey addHouseButtonKey = GlobalKey(); // Key for the 'Add House' button
-  final GlobalKey dropDownButtonKey = GlobalKey(); // Key for the 'Add House' button
+  final GlobalKey addHouseButtonKey =
+      GlobalKey(); // Key for the 'Add House' button
+  final GlobalKey dropDownButtonKey =
+      GlobalKey(); // Key for the 'Add House' button
 
   List<TargetFocus> targets = [];
 
@@ -30,24 +34,27 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
     AddHouseController.instance.clear();
     super.initState();
 
-    // Define the tutorial coach marks
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _createTutorial();
-      _showTutorial(); // Show the tutorial when the screen is displayed
-    });
-  }
+
+    if (PrefsHelper.isFirstTimeHome) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _createTutorial();
+        _showTutorial(); // Show the tutorial when the screen is displayed
+      });
+    }
+
 
   void _createTutorial() {
     targets.add(
       TargetFocus(
         identify: "addHouseButton",
         keyTarget: addHouseButtonKey,
+        alignSkip: Alignment.center,
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   "Add House Button",
                   style: TextStyle(
@@ -75,9 +82,9 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   "Drop down Button",
                   style: TextStyle(
@@ -103,23 +110,33 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
   void _showTutorial() {
     TutorialCoachMark(
       targets: targets,
-      colorShadow: Colors.black, // Shadow background color
+      alignSkip: Alignment.center,
+      useSafeArea: true,
+      colorShadow: Colors.black,
+      // Shadow background color
       textSkip: "SKIP",
       paddingFocus: 10,
       onFinish: () {
-        print("Tutorial finished");
+        if (kDebugMode) {
+          print("Tutorial finished");
+        }
       },
       onClickTarget: (target) {
-        print("Target clicked: ${target.identify}");
+        if (kDebugMode) {
+          print("Target clicked: ${target.identify}");
+        }
       },
       onSkip: () {
-        print("Tutorial skipped");
+        if (kDebugMode) {
+          print("Tutorial skipped");
+        }
         return true;
       },
-    ).show(context: context); // Pass context as a named parameter
+    ).show(context: context);
+
+    PrefsHelper.isFirstTimeAddHouse = true;
+    PrefsHelper.setBool("isFirstTimeAddHouse", PrefsHelper.isFirstTimeAddHouse);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -199,4 +216,3 @@ class _AddHouseScreenState extends State<AddHouseScreen> {
     );
   }
 }
-

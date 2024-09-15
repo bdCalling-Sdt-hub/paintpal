@@ -2,8 +2,8 @@ class AppUrls {
   // static const baseUrl = "http://192.168.10.137:9000/api/v1";
   // static const imageUrl = "http://192.168.10.137:9000/";
 
-  static const baseUrl = "http://192.168.10.137:9000/api/v1";
-  static const imageUrl = "http://192.168.10.137:9000/";
+  static const baseUrl = "http://159.223.184.53:2000/api/v1";
+  static const imageUrl = "http://159.223.184.53:2000/";
 
   static const signUp = "$baseUrl/users/signup";
   static const verifyOtp = "$baseUrl/users/verify-otp";
@@ -13,12 +13,9 @@ class AppUrls {
   static const resetPassword = "$baseUrl/users/reset-password";
   static const changePassword = "$baseUrl/users/change-password";
   static const user = "$baseUrl/users";
-  static const addHouse =
-      "$baseUrl/house/single";
-  static const ownHouse =
-      "$baseUrl/house/user/all-name";
-  static const houseShortDetails =
-      "$baseUrl/house/user/short-details";
+  static const addHouse = "$baseUrl/house/single";
+  static const ownHouse = "$baseUrl/house/user/all-name";
+  static const houseShortDetails = "$baseUrl/house/user/short-details";
   static const allHouse = "$baseUrl/house";
   static const multipleHouse = "$baseUrl/house/multiple";
   static const scanHouse = "$baseUrl/house/scan";

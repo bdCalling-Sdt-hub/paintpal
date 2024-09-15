@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/utils/app_images.dart';
 import 'package:paintpal/utils/app_string.dart';
-import 'package:paintpal/view/screen/common_screen/onboarding_screen/first_page.dart';
-import '../../../core/app_routes.dart';
 import '../../component/text/common_text.dart';
 
 class WelcomeScreen extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,23 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Fetch house repo after screen loads
     Future.delayed(Duration.zero, () {
-      HomeController.instance.getAllHouseRepo().then((value){
-        Future.delayed(Duration(milliseconds: 1000), () {
-          _checkFirstTimeUser();
-        },);
+      HomeController.instance.getAllHouseRepo().then((value) {
+        Future.delayed(
+          const Duration(milliseconds: 1000),
+          () {
+            _checkFirstTimeUser();
+          },
+        );
       });
     });
   }
 
   // Check if the tutorial has been shown before
   Future<void> _checkFirstTimeUser() async {
-    bool hasShownTutorial = await PrefsHelper.getBool('hasShownTutorial') ?? false;
+    if (PrefsHelper.isFirstTimeHome) return;
+    _initTargets();
+    _showTutorial();
+    PrefsHelper.setBool('hasShownTutorial', true);
 
-    if (!hasShownTutorial) {
-      _initTargets();
-      _showTutorial();
-      PrefsHelper.setBool('hasShownTutorial', true); // Set the flag after showing
-    }
+
   }
 
   // Initialize the tutorial marks
@@ -86,16 +89,25 @@ class _HomeScreenState extends State<HomeScreen> {
       textSkip: "SKIP",
       paddingFocus: 10,
       onFinish: () {
-        print("Tutorial finished");
+        if (kDebugMode) {
+          print("Tutorial finished");
+        }
       },
       onClickTarget: (target) {
-        print("Target clicked: ${target.identify}");
+        if (kDebugMode) {
+          print("Target clicked: ${target.identify}");
+        }
       },
       onSkip: () {
-        print("Tutorial skipped");
+        if (kDebugMode) {
+          print("Tutorial skipped");
+        }
         return true;
       },
     ).show(context: context);
+
+    PrefsHelper.isFirstTimeHome = true;
+    PrefsHelper.setBool("isFirstTimeHome", PrefsHelper.isFirstTimeHome);
   }
 
   @override
@@ -126,117 +138,126 @@ class _HomeScreenState extends State<HomeScreen> {
           Status.loading => const CommonLoader(),
           Status.error => ErrorScreen(onTap: controller.getAllHouseRepo),
           Status.completed => GridView.builder(
-            itemCount: controller.rooms.length + 1,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, mainAxisSpacing: 16, mainAxisExtent: 210),
-            itemBuilder: (context, index) {
-              if (index < controller.rooms.length) {
-                RoomName item = controller.rooms[index];
-                return InkWell(
-                  onTap: () => Get.toNamed(
-                    AppRoutes.roomDetails,
-                    parameters: {
-                      "image": item.image,
-                      "name": item.roomName,
-                      "id": item.id,
-                    },
-                  ),
-                  child: Column(
+              itemCount: controller.rooms.length + 1,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 16, mainAxisExtent: 210),
+              itemBuilder: (context, index) {
+                if (index < controller.rooms.length) {
+                  RoomName item = controller.rooms[index];
+                  return InkWell(
+                    onTap: () => Get.toNamed(
+                      AppRoutes.roomDetails,
+                      parameters: {
+                        "image": item.image,
+                        "name": item.roomName,
+                        "id": item.id,
+                      },
+                    ),
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            CommonImage(
+                              imageSrc: item.image,
+                              imageType: ImageType.network,
+                              height: 165,
+                              width: 165,
+                            ),
+                            if (!PrefsHelper.otherHouse)
+                              Positioned(
+                                bottom: 46,
+                                right: 6,
+                                child: SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    style: ButtonStyle(
+                                      backgroundColor: WidgetStateProperty.all(
+                                          AppColors.white_500),
+                                    ),
+                                    onPressed: () => Get.toNamed(
+                                      AppRoutes.editRoom,
+                                      parameters: {
+                                        "image": item.image,
+                                        "name": item.roomName,
+                                        "id": item.id,
+                                      },
+                                    ),
+                                    icon: const Icon(
+                                      Icons.mode_edit_outlined,
+                                    ),
+                                    iconSize: 20,
+                                  ),
+                                ),
+                              ),
+                            if (!PrefsHelper.otherHouse)
+                              Positioned(
+                                bottom: 6,
+                                right: 6,
+                                child: SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    style: ButtonStyle(
+                                      backgroundColor: WidgetStateProperty.all(
+                                          AppColors.white_500),
+                                    ),
+                                    onPressed: () => deleteRoom(() {
+                                      controller.deleteRoomRepo(item.id);
+                                    }),
+                                    icon: const Icon(CupertinoIcons.delete),
+                                    iconSize: 20,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                        CommonText(
+                          text: item.roomName,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          top: 8,
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return Column(
                     children: [
-                      Stack(
-                        children: [
-                          CommonImage(
-                            imageSrc: item.image,
-                            imageType: ImageType.network,
-                            height: 165,
-                            width: 165,
+                      GestureDetector(
+                        key: addRoomKey,
+                        // Assigning the GlobalKey to the Add Room button
+                        onTap: () => Get.toNamed(AppRoutes.addRoom),
+                        child: DottedBorder(
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(12),
+                          dashPattern: const [8],
+                          color: AppColors.white_500,
+                          strokeWidth: 1.5,
+                          child: SizedBox(
+                            height: 150.sp,
+                            width: 150.sp,
+                            child: const Icon(
+                              Icons.add,
+                              size: 48,
+                              color: AppColors.white_500,
+                            ).center,
                           ),
-                          if (!PrefsHelper.otherHouse)
-                            Positioned(
-                              bottom: 46,
-                              right: 6,
-                              child: SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () => Get.toNamed(
-                                    AppRoutes.editRoom,
-                                    parameters: {
-                                      "image": item.image,
-                                      "name": item.roomName,
-                                      "id": item.id,
-                                    },
-                                  ),
-                                  icon: const Icon(
-                                    Icons.mode_edit_outlined,
-                                  ),
-                                  iconSize: 20,
-                                ),
-                              ),
-                            ),
-                          if (!PrefsHelper.otherHouse)
-                            Positioned(
-                              bottom: 6,
-                              right: 6,
-                              child: SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: IconButton(
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () => deleteRoom(() {
-                                    controller.deleteRoomRepo(item.id);
-                                  }),
-                                  icon: const Icon(CupertinoIcons.delete),
-                                  iconSize: 20,
-                                ),
-                              ),
-                            ),
-                        ],
+                        ),
                       ),
-                      CommonText(
-                        text: item.roomName,
+                      const CommonText(
+                        text: "Add new Room",
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         top: 8,
                       ),
                     ],
-                  ),
-                );
-              } else {
-                return Column(
-                  children: [
-                    GestureDetector(
-                      key: addRoomKey, // Assigning the GlobalKey to the Add Room button
-                      onTap: () => Get.toNamed(AppRoutes.addRoom),
-                      child: DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: const Radius.circular(12),
-                        dashPattern: const [8],
-                        color: AppColors.white_500,
-                        strokeWidth: 1.5,
-                        child: SizedBox(
-                          height: 160,
-                          width: 160,
-                          child: const Icon(
-                            Icons.add,
-                            size: 48,
-                            color: AppColors.white_500,
-                          ).center,
-                        ),
-                      ),
-                    ),
-                    const CommonText(
-                      text: "Add new Room",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      top: 8,
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
+                  );
+                }
+              },
+            ),
         },
       ),
       bottomNavigationBar: const CommonBottomNavBar(
@@ -245,4 +266,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

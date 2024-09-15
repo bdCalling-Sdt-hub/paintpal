@@ -17,6 +17,8 @@ class PrefsHelper extends GetxController {
   static String houseId = "";
   static bool otherHouse = false;
   static bool hasShownTutorial = false;
+  static bool isFirstTimeAddHouse = false;
+  static bool isFirstTimeHome = false;
 
   static String mySubscription = "shopping";
   static String localizationLanguageCode = 'en';
@@ -51,7 +53,8 @@ class PrefsHelper extends GetxController {
     houseId = preferences.getString("houseId") ?? "";
     houseName = preferences.getString("houseName") ?? "";
     otherHouse = preferences.getBool("otherHouse") ?? false;
-    hasShownTutorial = preferences.getBool("hasShownTutorial") ?? false;
+    isFirstTimeAddHouse = preferences.getBool("isFirstTimeAddHouse") ?? false;
+    isFirstTimeHome = preferences.getBool("isFirstTimeHome") ?? false;
 
     if (kDebugMode) {
       print(myImage);
@@ -61,7 +64,6 @@ class PrefsHelper extends GetxController {
   ///<<<======================== Get All Data Form Shared Preference ============>
   static Future<void> removeAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.clear();
     preferences.setString("token", "");
     preferences.setString("refreshToken", "");
     preferences.setString("userId", "");

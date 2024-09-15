@@ -64,8 +64,6 @@ class SignUpController extends GetxController {
   }
 
   signUpUser() async {
-    Get.toNamed(AppRoutes.addHouse);
-    return;
     isLoading = true;
     update();
     Map<String, String> body = {

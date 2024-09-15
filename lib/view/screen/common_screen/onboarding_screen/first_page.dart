@@ -8,7 +8,6 @@ import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
 import 'package:paintpal/view/component/image/common_image.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
-import 'package:paintpal/view/screen/common_screen/onboarding_screen/second_page.dart';
 
 import 'widgets/dot_indicator.dart';
 

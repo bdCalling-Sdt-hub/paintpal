@@ -5,7 +5,6 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
-import 'dart:typed_data';
 
 class ScreenShotHelper {
   static String downloadImagePath = "";

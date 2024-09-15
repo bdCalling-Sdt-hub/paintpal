@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -67,13 +66,13 @@ class _SecondPageState extends State<SecondPage> {
                         enlargeFactor: 0.3,
                         autoPlayCurve: Curves.easeInOut,
                         scrollDirection: Axis.horizontal,
-                        autoPlayAnimationDuration: Duration(seconds: 2)
+                        autoPlayAnimationDuration: const Duration(seconds: 2)
                       ),
                       items: imageList.map((items) {
                         return Builder(
                           builder: (BuildContext context) {
                             return  Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 6.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 6.0),
                               child: CommonImage(
                                 imageSrc: items,
                                 height: Get.height * 0.4,

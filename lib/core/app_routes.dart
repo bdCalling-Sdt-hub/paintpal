@@ -172,19 +172,19 @@ class AppRoutes {
         name: firstPage,
         page: () => const FirstPage(),
         transition: Transition.rightToLeftWithFade,
-      transitionDuration: Duration(milliseconds: 800)
+      transitionDuration: const Duration(milliseconds: 800)
     ),
     GetPage(
         name: secondPage,
         page: () => const SecondPage(),
         transition: Transition.rightToLeftWithFade,
-        transitionDuration: Duration(milliseconds: 800)
+        transitionDuration: const Duration(milliseconds: 800)
     ),
     GetPage(
         name: thirdPage,
         page: () => const ThirdPage(),
         transition: Transition.rightToLeftWithFade,
-        transitionDuration: Duration(milliseconds: 500)
+        transitionDuration: const Duration(milliseconds: 500)
     ),
   ];
 }
