@@ -22,4 +22,13 @@ class AppImages {
   static const String livingRoom = "$baseurl/living_room.png";
   static const String prayerRoom = "$baseurl/prayerroom.png";
   static const String studyRoom = "$baseurl/studyroom.png";
+
+  ///================ Onboarding Images =======================
+
+  static const String onboarding_1 = "$baseurl/onboarding-1.jpg";
+  static const String onboarding_2_1 = "$baseurl/onboarding_2-1.jpg";
+  static const String onboarding_2_2 = "$baseurl/onboarding_2-2.jpg";
+  static const String onboarding_2_3 = "$baseurl/onboarding_2-3.jpg";
+  static const String onboarding_3 = "$baseurl/onboarding-3.jpg";
+
 }

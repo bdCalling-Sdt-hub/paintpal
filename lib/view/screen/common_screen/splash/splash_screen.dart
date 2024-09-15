@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paintpal/utils/app_string.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
+import 'package:paintpal/view/screen/common_screen/onboarding_screen/first_page.dart';
 import '../../../../../extension/my_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (PrefsHelper.isLogIn) {
         Get.offAllNamed(AppRoutes.home);
       } else {
-        Get.offAllNamed(AppRoutes.welcome);
+        Get.offAllNamed(AppRoutes.firstPage);
       }
     });
     super.initState();

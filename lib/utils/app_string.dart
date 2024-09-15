@@ -115,4 +115,15 @@ class AppString {
   static const String generateQRCode = "Generate QR Code";
   static const String export = "Export";
   static const String addHouse = "Add House";
+  static const String skip = "Skip";
+  static const String next = "Next";
+  static const String getStarted = "Get Started";
+
+  static const String reviewAndConfirm = "Review and Confirm";
+  static const String customizeYourRoomWithColor = "Add the surface colors of your rooms";
+  static const String getReadyToTransformYourSpace = "Register all your houses in one app";
+  static const String startByEnteringYourRoomDetails = "Start by entering your room details. Add the dimensions and surface areas you want to paint. This will help us give you the perfect color match for your room.";
+  static const String selectTheWallsCeilingsOrAnySurface = "Select the walls, ceilings, or any surface you want to paint, and choose your preferred colors. Let your creativity flow as you visualize your new space.";
+  static const String doubleCheckYourRoomDetailsAndColorChoices = "Double-check your room details and color selections. Once everything is set, you can find painters on Map to bring your vision to life."
+  ;
 }
