@@ -72,7 +72,7 @@ class SignInScreen extends StatelessWidget {
                         color: AppColors.white_500,
                       ),
                       isPassword: true,
-                      labelText: AppString.password,
+                      hintText: AppString.password,
                       validator: OtherHelper.passwordValidator,
                     ),
                     Align(
