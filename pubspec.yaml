@@ -61,8 +61,10 @@ dependencies:
   qr_flutter:
     git:
       url: https://github.com/theyakka/qr.flutter.git
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   tutorial_coach_mark: ^1.2.11
+  palette_generator: ^0.3.3+4
+
 
 dev_dependencies:
   flutter_test:

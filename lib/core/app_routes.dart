@@ -3,6 +3,7 @@ import 'package:paintpal/view/screen/common_screen/onboarding_screen/first_page.
 import 'package:paintpal/view/screen/common_screen/onboarding_screen/second_page.dart';
 import 'package:paintpal/view/screen/common_screen/onboarding_screen/third_page.dart';
 import 'package:paintpal/view/screen/common_screen/setting/about_us.dart';
+import 'package:paintpal/view/screen/screen/ColorGenerator/color_generator.dart';
 import 'package:paintpal/view/screen/screen/Room/add_house_screen.dart';
 import 'package:paintpal/view/screen/screen/Room/add_room.dart';
 import 'package:paintpal/view/screen/screen/Room/edit_wall.dart';
@@ -62,6 +63,7 @@ class AppRoutes {
   static const String firstPage = "/first_page.dart";
   static const String secondPage = "/second_page.dart";
   static const String thirdPage = "/third_page.dart";
+  static const String colorGenerator = "/color_generator.dart";
 
   static List<GetPage> routes = [
     GetPage(
@@ -183,6 +185,12 @@ class AppRoutes {
     GetPage(
         name: thirdPage,
         page: () => const ThirdPage(),
+        transition: Transition.rightToLeftWithFade,
+        transitionDuration: const Duration(milliseconds: 500)
+    ),
+    GetPage(
+        name: colorGenerator,
+        page: () => const ColorGenerator(),
         transition: Transition.rightToLeftWithFade,
         transitionDuration: const Duration(milliseconds: 500)
     ),

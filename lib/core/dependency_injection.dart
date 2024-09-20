@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:paintpal/controllers/ColorGenerateController/color_generate_controller.dart';
 
 import '../controllers/common_controller/auth/change_password_controller.dart';
 import '../controllers/common_controller/auth/forget_password_controller.dart';
@@ -38,5 +39,6 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => EditRoomController(), fenix: true);
     Get.lazyPut(() => UpdateSurfaceController(), fenix: true);
     Get.lazyPut(() => ShowGoogleMapController(), fenix: true);
+    Get.lazyPut(() => ColorGenerateController(), fenix: true);
   }
 }

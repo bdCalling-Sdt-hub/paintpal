@@ -65,6 +65,7 @@ class AppString {
   static const String privacyPolicy = "Privacy Policy";
   static const String deleteAccount = "Delete account";
   static const String termsOfServices = "Terms of Services";
+  static const String generateColor = "Generate Color";
 
   ///=========================New String =======================
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:paintpal/controllers/ColorGenerateController/color_generate_controller.dart';
 import 'package:paintpal/controllers/home/home_controller.dart';
 import 'package:paintpal/core/app_routes.dart';
 import 'package:paintpal/extension/my_extension.dart';
@@ -52,6 +54,10 @@ class HomeDrawer extends StatelessWidget {
                     }),
                 title: AppString.generateQRCode,
                 icon: Icons.qr_code_scanner_outlined),
+            drawerItem(
+                onTap: () => ColorGenerateController.instance.pickImage(ImageSource.camera).then((value) => Get.toNamed(AppRoutes.colorGenerator)),
+                title: AppString.generateColor,
+                icon: Icons.color_lens_outlined),
             drawerItem(
                 onTap: () => Get.toNamed(AppRoutes.setting),
                 title: AppString.settings,
