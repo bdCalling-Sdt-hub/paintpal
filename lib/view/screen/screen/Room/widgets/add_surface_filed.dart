@@ -74,30 +74,33 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                       child: Container(
                         color: AppColors.blue_400.withOpacity(0.5),
                         child: Center(
-                          child: widget.item["surfaceImage"] != null
-                              ? Image.file(
-                                  File(widget.item["surfaceImage"]),
-                                  fit: BoxFit.fill,
-                                )
-                              : Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () async {
-                                        widget.item["surfaceImage"] =
-                                            await OtherHelper.openGallery();
-                                        setState(() {});
-                                      },
-                                      icon: const Icon(
-                                        Icons.add,
-                                        size: 48,
-                                        color: AppColors.white_500,
-                                      ).center,
+                          child: GestureDetector(
+                            onTap: () async {
+                              widget.item["surfaceImage"] =
+                                  await OtherHelper.openGallery();
+                              setState(() {});
+                            },
+                            child: Container(
+                              child: widget.item["surfaceImage"] != null
+                                  ? Image.file(
+                                      File(widget.item["surfaceImage"]),
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.add,
+                                          size: 48,
+                                          color: AppColors.white_500,
+                                        ).center,
+                                        const CommonText(
+                                            text: AppString.uploadSurfaceImage)
+                                      ],
                                     ),
-                                    const CommonText(
-                                        text: AppString.uploadSurfaceImage)
-                                  ],
-                                ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

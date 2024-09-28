@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   changeScreen() {
     Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(milliseconds: 2000),
       () {
         secondScreen = true;
         setState(() {});
@@ -79,9 +79,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   )
                 : Center(
                     child: CommonImage(
-                    imageSrc: AppImages.logo,
-                    height: 260,
-                    width: 260,
+                    imageSrc: "assets/gif/logo.gif",
+                    height: 400,
+                    width: 400,
                     imageType: ImageType.png,
                   )),
             const Spacer(),
