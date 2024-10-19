@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:paintpal/controllers/room/add_room_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
+import 'package:paintpal/utils/app_colors.dart';
 import '../../../../../helpers/other_helper.dart';
 import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_text_field.dart';
@@ -14,12 +16,14 @@ class RowItem extends StatelessWidget {
       this.rightController,
       this.isEnabled = true,
       this.isNumber = false,
+      this.isShowScan = false,
       this.leftController});
 
   final String leftText;
   final String leftTextHint;
   final bool isEnabled;
   final bool isNumber;
+  final bool isShowScan;
 
   final String rightText;
   final String rightTextHint;
@@ -44,6 +48,18 @@ class RowItem extends StatelessWidget {
               controller: leftController ?? defealtLeftController,
               hintText: leftTextHint,
               validator: OtherHelper.validator,
+              suffixIcon: isShowScan
+                  ? GestureDetector(
+                      onTap: () {
+                        AddRoomController.instance.scanWall(
+                            rightController ?? defealtRightController,
+                            leftController ?? defealtLeftController);
+                      },
+                      child: const Icon(
+                        Icons.document_scanner,
+                        color: AppColors.white_50,
+                      ))
+                  : const SizedBox(),
               enabled: isEnabled,
             )
           ],

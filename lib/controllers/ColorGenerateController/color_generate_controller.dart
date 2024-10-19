@@ -8,12 +8,15 @@ import 'package:http/http.dart' as http;
 import 'dart:developer' as print;
 
 import 'package:paintpal/models/gemimi_response_model.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 
 
 class ColorGenerateController extends GetxController{
 
   static ColorGenerateController get instance => Get.put(ColorGenerateController());
+
+  PaletteGenerator? paletteGenerator;
 
   var selectedImagePath = ''.obs;
   RxString colorName = "".obs;

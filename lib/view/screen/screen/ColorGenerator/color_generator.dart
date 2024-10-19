@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:paintpal/Utils/app_colors.dart';
 import 'package:paintpal/controllers/ColorGenerateController/color_generate_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
-import 'package:paintpal/utils/app_colors.dart';
 import 'package:paintpal/view/component/text/common_text.dart';
 import 'package:palette_generator/palette_generator.dart';
 

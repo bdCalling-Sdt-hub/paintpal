@@ -108,6 +108,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                     RowItem(
                       leftController: widget.item["colorCode"],
                       rightController: widget.item["colorDetails"],
+                      isShowScan: true,
                       leftText: AppString.colorCode,
                       leftTextHint: AppString.colorCodeHint,
                       rightText: AppString.colorDetails,

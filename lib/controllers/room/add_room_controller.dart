@@ -1,22 +1,35 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:paintpal/models/house_name.dart';
 import 'package:paintpal/models/surface_model.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 import '../../core/app_routes.dart';
 import '../../helpers/other_helper.dart';
+import '../../models/gemimi_response_model.dart';
 import '../../services/api_service.dart';
 import '../../utils/app_url.dart';
 import '../../view/screen/screen/Room/widgets/add_new_house.dart';
+import 'package:http/http.dart' as http;
 
 class AddRoomController extends GetxController {
   List items = [HouseName(houseName: "Add House", id: "")];
+
   List surfaces = [];
   List surfacesFile = [];
   List surfacesController = [];
+  String colorName = "";
+  String colorCode = "";
+  var selectedImagePath = '';
+  String _apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
+  GeminiResponseModel? geminiResponseModel;
+  PaletteGenerator? paletteGenerator;
 
   bool isLoading = false;
   bool addRoomIsLoading = false;
@@ -33,12 +46,12 @@ class AddRoomController extends GetxController {
   String roomId = "";
 
   clear() {
-    surfaces.clear() ;
-    surfacesFile.clear() ;
-    surfacesController.clear() ;
-    coverImage = null ;
-    roomController.text = "" ;
-    addSurface() ;
+    surfaces.clear();
+    surfacesFile.clear();
+    surfacesController.clear();
+    coverImage = null;
+    roomController.text = "";
+    addSurface();
   }
 
   selectItem(int index) {
@@ -57,9 +70,7 @@ class AddRoomController extends GetxController {
     Get.back();
   }
 
-
   addSurface() {
-
     TextEditingController surfaceController = TextEditingController();
     TextEditingController colorCodeController = TextEditingController();
     TextEditingController colorNameController = TextEditingController();
@@ -81,6 +92,76 @@ class AddRoomController extends GetxController {
       "surfaceImage": surfaceImage,
     });
     update();
+  }
+
+  scanWall(TextEditingController name, TextEditingController code) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      selectedImagePath = pickedFile.path;
+    } else {
+      selectedImagePath = '';
+    }
+
+    if (selectedImagePath.isEmpty) return;
+
+    final PaletteGenerator generator = await PaletteGenerator.fromImageProvider(
+      FileImage(File(selectedImagePath)), // Replace with your image
+    );
+
+    paletteGenerator = generator;
+
+    var hexColorCode = paletteGenerator?.dominantColor?.color.value
+        .toRadixString(16)
+        .substring(2);
+
+    final url = Uri.parse(
+        "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=$_apiKey");
+    final headers = {'Content-Type': 'application/json'};
+    var bodyData = {
+      "contents": [
+        {
+          "parts": [
+            {
+              "text":
+                  "Hex Color Code:$hexColorCode, give the Color name from the hex color code"
+            }
+          ]
+        }
+      ]
+    };
+    try {
+      var response = await http
+          .post(url, body: jsonEncode(bodyData), headers: headers)
+          .timeout(const Duration(seconds: 30));
+
+      if (response.statusCode == 200) {
+        geminiResponseModel =
+            GeminiResponseModel.fromJson(jsonDecode(response.body));
+        colorName =
+            geminiResponseModel?.candidates?[0].content?.parts?[0].text ??
+                "Not Found";
+
+        colorCode = hexColorCode.toString();
+      } else {
+        Get.snackbar(
+          "Invalid value".tr,
+          "Something went wrong, Try again!".tr,
+        );
+      }
+    } catch (error) {
+      Get.snackbar(
+        "Invalid value".tr,
+        "Something went wrong".tr,
+      );
+      if (kDebugMode) {
+        print("Error: $error");
+      }
+    }
+
+    name.text = colorName;
+    code.text = colorCode;
   }
 
   @override

@@ -91,10 +91,11 @@ class _EditWallState extends State<EditWall> {
       child: Column(
         children: [
           RowItem(
+            isShowScan: true,
             leftController:
                 UpdateSurfaceController.instance.colorCodeController,
             rightController:
-                UpdateSurfaceController.instance.colorBrandNameController,
+                UpdateSurfaceController.instance.colorNameController,
             leftText: AppString.colorCode,
             leftTextHint: AppString.colorCodeHint,
             rightText: AppString.colorDetails,
