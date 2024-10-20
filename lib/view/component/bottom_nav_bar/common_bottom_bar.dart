@@ -18,11 +18,8 @@ class CommonBottomNavBar extends StatefulWidget {
 }
 
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
-  static int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    selectedIndex = widget.currentIndex;
     return CurvedNavigationBar(
         index: widget.currentIndex > 5 ? 2 : widget.currentIndex,
         height: 60,
@@ -56,7 +53,6 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
                   ? AppColors.white_500
                   : AppColors.black),
         ]);
-
   }
 
   void onTap(int index) async {
@@ -69,18 +65,18 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       if (!(widget.currentIndex == 0)) {
         Get.to(
           const HomeScreen(),
-          transition: animation ? Transition.leftToRight : Transition.rightToLeft ,
-          duration: const Duration(
-              milliseconds: 600),
+          transition:
+              animation ? Transition.leftToRight : Transition.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         );
       }
     } else if (index == 1) {
       if (!(widget.currentIndex == 1)) {
         Get.to(
           const LocationScreen(),
-          transition: animation ? Transition.leftToRight : Transition.rightToLeft ,
-          duration: const Duration(
-              milliseconds: 600),
+          transition:
+              animation ? Transition.leftToRight : Transition.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         );
         // Get.toNamed(AppRoutes.location);
       }
@@ -88,9 +84,9 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       if (!(widget.currentIndex == 2)) {
         Get.to(
           const AddRoom(),
-          transition: animation ? Transition.leftToRight : Transition.rightToLeft ,
-          duration: const Duration(
-              milliseconds: 600),
+          transition:
+              animation ? Transition.leftToRight : Transition.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         );
         // Get.toNamed(AppRoutes.addRoom);
       }
@@ -98,9 +94,9 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       if (!(widget.currentIndex == 3)) {
         Get.to(
           const SettingScreen(),
-          transition: animation ? Transition.leftToRight : Transition.rightToLeft ,
-          duration: const Duration(
-              milliseconds: 600),
+          transition:
+              animation ? Transition.leftToRight : Transition.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         );
         // Get.toNamed(AppRoutes.setting);
       }
@@ -108,9 +104,9 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       if (!(widget.currentIndex == 4)) {
         Get.to(
           const ProfileScreen(),
-          transition: animation ? Transition.leftToRight : Transition.rightToLeft ,
-          duration: const Duration(
-              milliseconds: 600),
+          transition:
+              animation ? Transition.leftToRight : Transition.rightToLeft,
+          duration: const Duration(milliseconds: 600),
         );
         // Get.toNamed(AppRoutes.profile);
       }

@@ -7,7 +7,6 @@ import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/other_helper.dart';
 import 'package:paintpal/view/component/button/common_button.dart';
 import 'package:paintpal/view/component/image/common_image.dart';
-
 import '../../../../controllers/room/room_details_controller.dart';
 import '../../../../models/room_details_model.dart';
 import '../../../../utils/app_colors.dart';

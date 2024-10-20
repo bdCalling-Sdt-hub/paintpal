@@ -142,7 +142,6 @@ class HomeController extends GetxController {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(
           "#ff6666", "Cancel", true, ScanMode.QR);
 
-
       if (qrCode.isNotEmpty && qrCode != "-1") {
         Uri uri = Uri.parse(qrCode.toString());
         String houseId = uri.pathSegments.last;
