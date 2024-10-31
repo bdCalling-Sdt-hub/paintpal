@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:paintpal/helpers/prefs_helper.dart';
 import 'package:paintpal/models/api_response_model.dart';
@@ -139,11 +139,18 @@ class HomeController extends GetxController {
 
   Future<void> scanQR() async {
     try {
-      final qrCode = await FlutterBarcodeScanner.scanBarcode(
-          "#ff6666", "Cancel", true, ScanMode.QR);
+      var result = await BarcodeScanner.scan();
 
-      if (qrCode.isNotEmpty && qrCode != "-1") {
-        Uri uri = Uri.parse(qrCode.toString());
+      qrResult = result.rawContent;
+      if (kDebugMode) {
+        print("bagId =================================> ${result.toString()}");
+        print("bagId =================================> ${result.rawContent}");
+        print("bagId =================================> ${result.format}");
+      }
+
+
+      if (qrResult.isNotEmpty) {
+        Uri uri = Uri.parse(qrResult.toString());
         String houseId = uri.pathSegments.last;
         String houseName = uri.queryParameters['name'] ?? '';
         if (houseId.isEmpty && houseName.isEmpty) return;
@@ -156,15 +163,18 @@ class HomeController extends GetxController {
         PrefsHelper.setString("houseName", PrefsHelper.houseName);
         PrefsHelper.setString("otherHouse", PrefsHelper.otherHouse);
 
-        qrResult = qrCode.toString();
+        qrResult = qrResult.toString();
         await scanHouseRepo(houseId);
+
+
       }
     } catch (e) {
       if (kDebugMode) {
-        print(e);
+        print("Error : ==== $e");
       }
     }
   }
+
 
   Future<void> scanHouseRepo(houseId) async {
     houseStatus = true;

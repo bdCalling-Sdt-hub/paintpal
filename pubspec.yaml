@@ -53,11 +53,12 @@ dependencies:
   google_maps_flutter: ^2.7.0
   geocoding: ^3.0.0
   curved_navigation_bar: ^1.0.6
-  flutter_barcode_scanner: ^2.0.0
+  #  flutter_barcode_scanner: ^2.0.0
+  barcode_scan2: ^4.1.9
   screenshot: ^3.0.0
   device_info_plus: ^10.1.2
   permission_handler: ^11.3.1
-  image_gallery_saver: ^2.0.3
+  image_gallery_saver_plus: ^3.0.5
   qr_flutter:
     git:
       url: https://github.com/theyakka/qr.flutter.git

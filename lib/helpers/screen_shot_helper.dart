@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:paintpal/utils/app_colors.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -29,7 +29,7 @@ class ScreenShotHelper {
         final request = await Permission.photos
             .request(); //import 'package:permission_handler/permission_handler.dart';
         debugPrint('IsPermission Granted? : ${request.isGranted}');
-        final result = await ImageGallerySaver.saveImage(
+        final result = await ImageGallerySaverPlus.saveImage(
           uint8List,
           name: "screen_shot_mage",
         );
@@ -61,7 +61,7 @@ class ScreenShotHelper {
       if (androidVersion < 13) {
         final PermissionStatus status = await Permission.storage.request();
         if (status.isGranted) {
-          final result = await ImageGallerySaver.saveImage(
+          final result = await ImageGallerySaverPlus.saveImage(
             uint8List,
             name: "screen_shot_mage",
           );
