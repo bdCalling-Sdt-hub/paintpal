@@ -2,8 +2,8 @@ class AppUrls {
   // static const baseUrl = "http://192.168.10.137:9000/api/v1";
   // static const imageUrl = "http://192.168.10.137:9000/";
 
-  static const baseUrl = "http://159.223.184.53:2000/api/v1";
-  static const imageUrl = "http://159.223.184.53:2000/";
+  static const baseUrl = "http://104.236.205.243:9000/api/v1";
+  static const imageUrl = "http://104.236.205.243:9000";
 
   static const signUp = "$baseUrl/users/signup";
   static const verifyOtp = "$baseUrl/users/verify-otp";
