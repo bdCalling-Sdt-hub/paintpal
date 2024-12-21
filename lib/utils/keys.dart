@@ -7,7 +7,6 @@ class keys {
 
   static const String paymentIntent =
       "https://api.stripe.com/v1/payment_intents";
-  static const String apiKey = ''; // Replace with your API key
-
-
+  static const String apiKey =
+      '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'; // Replace with your API key
 }
