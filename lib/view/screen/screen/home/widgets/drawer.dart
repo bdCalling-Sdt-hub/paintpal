@@ -54,10 +54,18 @@ class HomeDrawer extends StatelessWidget {
                     }),
                 title: AppString.generateQRCode,
                 icon: Icons.qr_code_scanner_outlined),
-            // drawerItem(
-            //     onTap: () => ColorGenerateController.instance.pickImage(ImageSource.camera).then((value) => Get.toNamed(AppRoutes.colorGenerator)),
-            //     title: AppString.generateColor,
-            //     icon: Icons.color_lens_outlined),
+            drawerItem(
+                onTap: () => ColorGenerateController.instance
+                        .pickImage(ImageSource.camera)
+                        .then((value) {
+                      if (ColorGenerateController
+                          .instance.selectedImagePath.value.isEmpty) {
+                        return;
+                      }
+                      Get.toNamed(AppRoutes.colorGenerator);
+                    }),
+                title: AppString.generateColor,
+                icon: Icons.color_lens_outlined),
             drawerItem(
                 onTap: () => Get.toNamed(AppRoutes.setting),
                 title: AppString.settings,
