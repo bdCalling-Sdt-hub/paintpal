@@ -148,7 +148,6 @@ class HomeController extends GetxController {
         print("bagId =================================> ${result.format}");
       }
 
-
       if (qrResult.isNotEmpty) {
         Uri uri = Uri.parse(qrResult.toString());
         String houseId = uri.pathSegments.last;
@@ -165,8 +164,6 @@ class HomeController extends GetxController {
 
         qrResult = qrResult.toString();
         await scanHouseRepo(houseId);
-
-
       }
     } catch (e) {
       if (kDebugMode) {
@@ -175,6 +172,59 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> generalQR(BuildContext context) async {
+    try {
+      var result = await BarcodeScanner.scan();
+
+      String qrResult = result.rawContent;
+
+      if (kDebugMode) {
+        print("Scanned Content: $qrResult");
+      }
+
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Scanned Result"),
+            content: Text(qrResult.isNotEmpty ? qrResult : "No content found"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error: $e");
+      }
+
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text("Failed to scan QR Code: $e"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   Future<void> scanHouseRepo(houseId) async {
     houseStatus = true;

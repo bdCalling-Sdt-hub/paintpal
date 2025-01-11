@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:paintpal/controllers/room/add_room_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/helpers/other_helper.dart';
@@ -36,6 +37,45 @@ class _AddRoomState extends State<AddRoom> {
       },
     );
     super.initState();
+  }
+
+  // Function to show modal bottom sheet for selecting image source
+  Future<void> _showImageSourceOptions(AddRoomController controller) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedImage = await showModalBottomSheet<XFile>(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Upload from Gallery"),
+                onTap: () async {
+                  Navigator.of(context).pop(
+                    await picker.pickImage(source: ImageSource.gallery),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Take a Picture"),
+                onTap: () async {
+                  Navigator.of(context).pop(
+                    await picker.pickImage(source: ImageSource.camera),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (pickedImage != null) {
+      controller.setCoverImage(pickedImage.path);
+    }
   }
 
   @override
@@ -76,6 +116,18 @@ class _AddRoomState extends State<AddRoom> {
                     controller: controller.roomController,
                     validator: OtherHelper.validator,
                   ),
+                  const CommonText(
+                    text: AppString.roomSize,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    bottom: 8,
+                    top: 12,
+                  ).start,
+                  CommonTextField(
+                    hintText: AppString.roomSizeHint,
+                    controller: controller.roomController,
+                    validator: OtherHelper.validator,
+                  ),
                   16.height,
                   controller.coverImage != null
                       ? SizedBox(
@@ -97,7 +149,8 @@ class _AddRoomState extends State<AddRoom> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  onPressed: controller.getProfileImage,
+                                  onPressed: () =>
+                                      _showImageSourceOptions(controller),
                                   icon: const Icon(
                                     Icons.add,
                                     size: 48,

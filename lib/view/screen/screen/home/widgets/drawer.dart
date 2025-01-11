@@ -44,7 +44,7 @@ class HomeDrawer extends StatelessWidget {
               color: AppColors.highlight,
             ),
             drawerItem(
-                onTap: () => HomeController.instance.scanQR(),
+                onTap: () => HomeController.instance.generalQR(context),
                 title: AppString.scan,
                 icon: Icons.document_scanner_sharp),
             drawerItem(

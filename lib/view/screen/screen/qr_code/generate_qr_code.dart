@@ -15,6 +15,7 @@ import '../../../component/button/common_button.dart';
 import '../../../component/text_field/common_text_field.dart';
 import '../Room/widgets/house_pop_up.dart';
 
+// ignore: must_be_immutable
 class GenerateQrCode extends StatelessWidget {
   GenerateQrCode({super.key});
 

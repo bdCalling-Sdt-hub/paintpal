@@ -34,7 +34,15 @@ class AddRoomController extends GetxController {
   bool isLoading = false;
   bool addRoomIsLoading = false;
 
+  //String? coverImage;
+
   String? coverImage;
+
+  void setCoverImage(String path) {
+    coverImage = path;
+
+    update();
+  }
 
   TextEditingController houseNameController = TextEditingController();
   TextEditingController newHouseNameController = TextEditingController();
