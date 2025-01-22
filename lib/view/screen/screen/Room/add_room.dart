@@ -125,7 +125,7 @@ class _AddRoomState extends State<AddRoom> {
                   ).start,
                   CommonTextField(
                     hintText: AppString.roomSizeHint,
-                    controller: controller.roomController,
+                    controller: controller.roomSizeController,
                     validator: OtherHelper.validator,
                   ),
                   16.height,

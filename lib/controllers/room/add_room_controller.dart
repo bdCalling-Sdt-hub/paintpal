@@ -49,6 +49,7 @@ class AddRoomController extends GetxController {
   TextEditingController addressController = TextEditingController();
 
   TextEditingController roomController = TextEditingController();
+  TextEditingController roomSizeController = TextEditingController();
 
   String seletedHouse = "";
   String roomId = "";
@@ -59,6 +60,7 @@ class AddRoomController extends GetxController {
     surfacesController.clear();
     coverImage = null;
     roomController.text = "";
+    roomSizeController.text = "";
     addSurface();
   }
 
@@ -262,8 +264,10 @@ class AddRoomController extends GetxController {
     var body = {
       "houseID": seletedHouse,
       "roomName": roomController.text,
+      "roomSize": roomSizeController.text,
       "surface": jsonEncode(surfaces)
     };
+    print("Body=================================$body");
 
     var response = await ApiService.addRoomRequest(
       url: AppUrls.room,
@@ -272,6 +276,7 @@ class AddRoomController extends GetxController {
       surfaceFile: surfacesFile,
       body: body,
     ).timeout(const Duration(seconds: 30));
+    print("Response=================================${response.body}");
 
     if (response.statusCode == 200) {
       surfaces.clear();

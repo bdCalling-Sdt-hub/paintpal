@@ -117,6 +117,7 @@ class SignUpController extends GetxController {
       AppUrls.verifyOtp,
       body,
     );
+    print("Body: ${response.body}");
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
@@ -139,6 +140,7 @@ class SignUpController extends GetxController {
     } else {
       Get.snackbar(response.statusCode.toString(), response.message);
     }
+    print("Body: ${response.statusCode}");
 
     isLoadingVerify = false;
     update();

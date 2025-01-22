@@ -7,8 +7,7 @@ import '../../utils/app_url.dart';
 import '../../utils/app_utils.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EditRoomController extends GetxController {
-  TextEditingController roomNameController = TextEditingController();
+class EditSizeController extends GetxController {
   TextEditingController roomSizeController = TextEditingController();
 
   bool isLoading = false;
@@ -23,7 +22,7 @@ class EditRoomController extends GetxController {
 
   String? fileImage;
 
-  static EditRoomController get instance => Get.put(EditRoomController());
+  static EditSizeController get instance => Get.put(EditSizeController());
 
   Future<void> selectImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
@@ -42,10 +41,9 @@ class EditRoomController extends GetxController {
     update();
 
     Map<String, String> body = {
-      "roomName": roomNameController.text,
       "roomSize": roomSizeController.text,
     };
-    print("===========================Body====================$body");
+    print("Body $body");
 
     var response = await ApiService.multipartRequest(
       url: "${AppUrls.room}/$roomId",
@@ -54,8 +52,6 @@ class EditRoomController extends GetxController {
       imageName: "coverImage",
       imagePath: fileImage,
     );
-    print(
-        "===========================Body====================${response.body}");
 
     if (response.statusCode == 200) {
       Get.offAllNamed(AppRoutes.home);

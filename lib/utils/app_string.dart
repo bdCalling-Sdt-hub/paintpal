@@ -115,6 +115,7 @@ class AppString {
   static const String about = "About us";
   static const String uploadCoverImage = "Add an image";
   static const String scan = "Scan QR Code";
+  static const String scanbar = "Scan Bar Code";
   static const String generateQRCode = "Generate QR Code";
   static const String export = "Export";
   static const String addHouse = "Add House";

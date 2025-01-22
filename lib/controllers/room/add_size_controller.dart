@@ -19,9 +19,10 @@ class RoomSizeController extends GetxController {
     isLoading = true;
     update();
     Map<String, String> body = {
-      "roomName": roomSizeController.text,
+      "roomSize": roomSizeController.text,
     };
-
+    // ignore: avoid_print
+    print("body: $body");
     var response = await ApiService.multipartRequest(
         url: "${AppUrls.room}/$roomId",
         method: "PATCH",
