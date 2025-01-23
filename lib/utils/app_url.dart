@@ -2,8 +2,8 @@ class AppUrls {
   // static const baseUrl = "https://8xcghwgx.inc1.devtunnels.ms:8000/api/v1";
   // static const imageUrl = "https://8xcghwgx.inc1.devtunnels.ms:8000/";
 
-  static const baseUrl = "http://137.184.95.36:8000/api/v1";
-  static const imageUrl = "http://137.184.95.36:8000";
+  static const baseUrl = "http://139.59.0.25:8001/api/v1";
+  static const imageUrl = "http://139.59.0.25:8001/";
 
   static const signUp = "$baseUrl/users/signup";
   static const verifyOtp = "$baseUrl/users/verify-otp";

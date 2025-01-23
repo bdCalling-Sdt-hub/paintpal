@@ -3,6 +3,7 @@ class RoomDetailsModel {
   final String house;
   final String owner;
   final String roomName;
+  final String roomSize;
   final String coverImage;
   final List<Surface> surface;
   final DateTime createdAt;
@@ -14,6 +15,7 @@ class RoomDetailsModel {
     required this.house,
     required this.owner,
     required this.roomName,
+    required this.roomSize,
     required this.coverImage,
     required this.surface,
     required this.createdAt,
@@ -27,6 +29,7 @@ class RoomDetailsModel {
       house: json['house'] ?? '',
       owner: json['owner'] ?? '',
       roomName: json['roomName'] ?? '',
+      roomSize: json['roomSize'] ?? '',
       coverImage: json['coverImage'] ?? '',
       surface: (json['surface'] as List? ?? [])
           .map((item) => Surface.fromJson(item as Map<String, dynamic>))

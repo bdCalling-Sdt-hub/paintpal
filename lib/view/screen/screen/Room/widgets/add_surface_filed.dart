@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:paintpal/controllers/room/add_room_controller.dart';
 import 'package:paintpal/extension/my_extension.dart';
 import 'package:paintpal/view/component/text_field/common_text_field.dart';
@@ -25,10 +26,52 @@ class AddSurfaceFiled extends StatefulWidget {
 }
 
 class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
+  final ImagePicker _picker = ImagePicker();
+
   @override
   void dispose() {
     widget.isShow = false;
     super.dispose();
+  }
+
+  Future<void> _showImageSourceOptions() async {
+    final XFile? pickedImage = await showModalBottomSheet<XFile>(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("Upload from Gallery"),
+                onTap: () async {
+                  Navigator.of(context).pop(
+                    await _picker.pickImage(source: ImageSource.gallery),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("Take a Picture"),
+                onTap: () async {
+                  Navigator.of(context).pop(
+                    await _picker.pickImage(source: ImageSource.camera),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    // Process the selected image
+    if (pickedImage != null) {
+      widget.item["surfaceImage"] =
+          pickedImage.path; // Update item with image path
+      setState(() {}); // Refresh UI
+    }
   }
 
   @override
@@ -76,9 +119,7 @@ class _AddSurfaceFiledState extends State<AddSurfaceFiled> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () async {
-                              widget.item["surfaceImage"] =
-                                  await OtherHelper.openGallery();
-                              setState(() {});
+                              await _showImageSourceOptions(); // Show image source options
                             },
                             child: Container(
                               child: widget.item["surfaceImage"] != null

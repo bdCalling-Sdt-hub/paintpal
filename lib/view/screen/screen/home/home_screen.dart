@@ -58,8 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _initTargets();
     _showTutorial();
     PrefsHelper.setBool('hasShownTutorial', true);
-
-
   }
 
   // Initialize the tutorial marks
@@ -150,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       parameters: {
                         "image": item.image,
                         "name": item.roomName,
+                        "roomSize": item.roomSize,
                         "id": item.id,
                       },
                     ),
@@ -181,6 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       parameters: {
                                         "image": item.image,
                                         "name": item.roomName,
+                                        "roomSize": item.roomSize,
                                         "id": item.id,
                                       },
                                     ),
